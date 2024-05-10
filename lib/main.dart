@@ -1,3 +1,4 @@
+import 'package:elbigay/screens/organization/profile_organization.dart';
 import 'package:flutter/material.dart';
 
 // import screens
@@ -28,13 +29,14 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/organization_profile',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
           '/signup': (context) => const SignUp(),
           '/donor_navbar': (context) => const DonorNavbar(),
           '/donor_homepage': (context) => const DonorHomepage(),
+          '/organization_profile': (context) => const OrganizationProfile(),
         });
   }
 }
