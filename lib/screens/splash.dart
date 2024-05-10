@@ -5,7 +5,7 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the screen width
+    // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -37,7 +37,9 @@ class Splash extends StatelessWidget {
                       width: screenWidth * 0.6,
                       height: screenHeight * 0.06,
                       child: FilledButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/signup');
+                        },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text("Sign up",
@@ -53,7 +55,9 @@ class Splash extends StatelessWidget {
                       width: screenWidth * 0.6,
                       height: screenHeight * 0.06,
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/signin');
+                        },
                         style: OutlinedButton.styleFrom(
                           side:
                               BorderSide(color: Theme.of(context).primaryColor),
