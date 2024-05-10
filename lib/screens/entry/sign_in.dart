@@ -55,7 +55,9 @@ class SignIn extends StatelessWidget {
                           width: double.infinity,
                           height: 47,
                           child: FilledButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/donor_navbar');
+                            },
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                 Theme.of(context).primaryColor,

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 // import screens
 import '/screens/splash.dart';
 import '/screens/entry/sign_in.dart';
-import 'screens/entry/sign_up.dart';
+import '/screens/entry/sign_up.dart';
+import '/widgets/navbar_donor.dart';
+import '/screens/donor/homepage_donor.dart';
 
 void main() {
   runApp(const MainApp());
@@ -31,6 +33,8 @@ class MainApp extends StatelessWidget {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
           '/signup': (context) => const SignUp(),
+          '/donor_navbar': (context) => const DonorNavbar(),
+          '/donor_homepage': (context) => const DonorHomepage(),
         });
   }
 }
