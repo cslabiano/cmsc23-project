@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_print
+
 import 'package:flutter/material.dart';
 
 class OrganizationProfile extends StatefulWidget {
@@ -36,7 +38,6 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                       children: [
                         SizedBox(
                           height: 125,
-                          width: 125,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(300),
                             child: Image.asset('assets/googlelogo.png'),
@@ -55,10 +56,10 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                           style: TextStyle(
                             fontSize: screenWidth * 0.05,
                             fontWeight: FontWeight.w600,
-                            color: const Color.fromARGB(100, 73, 79, 85),
+                            color: const Color.fromRGBO(71, 71, 71, 1),
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -73,7 +74,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                         const Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -130,7 +131,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                             )
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -142,6 +143,77 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 12),
+                        InkWell(
+                          onTap: () {
+                            // navigate to donation drive page
+                            print("tapped");
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white,
+                              boxShadow: kElevationToShadow[2],
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  height: screenHeight * 0.1,
+                                  width: screenWidth * 0.3,
+                                  child: Image.asset('assets/googlelogo.png'),
+                                ),
+                                const SizedBox(width: 7),
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Google donation drive",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: screenWidth * 0.05,
+                                            fontWeight: FontWeight.w600,
+                                            color: Theme.of(context).colorScheme.secondary,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 3,
+                                          style: TextStyle(
+                                            fontSize: screenWidth * 0.03,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.timelapse_rounded,
+                                              color: Color.fromRGBO(71, 71, 71, 1),
+                                              size: screenWidth * 0.05,
+                                            ),
+                                            const SizedBox(width: 3),
+                                            Text(
+                                              "4 days left",
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(71, 71, 71, 1)
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ]
+                                    ),
+                                  )
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 7),
+                        Text("end") // just to fully render the bottom of the donation drive. remove later
                       ],
                     ),
                   ),
