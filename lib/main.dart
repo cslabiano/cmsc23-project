@@ -6,6 +6,7 @@ import '/screens/entry/sign_in.dart';
 import '/screens/entry/sign_up.dart';
 import '/widgets/navbar_donor.dart';
 import '/screens/donor/homepage_donor.dart';
+import '/screens/donor/profile_donor.dart';
 
 void main() {
   runApp(const MainApp());
@@ -28,13 +29,14 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/donor_profilepage',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
           '/signup': (context) => const SignUp(),
           '/donor_navbar': (context) => const DonorNavbar(),
           '/donor_homepage': (context) => const DonorHomepage(),
+          '/donor_profilepage': (context) => const DonorProfilepage(),
         });
   }
 }
