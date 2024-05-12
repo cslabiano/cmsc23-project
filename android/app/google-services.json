@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "401881420442",
+    "project_id": "elbigay-database",
+    "storage_bucket": "elbigay-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401881420442:android:278e1112d22cdf9ad90523",
+        "android_client_info": {
+          "package_name": "com.example.elbigay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSaYnm1Kbs3BRraZUnmBtsS57mnjR_MkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
