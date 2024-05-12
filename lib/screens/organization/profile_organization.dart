@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'package:elbigay/widgets/navbar_org.dart';
 import 'package:flutter/material.dart';
 import 'package:elbigay/models/donation_drive_model.dart';
 
@@ -38,7 +39,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(top: Radius.circular(30))
                   ),
-                  margin: EdgeInsets.only(top: screenHeight * 0.29),
+                  margin: EdgeInsets.only(top: screenHeight * 0.2),
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
                   child: Column(
                     children: [
@@ -241,7 +242,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                   ),
                 ),
                 Positioned(
-                  top: screenHeight * 0.2,
+                  top: screenHeight * 0.11,
                   child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -271,6 +272,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                   ],
                 ),
                 ),
+                // OrgNavbar()
               ],
             )
           ],
