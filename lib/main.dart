@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/donor_homepage',
+        initialRoute: '/donor_navbar',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),

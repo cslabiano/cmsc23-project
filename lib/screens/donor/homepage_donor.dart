@@ -49,7 +49,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
                     style: TextStyle(
                         color: Color.fromRGBO(62, 180, 137, 1),
                         fontFamily: 'Lato',
-                        fontSize: 25,
+                        fontSize: 27,
                         fontWeight: FontWeight.normal,
                         height: 1),
                   ),
@@ -68,19 +68,33 @@ class _DonorHomepageState extends State<DonorHomepage> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.only(top: 20),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        spreadRadius: -4,
+                        blurRadius: 3,
+                        blurStyle: BlurStyle.outer,
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
                   child: TextField(
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 6),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 5),
                       hintText: "Search",
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                          bottomLeft: Radius.circular(30),
-                          bottomRight: Radius.circular(30),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
                         ),
                       ),
                     ),
@@ -98,13 +112,23 @@ class _DonorHomepageState extends State<DonorHomepage> {
                             onTap: () {
                               print("Tapped");
                             },
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20)),
                             child: Container(
                               height: screenHeight * 0.2,
-                              width: screenWidth * 0.8,
+                              width: screenWidth * 0.85,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 4,
+                                    blurStyle: BlurStyle.outer,
+                                  ),
+                                ],
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.only(
@@ -117,44 +141,57 @@ class _DonorHomepageState extends State<DonorHomepage> {
                               ),
                             ),
                           ),
-                          Container(
-                            height: screenHeight * 0.08,
-                            width: screenWidth * 0.8,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(20)),
-                              color: Colors.white,
-                              boxShadow: kElevationToShadow[2],
-                            ),
-                            padding: EdgeInsets.fromLTRB(15, 5, 20, 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  _donations[index].title,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(62, 180, 137, 1),
-                                    fontFamily: 'Lato',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
+                          InkWell(
+                            onTap: () {
+                              print("Tapped");
+                            },
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20)),
+                            child: Container(
+                              height: screenHeight * 0.069,
+                              width: screenWidth * 0.85,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(20)),
+                                  color: Colors.white,
+                                  boxShadow: kElevationToShadow[2]),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                                    child: Text(
+                                      _donations[index].title,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(62, 180, 137, 1),
+                                        fontFamily: 'Lato',
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  _donations[index].description,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(34, 38, 66, 1),
-                                    fontFamily: 'Lato',
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.normal,
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
+                                    child: Text(
+                                      _donations[index].description,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(34, 38, 66, 1),
+                                        fontFamily: 'Lato',
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
+                          )
                         ]);
                       }),
                 ),
