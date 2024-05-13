@@ -103,7 +103,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   Text(
                                     "09123456789",
                                     style: TextStyle(
-                                      fontSize: screenWidth * 0.03
+                                      fontSize: screenWidth * 0.03,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   )
                                 ],
@@ -118,7 +119,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   Text(
                                     "org@gmail.com",
                                     style: TextStyle(
-                                      fontSize: screenWidth * 0.03
+                                      fontSize: screenWidth * 0.03,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   )
                                 ],
@@ -133,7 +135,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   Text(
                                     "567R+VR3, Harold Cuzner Royal Palm Ave, Los Baños",
                                     style: TextStyle(
-                                      fontSize: screenWidth * 0.03
+                                      fontSize: screenWidth * 0.03,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   )
                                 ],
@@ -150,88 +153,215 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: screenHeight,
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: _donationDrives.length,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        // navigate to donation drive page
-                                        print("tapped");
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                                              color: Colors.white,
-                                              boxShadow: kElevationToShadow[2],
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  height: screenHeight * 0.1,
-                                                  width: screenWidth * 0.3,
-                                                  child: Image.asset(_donationDrives[index].image),
-                                                ),
-                                                const SizedBox(width: 7),
-                                                Expanded(
-                                                  child: Container(
-                                                    padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          _donationDrives[index].title,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(
-                                                            fontSize: screenWidth * 0.05,
-                                                            fontWeight: FontWeight.w600,
-                                                            color: Theme.of(context).colorScheme.secondary,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(height: 2),
-                                                        Text(
-                                                          _donationDrives[index].description,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          maxLines: 3,
-                                                          style: TextStyle(
-                                                            fontSize: screenWidth * 0.03,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(height: 2),
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                              Icons.timelapse_rounded,
-                                                              color: const Color.fromRGBO(128, 128, 128, 1),
-                                                              size: screenWidth * 0.05,
-                                                            ),
-                                                            const SizedBox(width: 3),
-                                                            Text(
-                                                              _donationDrives[index].timeLeft,
-                                                              style: TextStyle(
-                                                                color: const Color.fromRGBO(128, 128, 128, 1)
-                                                              ),
-                                                            )
-                                                          ],
-                                                        )
-                                                      ]
-                                                    ),
-                                                  )
-                                                ),
-                                              ],
-                                            ),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: _donationDrives.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      // navigate to donation drive page
+                                      print("tapped");
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                                            color: Colors.white,
+                                            boxShadow: kElevationToShadow[2],
                                           ),
-                                          const SizedBox(height: 20)
-                                        ],
-                                      ),
-                                    );
-                                  }
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                height: screenHeight * 0.1,
+                                                width: screenWidth * 0.3,
+                                                child: Image.asset(_donationDrives[index].image),
+                                              ),
+                                              const SizedBox(width: 7),
+                                              Expanded(
+                                                child: Container(
+                                                  padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        _donationDrives[index].title,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: screenWidth * 0.05,
+                                                          fontWeight: FontWeight.w600,
+                                                          color: Theme.of(context).colorScheme.secondary,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 2),
+                                                      Text(
+                                                        _donationDrives[index].description,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        maxLines: 3,
+                                                        style: TextStyle(
+                                                          fontSize: screenWidth * 0.03,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 2),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.timelapse_rounded,
+                                                            color: const Color.fromRGBO(128, 128, 128, 1),
+                                                            size: screenWidth * 0.05,
+                                                          ),
+                                                          const SizedBox(width: 3),
+                                                          Text(
+                                                            _donationDrives[index].timeLeft,
+                                                            style: TextStyle(
+                                                              color: const Color.fromRGBO(128, 128, 128, 1)
+                                                            ),
+                                                          )
+                                                        ],
+                                                      )
+                                                    ]
+                                                  ),
+                                                )
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20)
+                                      ],
+                                    ),
+                                  );
+                                }
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: kElevationToShadow[4],
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  border: Border.all(
+                                    color: Color.fromRGBO(34, 38, 66, 1),
+                                    width: 2,
+                                  ),
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    "My Account",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color:
+                                          Color.fromRGBO(34, 38, 66, 1),
+                                      fontFamily: 'Lato',
+                                      fontSize: 15,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                    ),
+                                  ),
+                                  leading: Icon(Icons.account_circle_outlined),
+                                  trailing: Icon(Icons.keyboard_arrow_right),
+                                  onTap: () {
+                                    
+                                  },
                                 ),
                               ),
+                              const SizedBox(height: 10),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: kElevationToShadow[4],
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  border: Border.all(
+                                    color: Color.fromRGBO(34, 38, 66, 1),
+                                    width: 2,
+                                  ),
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    "Settings",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color:
+                                          Color.fromRGBO(34, 38, 66, 1),
+                                      fontFamily: 'Lato',
+                                      fontSize: 15,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                    ),
+                                  ),
+                                  leading: Icon(Icons.settings_outlined),
+                                  trailing: Icon(Icons.keyboard_arrow_right),
+                                  onTap: () {
+                                    
+                                  },
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: kElevationToShadow[4],
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  border: Border.all(
+                                    color: Color.fromRGBO(34, 38, 66, 1),
+                                    width: 2,
+                                  ),
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    "Help Center",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color:
+                                          Color.fromRGBO(34, 38, 66, 1),
+                                      fontFamily: 'Lato',
+                                      fontSize: 15,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                    ),
+                                  ),
+                                  leading: Icon(Icons.help_outline_outlined),
+                                  trailing: Icon(Icons.keyboard_arrow_right),
+                                  onTap: () {
+
+                                  },
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: kElevationToShadow[4],
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  border: Border.all(
+                                    color: Color.fromRGBO(34, 38, 66, 1),
+                                    width: 2,
+                                  ),
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    "Log Out",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color:
+                                          Color.fromRGBO(34, 38, 66, 1),
+                                      fontFamily: 'Lato',
+                                      fontSize: 15,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                    ),
+                                  ),
+                                  leading: Icon(Icons.logout_outlined),
+                                  trailing: Icon(Icons.keyboard_arrow_right),
+                                  onTap: () {
+                                    Navigator.popUntil(context, ModalRoute.withName('/signin'));
+                                    // Navigator.pushNamed(context, '/');
+                                  },
+                                ),
+                              ),
+                              const SizedBox(height: 10),
                             ],
                           ),
                         ),
