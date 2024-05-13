@@ -23,7 +23,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Color.fromRGBO(26, 206, 161, 1),
       resizeToAvoidBottomInset: false,
       body: Center(
         child: ListView(
@@ -236,7 +236,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  boxShadow: kElevationToShadow[4],
+                                  boxShadow: kElevationToShadow[2],
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
@@ -251,9 +251,9 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                       color:
                                           Color.fromRGBO(34, 38, 66, 1),
                                       fontFamily: 'Lato',
-                                      fontSize: 15,
+                                      fontSize: screenWidth * 0.04,
                                       letterSpacing: 0,
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.w600,
                                       height: 1
                                     ),
                                   ),
@@ -268,7 +268,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  boxShadow: kElevationToShadow[4],
+                                  boxShadow: kElevationToShadow[2],
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
@@ -283,9 +283,9 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                       color:
                                           Color.fromRGBO(34, 38, 66, 1),
                                       fontFamily: 'Lato',
-                                      fontSize: 15,
+                                      fontSize: screenWidth * 0.04,
                                       letterSpacing: 0,
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.w600,
                                       height: 1
                                     ),
                                   ),
@@ -300,7 +300,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  boxShadow: kElevationToShadow[4],
+                                  boxShadow: kElevationToShadow[2],
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
@@ -315,9 +315,9 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                       color:
                                           Color.fromRGBO(34, 38, 66, 1),
                                       fontFamily: 'Lato',
-                                      fontSize: 15,
+                                      fontSize: screenWidth * 0.04,
                                       letterSpacing: 0,
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.w600,
                                       height: 1
                                     ),
                                   ),
@@ -332,7 +332,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  boxShadow: kElevationToShadow[4],
+                                  boxShadow: kElevationToShadow[2],
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
@@ -347,9 +347,9 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                       color:
                                           Color.fromRGBO(34, 38, 66, 1),
                                       fontFamily: 'Lato',
-                                      fontSize: 15,
+                                      fontSize: screenWidth * 0.04,
                                       letterSpacing: 0,
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.w600,
                                       height: 1
                                     ),
                                   ),
@@ -357,7 +357,6 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   trailing: Icon(Icons.keyboard_arrow_right),
                                   onTap: () {
                                     Navigator.popUntil(context, ModalRoute.withName('/signin'));
-                                    // Navigator.pushNamed(context, '/');
                                   },
                                 ),
                               ),
@@ -378,7 +377,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                       height: 147,
                       width: 147,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color: Color.fromRGBO(26, 206, 161, 1),
                         shape: BoxShape.circle
                       ),
                     ),
@@ -390,12 +389,17 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                         shape: BoxShape.circle
                       ),
                     ),
-                    SizedBox(
-                      height: 125,
-                      width: 125,
-                      child: ClipRRect(
-                        child: Image.asset('assets/googlelogo.png'),
-                      )
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle
+                      ),
+                      child: SizedBox(
+                        height: 125,
+                        width: 125,
+                        child: ClipRRect(
+                          child: Image.asset('assets/googlelogo.png'),
+                        )
+                      ),
                     )
                   ],
                 ),
