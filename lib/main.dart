@@ -1,3 +1,4 @@
+import 'package:elbigay/widgets/navbar_org.dart';
 import 'package:flutter/material.dart';
 
 // import screens
@@ -6,6 +7,9 @@ import '/screens/entry/sign_in.dart';
 import '/screens/entry/sign_up.dart';
 import '/widgets/navbar_donor.dart';
 import '/screens/donor/homepage_donor.dart';
+import 'package:elbigay/screens/organization/donation_organization.dart';
+import 'package:elbigay/screens/organization/homepage_organization.dart';
+import 'package:elbigay/screens/organization/profile_organization.dart';
 
 void main() {
   runApp(const MainApp());
@@ -35,6 +39,10 @@ class MainApp extends StatelessWidget {
           '/signup': (context) => const SignUp(),
           '/donor_navbar': (context) => const DonorNavbar(),
           '/donor_homepage': (context) => const DonorHomepage(),
+          '/organization_navbar': (context) => const OrgNavbar(),
+          '/organization_homepage': (context) => const OrganizationHomepage(),
+          '/organization_profile': (context) => const OrganizationProfile(),
+          '/organization_donation': (context) => const OrganizationDonation(),
         });
   }
 }
