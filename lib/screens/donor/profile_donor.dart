@@ -316,6 +316,9 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                       leading: Icon(Icons.logout_outlined),
                                       trailing:
                                           Icon(Icons.keyboard_arrow_right),
+                                      onTap: () {
+                                        Navigator.pushNamed(context, '/');
+                                      },
                                     ),
                                   ),
                                 ],

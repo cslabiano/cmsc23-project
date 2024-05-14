@@ -11,9 +11,24 @@ class OrganizationProfile extends StatefulWidget {
 
 class _OrganizationProfileState extends State<OrganizationProfile> {
   final List<DonationDrive> _donationDrives = [
-    DonationDrive(image: 'assets/googlelogo.png', title: "title1", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", timeLeft: "4 days left"),
-    DonationDrive(image: 'assets/googlelogo.png', title: "title2", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", timeLeft: "3 days left"),
-    DonationDrive(image: 'assets/googlelogo.png', title: "title3", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", timeLeft: "2 days left"),
+    DonationDrive(
+        image: 'assets/googlelogo.png',
+        title: "title1",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        timeLeft: "4 days left"),
+    DonationDrive(
+        image: 'assets/googlelogo.png',
+        title: "title2",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        timeLeft: "3 days left"),
+    DonationDrive(
+        image: 'assets/googlelogo.png',
+        title: "title3",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        timeLeft: "2 days left"),
   ];
 
   @override
@@ -23,10 +38,10 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(26, 206, 161, 1),
-      resizeToAvoidBottomInset: false,
-      body: Center(
-        child: ListView(
+        backgroundColor: Color.fromRGBO(26, 206, 161, 1),
+        resizeToAvoidBottomInset: false,
+        body: Center(
+            child: ListView(
           children: [
             Stack(
               alignment: Alignment(0, 0),
@@ -34,9 +49,9 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                 Container(
                   width: screenWidth,
                   decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(30))
-                  ),
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(30))),
                   margin: EdgeInsets.only(top: screenHeight * 0.2),
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
                   child: Column(
@@ -55,7 +70,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.1,
                                   fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).colorScheme.secondary,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                               Text(
@@ -74,7 +90,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.05,
                                     fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).colorScheme.secondary,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
                               ),
@@ -89,7 +106,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.05,
                                     fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).colorScheme.secondary,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
                               ),
@@ -149,90 +167,121 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.05,
                                     fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).colorScheme.secondary,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
                               ),
                               ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: _donationDrives.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      // navigate to donation drive page
-                                      print("tapped");
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                                            color: Colors.white,
-                                            boxShadow: kElevationToShadow[2],
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                height: screenHeight * 0.1,
-                                                width: screenWidth * 0.3,
-                                                child: Image.asset(_donationDrives[index].image),
-                                              ),
-                                              const SizedBox(width: 7),
-                                              Expanded(
-                                                child: Container(
-                                                  padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: _donationDrives.length,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        // navigate to donation drive page
+                                        print("tapped");
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20)),
+                                              color: Colors.white,
+                                              boxShadow: kElevationToShadow[2],
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: screenHeight * 0.1,
+                                                  width: screenWidth * 0.3,
+                                                  child: Image.asset(
+                                                      _donationDrives[index]
+                                                          .image),
+                                                ),
+                                                const SizedBox(width: 7),
+                                                Expanded(
+                                                    child: Container(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          0, 10, 20, 10),
                                                   child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        _donationDrives[index].title,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        style: TextStyle(
-                                                          fontSize: screenWidth * 0.05,
-                                                          fontWeight: FontWeight.w600,
-                                                          color: Theme.of(context).colorScheme.secondary,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(height: 2),
-                                                      Text(
-                                                        _donationDrives[index].description,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        maxLines: 3,
-                                                        style: TextStyle(
-                                                          fontSize: screenWidth * 0.03,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(height: 2),
-                                                      Row(
-                                                        children: [
-                                                          Icon(
-                                                            Icons.timelapse_rounded,
-                                                            color: const Color.fromRGBO(128, 128, 128, 1),
-                                                            size: screenWidth * 0.05,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          _donationDrives[index]
+                                                              .title,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            fontSize:
+                                                                screenWidth *
+                                                                    0.05,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .secondary,
                                                           ),
-                                                          const SizedBox(width: 3),
-                                                          Text(
-                                                            _donationDrives[index].timeLeft,
-                                                            style: TextStyle(
-                                                              color: const Color.fromRGBO(128, 128, 128, 1)
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 2),
+                                                        Text(
+                                                          _donationDrives[index]
+                                                              .description,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          maxLines: 3,
+                                                          style: TextStyle(
+                                                            fontSize:
+                                                                screenWidth *
+                                                                    0.03,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 2),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons
+                                                                  .timelapse_rounded,
+                                                              color: const Color
+                                                                  .fromRGBO(128,
+                                                                  128, 128, 1),
+                                                              size:
+                                                                  screenWidth *
+                                                                      0.05,
                                                             ),
-                                                          )
-                                                        ],
-                                                      )
-                                                    ]
-                                                  ),
-                                                )
-                                              ),
-                                            ],
+                                                            const SizedBox(
+                                                                width: 3),
+                                                            Text(
+                                                              _donationDrives[
+                                                                      index]
+                                                                  .timeLeft,
+                                                              style: TextStyle(
+                                                                  color: const Color
+                                                                      .fromRGBO(
+                                                                      128,
+                                                                      128,
+                                                                      128,
+                                                                      1)),
+                                                            )
+                                                          ],
+                                                        )
+                                                      ]),
+                                                )),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 20)
-                                      ],
-                                    ),
-                                  );
-                                }
-                              ),
+                                          const SizedBox(height: 20)
+                                        ],
+                                      ),
+                                    );
+                                  }),
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
@@ -248,20 +297,16 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                     "My Account",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                      color:
-                                          Color.fromRGBO(34, 38, 66, 1),
-                                      fontFamily: 'Lato',
-                                      fontSize: screenWidth * 0.04,
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1
-                                    ),
+                                        color: Color.fromRGBO(34, 38, 66, 1),
+                                        fontFamily: 'Lato',
+                                        fontSize: screenWidth * 0.04,
+                                        letterSpacing: 0,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1),
                                   ),
                                   leading: Icon(Icons.account_circle_outlined),
                                   trailing: Icon(Icons.keyboard_arrow_right),
-                                  onTap: () {
-                                    
-                                  },
+                                  onTap: () {},
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -280,20 +325,16 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                     "Settings",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                      color:
-                                          Color.fromRGBO(34, 38, 66, 1),
-                                      fontFamily: 'Lato',
-                                      fontSize: screenWidth * 0.04,
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1
-                                    ),
+                                        color: Color.fromRGBO(34, 38, 66, 1),
+                                        fontFamily: 'Lato',
+                                        fontSize: screenWidth * 0.04,
+                                        letterSpacing: 0,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1),
                                   ),
                                   leading: Icon(Icons.settings_outlined),
                                   trailing: Icon(Icons.keyboard_arrow_right),
-                                  onTap: () {
-                                    
-                                  },
+                                  onTap: () {},
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -312,20 +353,16 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                     "Help Center",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                      color:
-                                          Color.fromRGBO(34, 38, 66, 1),
-                                      fontFamily: 'Lato',
-                                      fontSize: screenWidth * 0.04,
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1
-                                    ),
+                                        color: Color.fromRGBO(34, 38, 66, 1),
+                                        fontFamily: 'Lato',
+                                        fontSize: screenWidth * 0.04,
+                                        letterSpacing: 0,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1),
                                   ),
                                   leading: Icon(Icons.help_outline_outlined),
                                   trailing: Icon(Icons.keyboard_arrow_right),
-                                  onTap: () {
-
-                                  },
+                                  onTap: () {},
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -344,19 +381,18 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                     "Log Out",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                      color:
-                                          Color.fromRGBO(34, 38, 66, 1),
-                                      fontFamily: 'Lato',
-                                      fontSize: screenWidth * 0.04,
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1
-                                    ),
+                                        color: Color.fromRGBO(34, 38, 66, 1),
+                                        fontFamily: 'Lato',
+                                        fontSize: screenWidth * 0.04,
+                                        letterSpacing: 0,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1),
                                   ),
                                   leading: Icon(Icons.logout_outlined),
                                   trailing: Icon(Icons.keyboard_arrow_right),
                                   onTap: () {
-                                    Navigator.popUntil(context, ModalRoute.withName('/signin'));
+                                    Navigator.popUntil(context,
+                                        ModalRoute.withName('/signin'));
                                   },
                                 ),
                               ),
@@ -371,45 +407,37 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                 Positioned(
                   top: screenHeight * 0.11,
                   child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      height: 147,
-                      width: 147,
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(26, 206, 161, 1),
-                        shape: BoxShape.circle
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        height: 147,
+                        width: 147,
+                        decoration: BoxDecoration(
+                            color: Color.fromRGBO(26, 206, 161, 1),
+                            shape: BoxShape.circle),
                       ),
-                    ),
-                    Container(
-                      height: 130,
-                      width: 130,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle
+                      Container(
+                        height: 130,
+                        width: 130,
+                        decoration: BoxDecoration(
+                            color: Colors.white, shape: BoxShape.circle),
                       ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle
-                      ),
-                      child: SizedBox(
-                        height: 125,
-                        width: 125,
-                        child: ClipRRect(
-                          child: Image.asset('assets/googlelogo.png'),
-                        )
-                      ),
-                    )
-                  ],
-                ),
+                      Container(
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: SizedBox(
+                            height: 125,
+                            width: 125,
+                            child: ClipRRect(
+                              child: Image.asset('assets/googlelogo.png'),
+                            )),
+                      )
+                    ],
+                  ),
                 ),
                 // OrgNavbar()
               ],
             )
           ],
-        )
-      )
-    );
+        )));
   }
 }
