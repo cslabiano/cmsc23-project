@@ -1,4 +1,6 @@
+import 'package:elbigay/screens/donor/donate_donor.dart';
 import 'package:elbigay/screens/donor/homepage_donor.dart';
+import 'package:elbigay/screens/donor/profile_donor.dart';
 import 'package:flutter/material.dart';
 
 class DonorNavbar extends StatefulWidget {
@@ -20,8 +22,8 @@ class _DonorNavbarState extends State<DonorNavbar> {
           index: _selectedIndex,
           children: const <Widget>[
             DonorHomepage(),
-            // donation screen
-            // DonorProfile()
+            DonatePage(),
+            DonorProfilepage()
           ],
         ),
       ),

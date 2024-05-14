@@ -7,9 +7,10 @@ import '/screens/entry/sign_in.dart';
 import '/screens/entry/sign_up.dart';
 import '/widgets/navbar_donor.dart';
 import '/screens/donor/homepage_donor.dart';
-import 'package:elbigay/screens/organization/donation_organization.dart';
-import 'package:elbigay/screens/organization/homepage_organization.dart';
-import 'package:elbigay/screens/organization/profile_organization.dart';
+import '/screens/donor/profile_donor.dart';
+import '/screens/organization/donation_organization.dart';
+import '/screens/organization/homepage_organization.dart';
+import '/screens/organization/profile_organization.dart';
 
 void main() {
   runApp(const MainApp());
@@ -32,13 +33,14 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/donor_navbar',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
           '/signup': (context) => const SignUp(),
           '/donor_navbar': (context) => const DonorNavbar(),
           '/donor_homepage': (context) => const DonorHomepage(),
+          '/donor_profilepage': (context) => const DonorProfilepage(),
           '/organization_navbar': (context) => const OrgNavbar(),
           '/organization_homepage': (context) => const OrganizationHomepage(),
           '/organization_profile': (context) => const OrganizationProfile(),

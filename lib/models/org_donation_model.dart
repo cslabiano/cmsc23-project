@@ -9,13 +9,12 @@ class Donation {
   String? address; // only for pickup
   String? contactNo; // only for pickup
 
-  Donation({
-    required this.category,
-    required this.forPickup,
-    required this.weight,
-    required this.status,
-    required this.donorName,
-    this.address,
-    this.contactNo
-  });
+  Donation(
+      {required this.category,
+      required this.forPickup,
+      required this.weight,
+      required this.status,
+      required this.donorName,
+      this.address,
+      this.contactNo});
 }
