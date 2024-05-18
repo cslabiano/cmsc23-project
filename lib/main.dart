@@ -1,4 +1,3 @@
-import 'package:elbigay/widgets/navbar_org.dart';
 import 'package:flutter/material.dart';
 
 // import screens
@@ -11,6 +10,8 @@ import '/screens/donor/profile_donor.dart';
 import '/screens/organization/donation_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
+
+import 'package:elbigay/widgets/navbar_org.dart';
 
 void main() {
   runApp(const MainApp());
