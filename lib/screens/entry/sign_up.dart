@@ -76,7 +76,10 @@ class _SignUpState extends State<SignUp> {
 
                               // input fields for email and password
                               InputField(
-                                  callback: (String val) {}, text: "email"),
+                                  callback: (String val) => email = val,
+                                  text: "email",
+                                  label: "email",
+                                  type: "string"),
                               const SizedBox(height: 12),
                               Row(
                                 children: [
@@ -84,7 +87,9 @@ class _SignUpState extends State<SignUp> {
                                     width: screenWidth * 0.4,
                                     child: InputField(
                                         callback: (String val) {},
-                                        text: "first name"),
+                                        text: "first name",
+                                        label: "fname",
+                                        type: "String"),
                                   ),
                                   const SizedBox(width: 12),
                                   Align(
@@ -93,21 +98,31 @@ class _SignUpState extends State<SignUp> {
                                       width: screenWidth * 0.4,
                                       child: InputField(
                                           callback: (String val) {},
-                                          text: "last name"),
+                                          text: "last name",
+                                          label: "fname",
+                                          type: "String"),
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 12),
                               InputField(
-                                  callback: (String val) {}, text: "username"),
-                              const SizedBox(height: 12),
-                              InputField(
-                                  callback: (String val) {}, text: "password"),
+                                  callback: (String val) {},
+                                  text: "username",
+                                  label: "uname",
+                                  type: "String"),
                               const SizedBox(height: 12),
                               InputField(
                                   callback: (String val) {},
-                                  text: "contact no."),
+                                  text: "password",
+                                  label: "password",
+                                  type: "password"),
+                              const SizedBox(height: 12),
+                              InputField(
+                                  callback: (String val) {},
+                                  text: "contact no.",
+                                  label: "number",
+                                  type: "number"),
                               const SizedBox(height: 12),
 
                               // first address field
@@ -126,6 +141,8 @@ class _SignUpState extends State<SignUp> {
                               InputField(
                                 callback: (String val) {},
                                 text: "address",
+                                label: "address",
+                                type: "String",
                                 key: ValueKey(addressControllers[0]),
                               ),
                               const SizedBox(height: 12),
@@ -143,6 +160,8 @@ class _SignUpState extends State<SignUp> {
                                           child: InputField(
                                             callback: (String val) {},
                                             text: "address",
+                                            label: "address",
+                                            type: "String",
                                             key: ValueKey(
                                                 addressControllers[index + 1]),
                                           ),

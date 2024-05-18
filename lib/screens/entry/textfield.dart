@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 class InputField extends StatefulWidget {
   final Function callback;
   final String text;
-  const InputField({required this.callback, required this.text, super.key});
+  final String label;
+  final String type;
+  const InputField(
+      {required this.callback,
+      required this.text,
+      required this.label,
+      required this.type,
+      super.key});
 
   @override
   State<InputField> createState() => _InputFieldState();

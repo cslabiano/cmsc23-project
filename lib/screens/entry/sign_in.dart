@@ -58,10 +58,16 @@ class SignIn extends StatelessWidget {
 
                           // input fields for email and password
                           InputField(
-                              callback: (String val) {}, text: "username"),
+                              callback: (String val) {},
+                              text: "username",
+                              label: "uname",
+                              type: "String"),
                           const SizedBox(height: 12),
                           InputField(
-                              callback: (String val) {}, text: "password"),
+                              callback: (String val) {},
+                              text: "password",
+                              label: "password",
+                              type: "password"),
                           SizedBox(height: screenHeight * 0.06),
 
                           // Sign in button
