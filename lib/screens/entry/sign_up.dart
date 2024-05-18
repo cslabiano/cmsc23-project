@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import '/screens/entry/textfield.dart';
+import 'package:dotted_border/dotted_border.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final _formKey = GlobalKey<FormState>();
+  List<TextEditingController> addressControllers = [TextEditingController()];
+  String? email;
+  String? fname;
+  String? lname;
+  String? uname;
+  String? password;
+  int? contact;
+  List<String>? address;
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +91,88 @@ class SignUp extends StatelessWidget {
                         InputField(
                             callback: (String val) {}, text: "contact no."),
                         const SizedBox(height: 12),
-                        InputField(callback: (String val) {}, text: "address"),
+
+                        // first address field
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Address",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15),
+                          ),
+                        ),
+                        InputField(
+                          callback: (String val) {},
+                          text: "address",
+                          key: ValueKey(addressControllers[0]),
+                        ),
                         const SizedBox(height: 12),
-                        SizedBox(height: screenHeight * 0.06),
+
+                        // Dynamically added address fields
+                        Column(
+                          children: List.generate(
+                            addressControllers.length - 1,
+                            (index) => Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: InputField(
+                                      callback: (String val) {},
+                                      text: "address",
+                                      key: ValueKey(
+                                          addressControllers[index + 1]),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.remove_circle,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary),
+                                    onPressed: () {
+                                      setState(() {
+                                        addressControllers.removeAt(index + 1);
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        DottedBorder(
+                          dashPattern: const [5, 3],
+                          color: Theme.of(context).colorScheme.tertiary,
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(12),
+                          padding: const EdgeInsets.all(6),
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12)),
+                            child: Container(
+                              width: double.infinity,
+                              height: screenHeight * 0.05,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: IconButton(
+                                icon: Icon(Icons.add,
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary),
+                                onPressed: () {
+                                  setState(() {
+                                    addressControllers
+                                        .add(TextEditingController());
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: screenHeight * 0.03),
 
                         // Sign up button
                         SizedBox(
@@ -106,65 +201,6 @@ class SignUp extends StatelessWidget {
                           ),
                         ),
 
-                        // divider
-                        SizedBox(height: screenHeight * 0.02),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Divider(
-                              color: Theme.of(context).colorScheme.secondary,
-                            )),
-                            Text(" or ",
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary)),
-                            Expanded(
-                                child: Divider(
-                              color: Theme.of(context).colorScheme.secondary,
-                            )),
-                          ],
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-
-                        // Sign up with google button
-                        SizedBox(
-                          width: double.infinity,
-                          height: 47,
-                          child: OutlinedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                Theme.of(context).colorScheme.background,
-                              ),
-                              shadowColor: MaterialStateProperty.all<Color>(
-                                Colors.black.withOpacity(1),
-                              ),
-                              elevation: MaterialStateProperty.all<double>(5),
-                              side: MaterialStateProperty.all<BorderSide>(
-                                BorderSide(
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/googlelogo.png",
-                                  height: 20,
-                                ),
-                                const SizedBox(width: 8),
-                                const Text(
-                                  "Sign up with Google",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromRGBO(71, 71, 71, 1)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
                         SizedBox(height: screenHeight * 0.03),
                         Align(
                           alignment: Alignment.bottomCenter,

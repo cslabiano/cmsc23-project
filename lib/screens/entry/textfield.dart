@@ -29,16 +29,17 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: Text(
-            capitalize(widget.text),
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold,
-                fontSize: 15),
+        if (widget.text.toLowerCase() != 'address')
+          Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              capitalize(widget.text),
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
+            ),
           ),
-        ),
         const SizedBox(height: 4),
         TextFormField(
           onSaved: (val) {
