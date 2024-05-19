@@ -49,6 +49,8 @@ class _InputFieldState extends State<InputField> {
           ),
         const SizedBox(height: 4),
         TextFormField(
+          keyboardType:
+              widget.type == "int" ? TextInputType.number : TextInputType.text,
           onSaved: (val) {
             // ignore: avoid_print
             print("Text value: ${val!}");
@@ -56,6 +58,33 @@ class _InputFieldState extends State<InputField> {
           validator: (val) {
             if (val == null || val.isEmpty) {
               return "Please enter your ${widget.text}";
+            }
+            if (widget.type == "email") {
+              final emailRegex =
+                  RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+              if (!emailRegex.hasMatch(val)) {
+                return "Please enter a valid email format";
+              }
+            } else if (widget.type == "password") {
+              final passwordRegex = RegExp(
+                r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{6,}$',
+              );
+              if (!passwordRegex.hasMatch(val)) {
+                return "Include at least one A-Z, a-z, 0-9, & special character";
+              }
+            } else if (widget.type == "number") {
+              if (val == null || val.isEmpty || int.tryParse(val) == null) {
+                return "Enter a number";
+              }
+            } else if (widget.type == "address") {
+              // Basic address validation
+              if (val.length < 10) {
+                return "Address is too short";
+              }
+              if (!RegExp(r'[A-Za-z]').hasMatch(val) ||
+                  !RegExp(r'\d').hasMatch(val)) {
+                return "Address must contain both letters and numbers";
+              }
             }
             return null;
           },

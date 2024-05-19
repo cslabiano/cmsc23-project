@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
 import '/screens/entry/textfield.dart';
 import 'package:dotted_border/dotted_border.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignUpDonor extends StatefulWidget {
+  const SignUpDonor({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpDonor> createState() => _SignUpDonorState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpDonorState extends State<SignUpDonor> {
   final _formKey = GlobalKey<FormState>();
   List<TextEditingController> addressControllers = [TextEditingController()];
+  String usertype = "donor";
   String? email;
   String? fname;
   String? lname;
@@ -86,7 +89,7 @@ class _SignUpState extends State<SignUp> {
                                   SizedBox(
                                     width: screenWidth * 0.4,
                                     child: InputField(
-                                        callback: (String val) {},
+                                        callback: (String val) => fname = val,
                                         text: "first name",
                                         label: "fname",
                                         type: "String"),
@@ -97,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                                     child: SizedBox(
                                       width: screenWidth * 0.4,
                                       child: InputField(
-                                          callback: (String val) {},
+                                          callback: (String val) => lname = val,
                                           text: "last name",
                                           label: "fname",
                                           type: "String"),
@@ -107,19 +110,19 @@ class _SignUpState extends State<SignUp> {
                               ),
                               const SizedBox(height: 12),
                               InputField(
-                                  callback: (String val) {},
+                                  callback: (String val) => uname = val,
                                   text: "username",
                                   label: "uname",
                                   type: "String"),
                               const SizedBox(height: 12),
                               InputField(
-                                  callback: (String val) {},
+                                  callback: (String val) => password = val,
                                   text: "password",
                                   label: "password",
                                   type: "password"),
                               const SizedBox(height: 12),
                               InputField(
-                                  callback: (String val) {},
+                                  callback: (int val) => contact = val,
                                   text: "contact no.",
                                   label: "number",
                                   type: "number"),
@@ -139,10 +142,12 @@ class _SignUpState extends State<SignUp> {
                                 ),
                               ),
                               InputField(
-                                callback: (String val) {},
+                                callback: (String val) {
+                                  addressControllers[0].text = val;
+                                },
                                 text: "address",
                                 label: "address",
-                                type: "String",
+                                type: "address",
                                 key: ValueKey(addressControllers[0]),
                               ),
                               const SizedBox(height: 12),
@@ -158,10 +163,13 @@ class _SignUpState extends State<SignUp> {
                                       children: [
                                         Expanded(
                                           child: InputField(
-                                            callback: (String val) {},
+                                            callback: (String val) {
+                                              addressControllers[index + 1]
+                                                  .text = val;
+                                            },
                                             text: "address",
                                             label: "address",
-                                            type: "String",
+                                            type: "address",
                                             key: ValueKey(
                                                 addressControllers[index + 1]),
                                           ),
@@ -221,9 +229,29 @@ class _SignUpState extends State<SignUp> {
                                 width: double.infinity,
                                 height: 47,
                                 child: FilledButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, '/donor_navbar');
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+
+                                      await context
+                                          .read<UserAuthProvider>()
+                                          .authService
+                                          .signUpDonor(
+                                            usertype,
+                                            email!,
+                                            fname!,
+                                            lname!,
+                                            uname!,
+                                            password!,
+                                            contact!,
+                                            address!,
+                                          );
+
+                                      if (context.mounted) {
+                                        Navigator.pushNamed(
+                                            context, '/donor_navbar');
+                                      }
+                                    }
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:

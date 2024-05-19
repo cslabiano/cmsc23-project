@@ -21,9 +21,24 @@ class UserAuthProvider with ChangeNotifier {
   }
 
   // accepts firstname and lastname aside from email and password
-  Future<void> signUp(
-      String email, String password, String firstname, String lastname) async {
-    await authService.signUp(email, password, firstname, lastname);
+  Future<void> signUpDonor(
+      String usertype,
+      String email,
+      String fname,
+      String lname,
+      String uname,
+      String password,
+      int contact,
+      List<String> address) async {
+    await authService.signUpDonor(
+        usertype, email, fname, lname, uname, password, contact, address);
+    notifyListeners();
+  }
+
+  Future<void> signUpOrg(String usertype, String email, String orgname,
+      String uname, String password, int contact, List<String> address) async {
+    await authService.signUpOrg(
+        usertype, email, orgname, uname, password, contact, address);
     notifyListeners();
   }
 

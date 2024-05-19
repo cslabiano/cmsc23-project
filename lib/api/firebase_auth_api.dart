@@ -29,8 +29,15 @@ class FirebaseAuthAPI {
     }
   }
 
-  Future<String?> signUp(
-      String email, String password, String firstname, String lastname) async {
+  Future<String?> signUpDonor(
+      String usertype,
+      String email,
+      String fname,
+      String lname,
+      String uname,
+      String password,
+      int contact,
+      List<String> address) async {
     UserCredential credential;
     try {
       credential = await auth.createUserWithEmailAndPassword(
@@ -38,12 +45,58 @@ class FirebaseAuthAPI {
         password: password,
       );
 
-      // add the user's name and email to the collection "users"
+      // add the user's usertype to the collection "users"
       await db.collection("users").doc(credential.user!.uid).set({
-        'firstname': firstname,
-        'lastname': lastname,
-        'email': email,
+        'usertype': usertype,
       });
+
+      await db.collection("donors").doc(credential.user!.uid).set({
+        'email': email,
+        'fname': fname,
+        'lname': lname,
+        'uname': uname,
+        'contact': contact,
+        'address': address
+      });
+
+      return "";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        return e.message;
+      } else if (e.code == 'email-already-in-use') {
+        return e.message;
+      } else if (e.code == 'invalid-email') {
+        return e.message;
+      }
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+    return null;
+  }
+
+  Future<String?> signUpOrg(String usertype, String email, String orgname,
+      String uname, String password, int contact, List<String> address) async {
+    UserCredential credential;
+    try {
+      credential = await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // add the user's usertype to the collection "users"
+      await db.collection("users").doc(credential.user!.uid).set({
+        'usertype': usertype,
+      });
+
+      await db.collection("donors").doc(credential.user!.uid).set({
+        'email': email,
+        'orgname': orgname,
+        'uname': uname,
+        'contact': contact,
+        'address': address
+      });
+
       return "";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
