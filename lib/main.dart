@@ -1,4 +1,11 @@
+import 'package:provider/provider.dart';
+
+import '/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+// import providers
+import '/providers/auth_provider.dart';
 
 // import screens
 import '/screens/splash.dart';
@@ -15,8 +22,20 @@ import '/screens/organization/profile_organization.dart';
 
 import 'package:elbigay/widgets/navbar_org.dart';
 
-void main() {
-  runApp(const MainApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ((context) => UserAuthProvider()))
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

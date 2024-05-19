@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../models/donor.dart';
 
 class FirebaseAuthAPI {
   static final FirebaseAuth auth = FirebaseAuth.instance;
@@ -29,34 +30,26 @@ class FirebaseAuthAPI {
     }
   }
 
-  Future<String?> signUpDonor(
-      String usertype,
-      String email,
-      String fname,
-      String lname,
-      String uname,
-      String password,
-      int contact,
-      List<String> address) async {
+  Future<String?> signUpDonor(Donor donor, String password) async {
     UserCredential credential;
     try {
       credential = await auth.createUserWithEmailAndPassword(
-        email: email,
+        email: donor.email,
         password: password,
       );
 
       // add the user's usertype to the collection "users"
       await db.collection("users").doc(credential.user!.uid).set({
-        'usertype': usertype,
+        'usertype': donor.usertype,
       });
 
       await db.collection("donors").doc(credential.user!.uid).set({
-        'email': email,
-        'fname': fname,
-        'lname': lname,
-        'uname': uname,
-        'contact': contact,
-        'address': address
+        'email': donor.email,
+        'fname': donor.fname,
+        'lname': donor.lname,
+        'uname': donor.uname,
+        'contact': donor.contact,
+        'address': donor.address
       });
 
       return "";

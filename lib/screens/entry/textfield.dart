@@ -49,8 +49,9 @@ class _InputFieldState extends State<InputField> {
           ),
         const SizedBox(height: 4),
         TextFormField(
-          keyboardType:
-              widget.type == "int" ? TextInputType.number : TextInputType.text,
+          keyboardType: widget.label == "number"
+              ? TextInputType.number
+              : TextInputType.text,
           onSaved: (val) {
             // ignore: avoid_print
             print("Text value: ${val!}");
@@ -71,10 +72,6 @@ class _InputFieldState extends State<InputField> {
               );
               if (!passwordRegex.hasMatch(val)) {
                 return "Include at least one A-Z, a-z, 0-9, & special character";
-              }
-            } else if (widget.type == "number") {
-              if (val == null || val.isEmpty || int.tryParse(val) == null) {
-                return "Enter a number";
               }
             } else if (widget.type == "address") {
               // Basic address validation
