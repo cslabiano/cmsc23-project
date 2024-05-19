@@ -11,24 +11,24 @@ class OrganizationProfile extends StatefulWidget {
 
 class _OrganizationProfileState extends State<OrganizationProfile> {
   final List<DonationDrive> _donationDrives = [
-    DonationDrive(
-        image: 'assets/googlelogo.png',
-        title: "title1",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        timeLeft: "4 days left"),
-    DonationDrive(
-        image: 'assets/googlelogo.png',
-        title: "title2",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        timeLeft: "3 days left"),
-    DonationDrive(
-        image: 'assets/googlelogo.png',
-        title: "title3",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        timeLeft: "2 days left"),
+    // DonationDrive(
+    //     image: 'assets/googlelogo.png',
+    //     title: "title1",
+    //     description:
+    //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     timeLeft: "4 days left"),
+    // DonationDrive(
+    //     image: 'assets/googlelogo.png',
+    //     title: "title2",
+    //     description:
+    //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     timeLeft: "3 days left"),
+    // DonationDrive(
+    //     image: 'assets/googlelogo.png',
+    //     title: "title3",
+    //     description:
+    //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     timeLeft: "2 days left"),
   ];
 
   @override
@@ -196,9 +196,9 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                                 SizedBox(
                                                   height: screenHeight * 0.1,
                                                   width: screenWidth * 0.3,
-                                                  child: Image.asset(
-                                                      _donationDrives[index]
-                                                          .image),
+                                                  // child: Image.asset(
+                                                  //     _donationDrives[index]
+                                                  //         .image),
                                                 ),
                                                 const SizedBox(width: 7),
                                                 Expanded(
@@ -258,18 +258,18 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                                             ),
                                                             const SizedBox(
                                                                 width: 3),
-                                                            Text(
-                                                              _donationDrives[
-                                                                      index]
-                                                                  .timeLeft,
-                                                              style: TextStyle(
-                                                                  color: const Color
-                                                                      .fromRGBO(
-                                                                      128,
-                                                                      128,
-                                                                      128,
-                                                                      1)),
-                                                            )
+                                                            // Text(
+                                                            //   _donationDrives[
+                                                            //           index]
+                                                            //       .timeLeft,
+                                                            //   style: TextStyle(
+                                                            //       color: const Color
+                                                            //           .fromRGBO(
+                                                            //           128,
+                                                            //           128,
+                                                            //           128,
+                                                            //           1)),
+                                                            // )
                                                           ],
                                                         )
                                                       ]),

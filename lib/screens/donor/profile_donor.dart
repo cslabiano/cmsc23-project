@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:elbigay/widgets/navbar_donor.dart';
 
 class DonorProfilepage extends StatefulWidget {
   const DonorProfilepage({super.key});
@@ -17,7 +16,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
   Widget build(BuildContext context) {
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,

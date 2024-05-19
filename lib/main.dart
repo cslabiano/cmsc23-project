@@ -1,4 +1,6 @@
+import 'package:elbigay/firebase_options.dart';
 import 'package:elbigay/widgets/navbar_org.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 // import screens
@@ -8,11 +10,13 @@ import '/screens/entry/sign_up.dart';
 import '/widgets/navbar_donor.dart';
 import '/screens/donor/homepage_donor.dart';
 import '/screens/donor/profile_donor.dart';
-import '/screens/organization/donation_organization.dart';
+import 'screens/organization/donation_drive_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MainApp());
 }
 
@@ -33,7 +37,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/donor_navbar',
+        initialRoute: '/',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -44,7 +48,8 @@ class MainApp extends StatelessWidget {
           '/organization_navbar': (context) => const OrgNavbar(),
           '/organization_homepage': (context) => const OrganizationHomepage(),
           '/organization_profile': (context) => const OrganizationProfile(),
-          '/organization_donation': (context) => const OrganizationDonation(),
+          '/organization_donation': (context) =>
+              const OrganizationDonationDrive(),
         });
   }
 }

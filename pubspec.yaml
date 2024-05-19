@@ -37,6 +37,8 @@ dependencies:
   provider: ^6.1.2
   firebase_core: ^2.31.0
   cloud_firestore: ^4.17.3
+  firebase_storage: ^11.7.5
+  gallery_picker: ^0.5.1
 
 dev_dependencies:
   flutter_test:
