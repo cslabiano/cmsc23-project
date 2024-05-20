@@ -18,6 +18,8 @@ class InputField extends StatefulWidget {
 
 class _InputFieldState extends State<InputField> {
   final TextEditingController _controller = TextEditingController();
+  // ignore: prefer_final_fields
+  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -89,6 +91,7 @@ class _InputFieldState extends State<InputField> {
           onChanged: (value) {
             widget.callback(_controller.text);
           },
+          obscureText: widget.type == "password" ? _obscureText : false,
           decoration: InputDecoration(
             hintText: "Enter your ${widget.text}",
             hintStyle: TextStyle(

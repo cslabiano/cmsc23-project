@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../api/firebase_auth_api.dart';
 import '../models/donor.dart';
+import '../models/org.dart';
 
 class UserAuthProvider with ChangeNotifier {
   late FirebaseAuthAPI authService;
@@ -22,16 +23,13 @@ class UserAuthProvider with ChangeNotifier {
   }
 
   // accepts firstname and lastname aside from email and password
-  Future<void> signUpDonor(Donor donor, String password, String contact,
-      List<String> address) async {
+  Future<void> signUpDonor(Donor donor, String password) async {
     await authService.signUpDonor(donor, password);
     notifyListeners();
   }
 
-  Future<void> signUpOrg(String usertype, String email, String orgname,
-      String uname, String password, int contact, List<String> address) async {
-    await authService.signUpOrg(
-        usertype, email, orgname, uname, password, contact, address);
+  Future<void> signUpOrg(Org org, String password) async {
+    await authService.signUpOrg(org, password);
     notifyListeners();
   }
 
