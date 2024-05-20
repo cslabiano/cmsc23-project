@@ -281,7 +281,7 @@ class _SignUpDonorState extends State<SignUpDonor> {
 
                                         if (result != null &&
                                             result.isNotEmpty) {
-                                          // Determine the type of error
+                                          // determine the type of error
                                           setState(() {
                                             if (result.contains('email')) {
                                               emailError = result;
