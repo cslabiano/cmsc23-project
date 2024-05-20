@@ -5,11 +5,13 @@ class InputField extends StatefulWidget {
   final String text;
   final String label;
   final String type;
+  final String? error;
   const InputField(
       {required this.callback,
       required this.text,
       required this.label,
       required this.type,
+      this.error,
       super.key});
 
   @override
@@ -98,6 +100,7 @@ class _InputFieldState extends State<InputField> {
               fontStyle: FontStyle.italic,
               color: Theme.of(context).colorScheme.tertiary,
             ),
+            errorText: widget.error,
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
             border: OutlineInputBorder(

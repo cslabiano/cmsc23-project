@@ -15,6 +15,7 @@ class SignUpDonor extends StatefulWidget {
 class _SignUpDonorState extends State<SignUpDonor> {
   final _formKey = GlobalKey<FormState>();
   List<TextEditingController> addressControllers = [TextEditingController()];
+
   late Donor donor;
   String usertype = "donor";
   late String email;
@@ -24,6 +25,11 @@ class _SignUpDonorState extends State<SignUpDonor> {
   late String password;
   late String contact;
   late List<String> address;
+
+  // Error message variables
+  String? emailError;
+  String? passwordError;
+  String? unameError;
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +90,12 @@ class _SignUpDonorState extends State<SignUpDonor> {
 
                                 // input fields for email and password
                                 InputField(
-                                    callback: (String val) => email = val,
-                                    text: "email",
-                                    label: "email",
-                                    type: "string"),
+                                  callback: (String val) => email = val,
+                                  text: "email",
+                                  label: "email",
+                                  type: "string",
+                                  error: emailError,
+                                ),
                                 const SizedBox(height: 12),
                                 Row(
                                   children: [
@@ -116,16 +124,20 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                 ),
                                 const SizedBox(height: 12),
                                 InputField(
-                                    callback: (String val) => uname = val,
-                                    text: "username",
-                                    label: "uname",
-                                    type: "String"),
+                                  callback: (String val) => uname = val,
+                                  text: "username",
+                                  label: "uname",
+                                  type: "String",
+                                  error: unameError,
+                                ),
                                 const SizedBox(height: 12),
                                 InputField(
-                                    callback: (String val) => password = val,
-                                    text: "password",
-                                    label: "password",
-                                    type: "password"),
+                                  callback: (String val) => password = val,
+                                  text: "password",
+                                  label: "password",
+                                  type: "password",
+                                  error: passwordError,
+                                ),
                                 const SizedBox(height: 12),
                                 InputField(
                                     callback: (String val) => contact = val,
@@ -240,6 +252,13 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
 
+                                        // Clear previous error messages
+                                        setState(() {
+                                          emailError = null;
+                                          passwordError = null;
+                                          unameError = null;
+                                        });
+
                                         // Collect addresses
                                         address = addressControllers
                                             .map(
@@ -255,14 +274,30 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                             contact: contact,
                                             address: address);
 
-                                        await context
+                                        String? result = await context
                                             .read<UserAuthProvider>()
                                             .authService
                                             .signUpDonor(donor, password);
 
-                                        if (context.mounted) {
-                                          Navigator.pushNamed(
-                                              context, '/donor_navbar');
+                                        if (result != null &&
+                                            result.isNotEmpty) {
+                                          // Determine the type of error
+                                          setState(() {
+                                            if (result.contains('email')) {
+                                              emailError = result;
+                                            } else if (result
+                                                .contains('password')) {
+                                              passwordError = result;
+                                            } else if (result
+                                                .contains('Username')) {
+                                              unameError = result;
+                                            }
+                                          });
+                                        } else {
+                                          if (context.mounted) {
+                                            Navigator.pushNamed(
+                                                context, '/donor_navbar');
+                                          }
                                         }
                                       }
                                     },

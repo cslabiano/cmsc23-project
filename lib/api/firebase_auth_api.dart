@@ -32,6 +32,10 @@ class FirebaseAuthAPI {
   }
 
   Future<String?> signUpDonor(Donor donor, String password) async {
+    if (await isUsernameTaken(donor.uname)) {
+      return "Username already in use";
+    }
+
     UserCredential credential;
     try {
       credential = await auth.createUserWithEmailAndPassword(
@@ -41,6 +45,7 @@ class FirebaseAuthAPI {
 
       // add the user's usertype to the collection "users"
       await db.collection("users").doc(credential.user!.uid).set({
+        'uname': donor.uname,
         'usertype': donor.usertype,
       });
 
@@ -70,6 +75,9 @@ class FirebaseAuthAPI {
   }
 
   Future<String?> signUpOrg(Org org, String password) async {
+    if (await isUsernameTaken(org.uname)) {
+      return "Username already in use";
+    }
     UserCredential credential;
     try {
       credential = await auth.createUserWithEmailAndPassword(
@@ -79,6 +87,7 @@ class FirebaseAuthAPI {
 
       // add the user's usertype to the collection "users"
       await db.collection("users").doc(credential.user!.uid).set({
+        'uname': org.uname,
         'usertype': org.usertype,
       });
 
@@ -104,6 +113,16 @@ class FirebaseAuthAPI {
       print(e);
     }
     return null;
+  }
+
+  Future<bool> isUsernameTaken(String uname) async {
+    final QuerySnapshot result = await db
+        .collection("users")
+        .where('uname', isEqualTo: uname)
+        .limit(1)
+        .get();
+    final List<DocumentSnapshot> documents = result.docs;
+    return documents.isNotEmpty;
   }
 
   Future<void> signOut() async {
