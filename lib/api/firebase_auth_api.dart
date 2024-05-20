@@ -36,8 +36,10 @@ class FirebaseAuthAPI {
 
           if (usertype != null) {
             // based on the usertype, query the corresponding collection
-            String collectionName =
-                (usertype == 'donor') ? 'donors' : 'organizations';
+            String collectionName = 'donor';
+            if (usertype == 'donor') collectionName = 'donors';
+            if (usertype == 'org') collectionName = 'organizations';
+            if (usertype == 'admin') collectionName = 'admins';
 
             // query the corresponding collection to retrieve the email
             final QuerySnapshot userQuery = await db
