@@ -199,7 +199,7 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                 ),
                                 const SizedBox(height: 12),
 
-                                // Dynamically added address fields
+                                // dynamically added address fields
                                 Column(
                                   children: List.generate(
                                     addressControllers.length - 1,
@@ -272,7 +272,7 @@ class _SignUpOrgState extends State<SignUpOrg> {
 
                                 SizedBox(height: screenHeight * 0.03),
 
-                                // Sign up button
+                                // sign up button
                                 SizedBox(
                                   width: double.infinity,
                                   height: 47,
@@ -281,7 +281,7 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
 
-                                        // Collect addresses
+                                        // collect addresses
                                         address = addressControllers
                                             .map(
                                                 (controller) => controller.text)
