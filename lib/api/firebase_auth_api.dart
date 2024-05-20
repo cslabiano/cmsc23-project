@@ -18,7 +18,7 @@ class FirebaseAuthAPI {
 
   Future<String?> signIn(String uname, String password) async {
     try {
-      // Search for the provided username in the database
+      // search for the provided username in the database
       final QuerySnapshot result = await db
           .collection("users")
           .where('uname', isEqualTo: uname)
@@ -28,18 +28,18 @@ class FirebaseAuthAPI {
       final List<DocumentSnapshot> documents = result.docs;
 
       if (documents.isNotEmpty) {
-        // If username exists, retrieve its corresponding usertype
-        final dynamic data = documents[0].data(); // Retrieve data from document
+        // if username exists, retrieve its corresponding usertype
+        final dynamic data = documents[0].data();
 
         if (data != null && data is Map<String, dynamic>) {
-          final usertype = data['usertype']; // Access 'usertype' property
+          final usertype = data['usertype'];
 
           if (usertype != null) {
-            // Based on the usertype, query the corresponding collection
+            // based on the usertype, query the corresponding collection
             String collectionName =
                 (usertype == 'donor') ? 'donors' : 'organizations';
 
-            // Query the corresponding collection to retrieve the email
+            // query the corresponding collection to retrieve the email
             final QuerySnapshot userQuery = await db
                 .collection(collectionName)
                 .where('uname', isEqualTo: uname)
@@ -49,40 +49,35 @@ class FirebaseAuthAPI {
             final List<DocumentSnapshot> userDocuments = userQuery.docs;
 
             if (userDocuments.isNotEmpty) {
-              // Retrieve the email from the user document
+              // retrieve the email from the user document
               final userData = userDocuments[0].data();
 
               if (userData != null && userData is Map<String, dynamic>) {
-                final email = userData['email']; // Access 'email' property
+                final email = userData['email'];
 
                 if (email != null) {
-                  // Perform sign-in with retrieved email and password
                   await auth.signInWithEmailAndPassword(
                       email: email, password: password);
-                  return null; // Return null on success
+                  return null;
                 } else {
-                  // Email not found for the username
                   return "Email not found for the username";
                 }
               }
             } else {
-              // User document not found in the corresponding collection
               return "User not found";
             }
           } else {
-            // Usertype not found for the username
             return "Usertype not found";
           }
         }
       } else {
-        // Username not found in the database
         return "Username not found";
       }
     } on FirebaseAuthException catch (e) {
-      // Handle authentication exceptions
+      // handle authentication exceptions
       return e.message;
     } catch (e) {
-      // Handle other exceptions
+      // handle other exceptions
       return "Failed to sign in: $e";
     }
     return "";
