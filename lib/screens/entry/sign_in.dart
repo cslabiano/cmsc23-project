@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                                 type: "password"),
                             SizedBox(height: screenHeight * 0.06),
 
-                            // Error message display
+                            // error message display
                             errorMessage != null
                                 ? Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -102,7 +102,7 @@ class _SignInState extends State<SignIn> {
                                   )
                                 : Container(),
 
-                            // Sign in button
+                            // sign in button
                             SizedBox(
                               width: double.infinity,
                               height: 47,
@@ -111,7 +111,7 @@ class _SignInState extends State<SignIn> {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
 
-                                    // Call sign-in method and handle errors
+                                    // call sign-in method and handle errors
                                     String? result = await context
                                         .read<UserAuthProvider>()
                                         .authService
@@ -179,7 +179,7 @@ class _SignInState extends State<SignIn> {
                             ),
                             SizedBox(height: screenHeight * 0.02),
 
-                            // Sign in with google button
+                            // sign in with google button
                             SizedBox(
                               width: double.infinity,
                               height: 47,
