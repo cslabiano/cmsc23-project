@@ -26,7 +26,7 @@ class _SignUpDonorState extends State<SignUpDonor> {
   late String contact;
   late List<String> address;
 
-  // Error message variables
+  // error message variables
   String? emailError;
   String? passwordError;
   String? unameError;
@@ -170,7 +170,7 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                 ),
                                 const SizedBox(height: 12),
 
-                                // Dynamically added address fields
+                                // dynamically added address fields
                                 Column(
                                   children: List.generate(
                                     addressControllers.length - 1,
@@ -243,7 +243,7 @@ class _SignUpDonorState extends State<SignUpDonor> {
 
                                 SizedBox(height: screenHeight * 0.03),
 
-                                // Sign up button
+                                // sign up button
                                 SizedBox(
                                   width: double.infinity,
                                   height: 47,
@@ -252,14 +252,14 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
 
-                                        // Clear previous error messages
+                                        // clear previous error messages
                                         setState(() {
                                           emailError = null;
                                           passwordError = null;
                                           unameError = null;
                                         });
 
-                                        // Collect addresses
+                                        // collect addresses
                                         address = addressControllers
                                             .map(
                                                 (controller) => controller.text)
