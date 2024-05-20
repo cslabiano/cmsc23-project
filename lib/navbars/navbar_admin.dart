@@ -40,7 +40,7 @@ class _DonorNavbarState extends State<DonorNavbar> {
             icon: _selectedIndex == 1
                 ? const Icon(Icons.inventory)
                 : const Icon(Icons.inventory_outlined),
-            label: 'Translate',
+            label: 'Donations',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 2

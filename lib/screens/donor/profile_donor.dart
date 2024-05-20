@@ -1,9 +1,5 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:elbigay/widgets/navbar_donor.dart';
 
 class DonorProfilepage extends StatefulWidget {
   const DonorProfilepage({super.key});
