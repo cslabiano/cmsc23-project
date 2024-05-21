@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
 
 class DonorProfilepage extends StatefulWidget {
   const DonorProfilepage({super.key});
@@ -312,8 +314,16 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                       leading: Icon(Icons.logout_outlined),
                                       trailing:
                                           Icon(Icons.keyboard_arrow_right),
-                                      onTap: () {
-                                        Navigator.pushNamed(context, '/');
+                                      onTap: () async {
+                                        await context
+                                            .read<UserAuthProvider>()
+                                            .signOut();
+                                        if (context.mounted) {
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context,
+                                              '/',
+                                              (Route<dynamic> route) => false);
+                                        }
                                       },
                                     ),
                                   ),

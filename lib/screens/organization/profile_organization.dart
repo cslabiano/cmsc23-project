@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 import 'package:flutter/material.dart';
-import 'package:elbigay/models/donation_drive_model.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
+import '../../models/donation_drive_model.dart';
 
 class OrganizationProfile extends StatefulWidget {
   const OrganizationProfile({super.key});
@@ -390,9 +392,14 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   ),
                                   leading: Icon(Icons.logout_outlined),
                                   trailing: Icon(Icons.keyboard_arrow_right),
-                                  onTap: () {
-                                    Navigator.popUntil(context,
-                                        ModalRoute.withName('/signin'));
+                                  onTap: () async {
+                                    await context
+                                        .read<UserAuthProvider>()
+                                        .signOut();
+                                    if (context.mounted) {
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          '/', (Route<dynamic> route) => false);
+                                    }
                                   },
                                 ),
                               ),
