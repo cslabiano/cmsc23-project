@@ -1,4 +1,4 @@
-import 'package:elbigay/models/donation_model.dart';
+import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:flutter/material.dart';
 
 class OrgCard extends StatefulWidget {

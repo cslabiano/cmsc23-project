@@ -1,7 +1,6 @@
-import 'package:elbigay/widgets/org_card.dart';
+import 'package:elbigay/cards/org_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import '../../models/donation_model.dart';
+import '../../models/donor_donation_model.dart';
 
 class DonorHomepage extends StatefulWidget {
   const DonorHomepage({super.key});

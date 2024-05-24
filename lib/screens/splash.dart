@@ -38,7 +38,8 @@ class Splash extends StatelessWidget {
                       height: screenHeight * 0.06,
                       child: FilledButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/signup');
+                          Navigator.pushReplacementNamed(
+                              context, '/signup_option');
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
