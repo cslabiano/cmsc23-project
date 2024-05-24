@@ -1,3 +1,4 @@
+import 'package:elbigay/widgets/org_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../models/donation_model.dart';
@@ -36,7 +37,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
       backgroundColor: Colors.white,
       body: Center(
         child: Container(
-          padding: EdgeInsets.only(right: 20, left: 30),
+          padding: EdgeInsets.only(right: 20, left: 20),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,90 +109,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
                       itemBuilder: (context, index) {
                         return Column(children: [
                           SizedBox(height: 20),
-                          InkWell(
-                            onTap: () {
-                              print("Tapped");
-                            },
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)),
-                            child: Container(
-                              height: screenHeight * 0.2,
-                              width: screenWidth * 0.85,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 4,
-                                    blurStyle: BlurStyle.outer,
-                                  ),
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20)),
-                                child: Image.asset(
-                                  _donations[index].image,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              print("Tapped");
-                            },
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                            child: Container(
-                              height: screenHeight * 0.069,
-                              width: screenWidth * 0.85,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(20),
-                                      bottomRight: Radius.circular(20)),
-                                  color: Colors.white,
-                                  boxShadow: kElevationToShadow[2]),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
-                                    child: Text(
-                                      _donations[index].title,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(62, 180, 137, 1),
-                                        fontFamily: 'Lato',
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
-                                    child: Text(
-                                      _donations[index].description,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(34, 38, 66, 1),
-                                        fontFamily: 'Lato',
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
+                          OrgCard(donation: _donations[index])
                         ]);
                       }),
                 ),
