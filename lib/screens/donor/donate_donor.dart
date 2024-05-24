@@ -30,8 +30,23 @@ class _DonatePageState extends State<DonatePage> {
   bool get _isAnyChecked =>
       _food || _clothes || _cash || _necessities || _others;
 
-  String formatTimeofDay(TimeOfDay timeOfDay) {
-    final String hour = timeOfDay.hour.toString().padLeft(2, '0');
+  TimeOfDay _minTime = TimeOfDay(hour: 8, minute: 0);
+  TimeOfDay _maxTime = TimeOfDay(hour: 20, minute: 0);
+
+  bool _isTimeInRange(TimeOfDay? time) {
+    final DateTime now = DateTime.now();
+    final DateTime minDateTime =
+        DateTime(now.year, now.month, now.day, _minTime.hour, _minTime.minute);
+    final DateTime maxDateTime =
+        DateTime(now.year, now.month, now.day, _maxTime.hour, _maxTime.minute);
+    final DateTime selectedDateTime =
+        DateTime(now.year, now.month, now.day, time!.hour, time.minute);
+    return selectedDateTime.isAfter(minDateTime) &&
+        selectedDateTime.isBefore(maxDateTime);
+  }
+
+  String formatTimeofDay(TimeOfDay? timeOfDay) {
+    final String hour = timeOfDay!.hour.toString().padLeft(2, '0');
     final String minute = timeOfDay.minute.toString().padLeft(2, '0');
     return '$hour:$minute';
   }
@@ -416,7 +431,7 @@ class _DonatePageState extends State<DonatePage> {
                           DateTime? selectedDate = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
-                              firstDate: DateTime(2000),
+                              firstDate: DateTime.now(),
                               lastDate: DateTime(2100));
                           if (selectedDate != null) {
                             _date = selectedDate;
@@ -470,10 +485,21 @@ class _DonatePageState extends State<DonatePage> {
                             context: context,
                             initialTime: TimeOfDay.now(),
                           );
-                          if (selectedTime != null) {
+
+                          if (selectedTime != null &&
+                              _isTimeInRange(selectedTime)) {
                             _time = selectedTime;
                             _timeController.text =
                                 formatTimeofDay(selectedTime);
+                          }
+
+                          if (!_isTimeInRange(selectedTime)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'Please select a time between 8:00 AM and 8:00 PM'),
+                              ),
+                            );
                           }
                         },
                       ),
@@ -537,6 +563,9 @@ class _DonatePageState extends State<DonatePage> {
                           EdgeInsets.symmetric(horizontal: screenWidth * 0.39),
                     ),
                     onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save;
+                      }
                       if (!_isAnyChecked) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -544,9 +573,6 @@ class _DonatePageState extends State<DonatePage> {
                                   Text('Please select at least one checkbox.')),
                         );
                         return;
-                      }
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save;
                       }
                       setState(() {
                         _finalDateTime = DateTime(_date!.year, _date!.month,
