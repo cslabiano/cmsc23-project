@@ -19,6 +19,7 @@ import '/screens/organization/donation_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
 
+//import navbars
 import '/navbars/navbar_org.dart';
 
 Future<void> main() async {
