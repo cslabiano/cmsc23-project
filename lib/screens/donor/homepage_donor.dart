@@ -47,8 +47,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
                     "Hello Myndie!",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        color: Color.fromRGBO(62, 180, 137, 1),
-                        fontFamily: 'Lato',
+                        color: Theme.of(context).primaryColor,
                         fontSize: 27,
                         fontWeight: FontWeight.normal,
                         height: 1),
@@ -61,7 +60,6 @@ class _DonorHomepageState extends State<DonorHomepage> {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       color: Color.fromRGBO(156, 157, 159, 1),
-                      fontFamily: 'Lato',
                       fontWeight: FontWeight.normal,
                       fontSize: 16,
                       height: 1,
