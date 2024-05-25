@@ -1,31 +1,81 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 class DonationDrive {
   String userId;
   String title;
   String description;
   String status;
-
   DonationDrive({
     required this.userId,
     required this.title,
     required this.description,
-    required this.status
+    required this.status,
   });
 
-  Map<String, dynamic> toJson(DonationDrive donationDrive) {
-    return {
-      'userId': donationDrive.userId,
-      'title': donationDrive.title,
-      'description': donationDrive.description,
-      'status': donationDrive.status,
+  // DonationDrive({
+  //   required this.userId,
+  //   required this.title,
+  //   required this.description,
+  //   required this.status
+  // });
+
+  // Map<String, dynamic> toJson(DonationDrive donationDrive) {
+  //   return {
+  //     'userId': donationDrive.userId,
+  //     'title': donationDrive.title,
+  //     'description': donationDrive.description,
+  //     'status': donationDrive.status,
+  //   };
+  // }
+
+  // factory DonationDrive.fromJson(Map<String, dynamic> json) {
+  //   return DonationDrive(
+  //     userId: json['userId'],
+  //     title: json['title'],
+  //     description: json['description'],
+  //     status: json['status'],
+  //   );
+  // }
+
+  // DonationDrive copyWith({
+  //   String? userId,
+  //   String? title,
+  //   String? description,
+  //   String? status,
+  // }) {
+  //   return DonationDrive(
+  //     userId: userId ?? this.userId,
+  //     title: title ?? this.title,
+  //     description: description ?? this.description,
+  //     status: status ?? this.status,
+  //   );
+  // }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'userId': userId,
+      'title': title,
+      'description': description,
+      'status': status,
     };
   }
 
-  factory DonationDrive.fromJson(Map<String, dynamic> json) {
+  factory DonationDrive.fromMap(Map<String, dynamic> map) {
     return DonationDrive(
-      userId: json['userId'],
-      title: json['title'],
-      description: json['description'],
-      status: json['status'],
+      userId: map['userId'] as String,
+      title: map['title'] as String,
+      description: map['description'] as String,
+      status: map['status'] as String,
     );
+  }
+
+  String toJson(DonationDrive donationDrive) => json.encode(toMap());
+
+  factory DonationDrive.fromJson(String source) => DonationDrive.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'DonationDrive(userId: $userId, title: $title, description: $description, status: $status)';
   }
 }

@@ -50,7 +50,9 @@ class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/add_donation_drive');
+          },
           child: Icon(
             Icons.add,
             size: screenWidth * 0.1,

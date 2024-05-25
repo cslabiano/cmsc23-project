@@ -25,7 +25,7 @@ class DonationDriveProvider extends ChangeNotifier {
   }
 
   void addDonationDrive(DonationDrive donationDrive) async {
-    String message = await firebaseService.addDonationDrive(donationDrive.toJson(donationDrive));
+    String message = await firebaseService.addDonationDrive(donationDrive);
     print(message);
     notifyListeners();
   }
