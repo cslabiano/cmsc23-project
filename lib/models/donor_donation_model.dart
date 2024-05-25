@@ -4,6 +4,7 @@ class Donation {
   String userId;
   String? id;
   String? orgId;
+  String status;
   List<String> itemType;
   String modeOfDelivery;
   String weight;
@@ -13,6 +14,7 @@ class Donation {
       {required this.userId,
       this.id,
       this.orgId,
+      required this.status,
       required this.itemType,
       required this.modeOfDelivery,
       required this.weight,
@@ -22,6 +24,7 @@ class Donation {
     return Donation(
         userId: json['userId'],
         id: json['id'],
+        status: json['status'],
         itemType: json['itemType'],
         modeOfDelivery: json['modeOfDelivery'],
         weight: json['weight'],
@@ -37,6 +40,7 @@ class Donation {
     return {
       'userId': donation.userId,
       'id': donation.id,
+      'status': donation.status,
       'itemType': donation.itemType,
       'modeOfDelivery': donation.modeOfDelivery,
       'weight': donation.weight,

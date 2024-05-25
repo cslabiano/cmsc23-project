@@ -640,6 +640,7 @@ class _DonatePageState extends State<DonatePage> {
                         Donation donation = Donation(
                           userId: "1",
                           itemType: _itemType,
+                          status: "Pending",
                           modeOfDelivery: _modeOfDelivery,
                           weight: _weight,
                           dateTime: _stringFinalDateTime!,
