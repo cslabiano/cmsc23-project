@@ -2,7 +2,7 @@ class DonationDrive {
   String userId;
   String title;
   String description;
-  bool status;
+  String status;
 
   DonationDrive({
     required this.userId,

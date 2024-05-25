@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:elbigay/models/donation_drive_model.dart';
+import 'package:elbigay/screens/organization/donation_drive_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class OrganizationDonationDrive extends StatefulWidget {
@@ -12,7 +13,12 @@ class OrganizationDonationDrive extends StatefulWidget {
 }
 
 class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
-  final List<DonationDrive> _donationDrives = [];
+  final List<DonationDrive> _donationDrives = [
+    DonationDrive(userId: '1', title: 'title 1', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
+    DonationDrive(userId: '1', title: 'title 2', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
+    DonationDrive(userId: '1', title: 'title 3', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Closed"),
+    DonationDrive(userId: '1', title: 'title 4', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,154 +29,42 @@ class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          toolbarHeight: screenHeight * 0.2,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.bottomLeft,
-                    end: Alignment.topRight,
-                    colors: const [
-                  Color.fromRGBO(14, 198, 178, 1),
-                  Color.fromRGBO(37, 212, 147, 1)
-                ])),
+          flexibleSpace: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // SizedBox(height: screenHeight * 0.1),
-                Container(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text(
-                    "Good day!",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: screenWidth * 0.09),
+                SizedBox(height: screenHeight * 0.02),
+                Text(
+                  "Your Donation Drives",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, 
+                      fontSize: screenWidth * 0.06,
+                      fontWeight: FontWeight.w600
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text(
-                    "Here are your donation drives",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: screenWidth * 0.05),
-                  ),
-                ),
-                SizedBox(height: screenHeight * 0.03),
-                SizedBox(
-                  height: 15,
-                  child: Container(
-                    decoration:
-                        BoxDecoration(color: Color.fromRGBO(157, 214, 193, 1)),
-                  ),
-                )
+                // SizedBox(height: screenHeight * 0.03),
               ],
             ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            size: screenWidth * 0.1,
+          ),
         ),
-        backgroundColor: Color.fromRGBO(243, 237, 237, 1),
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         body: Center(
             child: Container(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
           child: Column(
             children: [
-              const SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: _donationDrives.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          // navigate to donation drive page
-                          print("tapped");
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white,
-                                boxShadow: kElevationToShadow[2],
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: screenHeight * 0.1,
-                                    width: screenWidth * 0.3,
-                                    // child: Image.asset(
-                                    //     _donationDrives[index]
-                                    //         .image),
-                                  ),
-                                  const SizedBox(width: 7),
-                                  Expanded(
-                                      child: Container(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        0, 10, 20, 10),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            _donationDrives[index].title,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: screenWidth * 0.05,
-                                              fontWeight: FontWeight.w600,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 2),
-                                          Text(
-                                            _donationDrives[index].description,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 3,
-                                            style: TextStyle(
-                                              fontSize: screenWidth * 0.03,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 2),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.timelapse_rounded,
-                                                color: const Color.fromRGBO(
-                                                    128, 128, 128, 1),
-                                                size: screenWidth * 0.05,
-                                              ),
-                                              const SizedBox(width: 3),
-                                              // Text(
-                                              //   _donationDrives[
-                                              //           index]
-                                              //       .timeLeft,
-                                              //   style: TextStyle(
-                                              //       color: const Color
-                                              //           .fromRGBO(
-                                              //           128,
-                                              //           128,
-                                              //           128,
-                                              //           1)),
-                                              // )
-                                            ],
-                                          )
-                                        ]),
-                                  )),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 20)
-                          ],
-                        ),
-                      );
-                    }),
-              ),
+              const SizedBox(height: 10),
+              DonationDriveCard(donationDrives: _donationDrives, userType: "org")
             ],
           ),
         )));

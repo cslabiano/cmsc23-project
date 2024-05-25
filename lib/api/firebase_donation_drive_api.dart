@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/donation_drive_model.dart';
+import 'dart:convert';
 
 class FirebaseDonationDriveAPI {
   static final FirebaseFirestore db = FirebaseFirestore.instance;
@@ -15,7 +16,7 @@ class FirebaseDonationDriveAPI {
   Future<DonationDrive?> getDonationDrive(String id) async {
     try {
       DocumentSnapshot snapshot = await db.collection("donationDrives").doc(id).get();
-      return DonationDrive.fromJson(snapshot.data as Map<String, dynamic>);
+      return DonationDrive.fromJson(jsonDecode(snapshot.data as String));
     } on FirebaseException catch (e) {
       print("Error in ${e.code}: ${e.message}");
       return null;
