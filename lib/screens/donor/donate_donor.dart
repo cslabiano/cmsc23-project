@@ -946,6 +946,38 @@ class _DonatePageState extends State<DonatePage> {
                           context
                               .read<DonationProvider>()
                               .addDonation(donation);
+
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  "QR Code",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                content: Text(
+                                  "A QR code will be generated after your donation has been confirmed by the organization.",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      "Okay",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 19,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         }
                         if (_modeOfDelivery == "Drop off") {
                           Donation donation = Donation(
