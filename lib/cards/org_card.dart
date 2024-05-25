@@ -38,10 +38,10 @@ class _OrgCardState extends State<OrgCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-            child: Image.asset(
-              widget.donation.image,
-              fit: BoxFit.cover,
-            ),
+            // child: Image.asset(
+            // widget.donation.image,
+            // fit: BoxFit.cover,
+            //     ),
           ),
         ),
       ),
@@ -66,30 +66,31 @@ class _OrgCardState extends State<OrgCard> {
             children: [
               Container(
                 padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
-                child: Text(
-                  widget.donation.title,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Color.fromRGBO(62, 180, 137, 1),
-                    fontFamily: 'Lato',
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                // child:
+                // Text(
+                //   widget.donation.title,
+                //   overflow: TextOverflow.ellipsis,
+                //   style: TextStyle(
+                //     color: Color.fromRGBO(62, 180, 137, 1),
+                //     fontFamily: 'Lato',
+                //     fontSize: 14,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
-                child: Text(
-                  widget.donation.description,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyle(
-                    color: Color.fromRGBO(34, 38, 66, 1),
-                    fontFamily: 'Lato',
-                    fontSize: 8,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
+                // child: Text(
+                //   widget.donation.description,
+                //   overflow: TextOverflow.ellipsis,
+                //   maxLines: 2,
+                //   style: TextStyle(
+                //     color: Color.fromRGBO(34, 38, 66, 1),
+                //     fontFamily: 'Lato',
+                //     fontSize: 8,
+                //     fontWeight: FontWeight.normal,
+                //   ),
+                // ),
               ),
             ],
           ),

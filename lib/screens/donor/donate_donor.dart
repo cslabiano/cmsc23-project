@@ -1,5 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:elbigay/models/donor_donation_model.dart';
+import 'package:elbigay/providers/donation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class DonatePage extends StatefulWidget {
   const DonatePage({super.key});
@@ -18,6 +22,7 @@ class _DonatePageState extends State<DonatePage> {
   DateTime? _date;
   TimeOfDay? _time;
   DateTime? _finalDateTime;
+  String? _stringFinalDateTime;
   String _weight = '';
   String _modeOfDelivery = 'Drop off';
 
@@ -577,26 +582,76 @@ class _DonatePageState extends State<DonatePage> {
                       setState(() {
                         _finalDateTime = DateTime(_date!.year, _date!.month,
                             _date!.day, _time!.hour, _time!.minute);
+
+                        DateFormat dateFormat = DateFormat("yyy-MM-dd HH:mm");
+                        _stringFinalDateTime =
+                            dateFormat.format(_finalDateTime!);
+                        dateFormat.format(_finalDateTime!);
+
                         if (_food) {
-                          _itemType.add("Food");
+                          if (!_itemType.contains("Food")) {
+                            _itemType.add("Food");
+                          }
+                        } else {
+                          if (_itemType.contains("Food")) {
+                            _itemType.remove("Food");
+                          }
                         }
                         if (_clothes) {
-                          _itemType.add("Clothes");
+                          if (!_itemType.contains("Clothes")) {
+                            _itemType.add("Clothes");
+                          }
+                        } else {
+                          if (_itemType.contains("Clothes")) {
+                            _itemType.remove("Clothes");
+                          }
                         }
+
                         if (_cash) {
-                          _itemType.add("Cash");
+                          if (!_itemType.contains("Cash")) {
+                            _itemType.add("Cash");
+                          }
+                        } else {
+                          if (_itemType.contains("Cash")) {
+                            _itemType.remove("Cash");
+                          }
                         }
+
                         if (_necessities) {
-                          _itemType.add("Necessities");
+                          if (!_itemType.contains("Necessities")) {
+                            _itemType.add("Necessities");
+                          }
+                        } else {
+                          if (_itemType.contains("Necessities")) {
+                            _itemType.remove("Necessities");
+                          }
                         }
+
                         if (_others) {
-                          _itemType.add("Others");
+                          if (!_itemType.contains("Others")) {
+                            _itemType.add("Others");
+                          }
+                        } else {
+                          if (_itemType.contains("Others")) {
+                            _itemType.remove("Others");
+                          }
                         }
+
+                        Donation donation = Donation(
+                          userId: "1",
+                          itemType: _itemType,
+                          modeOfDelivery: _modeOfDelivery,
+                          weight: _weight,
+                          dateTime: _stringFinalDateTime!,
+                        );
+
+                        context.read<DonationProvider>().addDonation(donation);
+
                         print("Success");
                         print("$_isAnyChecked");
                         print('$_itemType');
                         print('$_modeOfDelivery');
-                        print('$_finalDateTime');
+                        print('$_stringFinalDateTime');
                         print('$_weight');
                       });
                     },
