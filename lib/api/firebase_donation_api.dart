@@ -17,10 +17,27 @@ class FirebaseDonationAPI {
     }
   }
 
-  Stream<QuerySnapshot> getDonations(String? orgId) {
+  Future<String> deleteDonation(String id) async {
+    try {
+      await db.collection("donations").doc(id).delete();
+
+      return "Successfully deleted!";
+    } on FirebaseException catch (e) {
+      return "Error in ${e.code}: ${e.message}";
+    }
+  }
+
+  Stream<QuerySnapshot> getDonationsOrg(String? orgId) {
     return db
         .collection("donations")
         .where('orgId', isEqualTo: orgId)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getDonationsDonor(String? uid) {
+    return db
+        .collection("donations")
+        .where('userId', isEqualTo: uid)
         .snapshots();
   }
 

@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:elbigay/providers/donation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,8 @@ class _DonatePageState extends State<DonatePage> {
   String? _stringFinalDateTime;
   String _weight = '';
   String _modeOfDelivery = 'Drop off';
+  String _address = '';
+  String _contactNumber = '';
 
   List<String> _itemType = [];
   List<bool> _selectedMode = [true, false];
@@ -54,6 +57,472 @@ class _DonatePageState extends State<DonatePage> {
     final String hour = timeOfDay!.hour.toString().padLeft(2, '0');
     final String minute = timeOfDay.minute.toString().padLeft(2, '0');
     return '$hour:$minute';
+  }
+
+  Widget dropOff() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Weight of the items to donate (kg)",
+          textAlign: TextAlign.left,
+          style:
+              TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1),
+        ),
+        SizedBox(height: 10),
+        TextFormField(
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.number,
+          validator: (val) {
+            if (val == null || val.isEmpty) {
+              return "Please enter weight";
+            }
+          },
+          onChanged: (value) {
+            _weight = value;
+          },
+          onSaved: (val) {
+            print("Text value: ${val!}");
+          },
+          decoration: InputDecoration(
+            hintText: "Enter weight",
+            hintStyle: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          cursorColor: Theme.of(context).primaryColor,
+        ),
+        SizedBox(height: 25),
+        Text(
+          "Choose Date and Time",
+          textAlign: TextAlign.left,
+          style:
+              TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1),
+        ),
+        SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: _dateController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.calendar_today),
+                  hintText: "Choose date",
+                  hintStyle: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                readOnly: true,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Please pick a date";
+                  }
+                },
+                onTap: () async {
+                  DateTime? selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100));
+                  if (selectedDate != null) {
+                    _date = selectedDate;
+                    _dateController.text =
+                        selectedDate.toString().split(" ")[0];
+                  }
+                },
+              ),
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              child: TextFormField(
+                controller: _timeController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.timer),
+                  hintText: "Choose time",
+                  hintStyle: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                readOnly: true,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Please pick a time";
+                  }
+                },
+                onTap: () async {
+                  TimeOfDay? selectedTime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+
+                  if (selectedTime != null && _isTimeInRange(selectedTime)) {
+                    _time = selectedTime;
+                    _timeController.text = formatTimeofDay(selectedTime);
+                  }
+
+                  if (!_isTimeInRange(selectedTime)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                            'Please select a time between 8:00 AM and 8:00 PM'),
+                      ),
+                    );
+                  }
+                },
+              ),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget pickup() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Weight of the items to donate (kg)",
+          textAlign: TextAlign.left,
+          style:
+              TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1),
+        ),
+        SizedBox(height: 10),
+        TextFormField(
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.number,
+          validator: (val) {
+            if (val == null || val.isEmpty) {
+              return "Please enter weight";
+            }
+          },
+          onChanged: (value) {
+            _weight = value;
+          },
+          onSaved: (val) {
+            print("Text value: ${val!}");
+          },
+          decoration: InputDecoration(
+            hintText: "Enter weight",
+            hintStyle: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          cursorColor: Theme.of(context).primaryColor,
+        ),
+        SizedBox(height: 25),
+        Text(
+          "Choose Date and Time",
+          textAlign: TextAlign.left,
+          style:
+              TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1),
+        ),
+        SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: _dateController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.calendar_today),
+                  hintText: "Choose date",
+                  hintStyle: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                readOnly: true,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Please pick a date";
+                  }
+                },
+                onTap: () async {
+                  DateTime? selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100));
+                  if (selectedDate != null) {
+                    _date = selectedDate;
+                    _dateController.text =
+                        selectedDate.toString().split(" ")[0];
+                  }
+                },
+              ),
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              child: TextFormField(
+                controller: _timeController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.timer),
+                  hintText: "Choose time",
+                  hintStyle: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                readOnly: true,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Please pick a time";
+                  }
+                },
+                onTap: () async {
+                  TimeOfDay? selectedTime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+
+                  if (selectedTime != null && _isTimeInRange(selectedTime)) {
+                    _time = selectedTime;
+                    _timeController.text = formatTimeofDay(selectedTime);
+                  }
+
+                  if (!_isTimeInRange(selectedTime)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                            'Please select a time between 8:00 AM and 8:00 PM'),
+                      ),
+                    );
+                  }
+                },
+              ),
+            )
+          ],
+        ),
+        SizedBox(height: 15),
+        Text(
+          "Address",
+          textAlign: TextAlign.left,
+          style:
+              TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1),
+        ),
+        SizedBox(height: 10),
+        TextFormField(
+          decoration: InputDecoration(
+            hintText: "Enter address",
+            hintStyle: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          validator: (val) {
+            if (val == null || val.isEmpty) {
+              return "Please enter an address";
+            }
+          },
+          onChanged: (value) {
+            setState(() {
+              _address = value;
+            });
+          },
+        ),
+        SizedBox(height: 15),
+        Text(
+          "Contact Number",
+          textAlign: TextAlign.left,
+          style:
+              TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1),
+        ),
+        SizedBox(height: 10),
+        TextFormField(
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: InputDecoration(
+            hintText: "Enter contact number",
+            hintStyle: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          validator: (val) {
+            if (val == null || val.isEmpty) {
+              return "Please enter your contact number";
+            }
+          },
+          onChanged: (value) {
+            setState(() {
+              _contactNumber = value;
+            });
+          },
+        ),
+        SizedBox(width: 20),
+      ],
+    );
   }
 
   @override
@@ -334,183 +803,8 @@ class _DonatePageState extends State<DonatePage> {
                   ),
                 ),
                 SizedBox(height: 25),
-                Text(
-                  "Weight of the items to donate (kg)",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontSize: 13, fontWeight: FontWeight.bold, height: 1),
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return "Please enter weight";
-                    }
-                  },
-                  onChanged: (value) {
-                    _weight = value;
-                  },
-                  onSaved: (val) {
-                    print("Text value: ${val!}");
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Enter weight",
-                    hintStyle: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 12),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  cursorColor: Theme.of(context).primaryColor,
-                ),
-                SizedBox(height: 25),
-                Text(
-                  "Choose Date and Time",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontSize: 13, fontWeight: FontWeight.bold, height: 1),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _dateController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.calendar_today),
-                          hintText: "Choose date",
-                          hintStyle: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            color: Theme.of(context).colorScheme.tertiary,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 12),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.tertiary,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.tertiary,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        readOnly: true,
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return "Please pick a date";
-                          }
-                        },
-                        onTap: () async {
-                          DateTime? selectedDate = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2100));
-                          if (selectedDate != null) {
-                            _date = selectedDate;
-                            _dateController.text =
-                                selectedDate.toString().split(" ")[0];
-                          }
-                        },
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    Expanded(
-                      child: TextFormField(
-                        controller: _timeController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.timer),
-                          hintText: "Choose time",
-                          hintStyle: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            color: Theme.of(context).colorScheme.tertiary,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 12),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.tertiary,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.tertiary,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        readOnly: true,
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return "Please pick a time";
-                          }
-                        },
-                        onTap: () async {
-                          TimeOfDay? selectedTime = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.now(),
-                          );
-
-                          if (selectedTime != null &&
-                              _isTimeInRange(selectedTime)) {
-                            _time = selectedTime;
-                            _timeController.text =
-                                formatTimeofDay(selectedTime);
-                          }
-
-                          if (!_isTimeInRange(selectedTime)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                    'Please select a time between 8:00 AM and 8:00 PM'),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    )
-                  ],
-                ),
+                if (_modeOfDelivery == "Drop off") dropOff(),
+                if (_modeOfDelivery == "Pickup") pickup(),
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {},
@@ -637,16 +931,38 @@ class _DonatePageState extends State<DonatePage> {
                           }
                         }
 
-                        Donation donation = Donation(
-                          userId: "1",
-                          itemType: _itemType,
-                          status: "Pending",
-                          modeOfDelivery: _modeOfDelivery,
-                          weight: _weight,
-                          dateTime: _stringFinalDateTime!,
-                        );
-
-                        context.read<DonationProvider>().addDonation(donation);
+                        if (_modeOfDelivery == "Pickup") {
+                          Donation donation = Donation(
+                            userId: "2",
+                            orgId: "1",
+                            itemType: _itemType,
+                            status: "Pending",
+                            address: _address,
+                            contactNumber: _contactNumber,
+                            modeOfDelivery: _modeOfDelivery,
+                            weight: _weight,
+                            dateTime: _stringFinalDateTime!,
+                          );
+                          context
+                              .read<DonationProvider>()
+                              .addDonation(donation);
+                        }
+                        if (_modeOfDelivery == "Drop off") {
+                          Donation donation = Donation(
+                            userId: "2",
+                            orgId: "1",
+                            itemType: _itemType,
+                            status: "Pending",
+                            address: "none",
+                            contactNumber: "none",
+                            modeOfDelivery: _modeOfDelivery,
+                            weight: _weight,
+                            dateTime: _stringFinalDateTime!,
+                          );
+                          context
+                              .read<DonationProvider>()
+                              .addDonation(donation);
+                        }
 
                         print("Success");
                         print("$_isAnyChecked");
@@ -654,6 +970,8 @@ class _DonatePageState extends State<DonatePage> {
                         print('$_modeOfDelivery');
                         print('$_stringFinalDateTime');
                         print('$_weight');
+                        print('$_address');
+                        print('$_contactNumber');
                       });
                     },
                     child:

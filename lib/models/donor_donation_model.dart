@@ -4,6 +4,8 @@ class Donation {
   String userId;
   String? id;
   String? orgId;
+  String? address;
+  String? contactNumber;
   String status;
   List<String> itemType;
   String modeOfDelivery;
@@ -14,6 +16,8 @@ class Donation {
       {required this.userId,
       this.id,
       this.orgId,
+      this.address,
+      this.contactNumber,
       required this.status,
       required this.itemType,
       required this.modeOfDelivery,
@@ -24,8 +28,13 @@ class Donation {
     return Donation(
         userId: json['userId'],
         id: json['id'],
+        orgId: json['orgId'],
+        address: json['address'],
+        contactNumber: json['contactNumber'],
         status: json['status'],
-        itemType: json['itemType'],
+        itemType: (json['itemType'] as List<dynamic>)
+            .map((item) => item as String)
+            .toList(),
         modeOfDelivery: json['modeOfDelivery'],
         weight: json['weight'],
         dateTime: json['dateTime']);
@@ -40,6 +49,9 @@ class Donation {
     return {
       'userId': donation.userId,
       'id': donation.id,
+      'orgId': donation.orgId,
+      'address': address,
+      'contactNumber': contactNumber,
       'status': donation.status,
       'itemType': donation.itemType,
       'modeOfDelivery': donation.modeOfDelivery,

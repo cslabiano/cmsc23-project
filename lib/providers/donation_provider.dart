@@ -7,7 +7,7 @@ class DonationProvider with ChangeNotifier {
   FirebaseDonationAPI firebaseService = FirebaseDonationAPI();
   late Stream<QuerySnapshot> _donoStream;
 
-  Stream<QuerySnapshot>? get donoStream => _donoStream;
+  Stream<QuerySnapshot> get donoStream => _donoStream;
 
   void addDonation(Donation donation) async {
     String message =
@@ -16,8 +16,13 @@ class DonationProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchDonations(String? orgId) {
-    _donoStream = firebaseService.getDonations(orgId);
+  void fetchDonationsOrg(String? orgId) {
+    _donoStream = firebaseService.getDonationsOrg(orgId);
+    notifyListeners();
+  }
+
+  void fetchDonationsDonor(String? uid) {
+    _donoStream = firebaseService.getDonationsDonor(uid);
     notifyListeners();
   }
 
