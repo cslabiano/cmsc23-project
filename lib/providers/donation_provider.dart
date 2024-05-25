@@ -1,20 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/api/firebase_donation_api.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '/models/donor_donation_model.dart';
 
 class DonationProvider with ChangeNotifier {
   FirebaseDonationAPI firebaseService = FirebaseDonationAPI();
-  late Stream<Donation>? _donoStream;
-  Donation? donoObject;
+  late Stream<QuerySnapshot> _donoStream;
 
-  Stream<Donation>? get donoStream => _donoStream;
-  Donation? get donation => donoObject;
+  Stream<QuerySnapshot>? get donoStream => _donoStream;
 
   void addDonation(Donation donation) async {
     String message =
         await firebaseService.addDonation(donation.toJson(donation));
     print(message);
+    notifyListeners();
+  }
+
+  void fetchDonations(String? orgId) {
+    _donoStream = firebaseService.getDonations(orgId);
+    notifyListeners();
+  }
+
+  void fetchDonation(String? id) {
+    _donoStream = firebaseService.getDonation(id);
+  }
+
+  void changeStatus(String id, String status) async {
+    await firebaseService.changeStatus(id, status);
     notifyListeners();
   }
 }

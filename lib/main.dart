@@ -1,4 +1,5 @@
 import 'package:elbigay/providers/donation_provider.dart';
+import 'package:elbigay/providers/donor_provider.dart';
 import 'package:elbigay/screens/donor/donate_donor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,8 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
-        ChangeNotifierProvider(create: ((context) => DonationProvider()))
+        ChangeNotifierProvider(create: ((context) => DonationProvider())),
+        ChangeNotifierProvider(create: ((context) => DonorProvider())),
       ],
       child: const MainApp(),
     ),
@@ -58,7 +60,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/donor_donatepage',
+        initialRoute: '/',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
