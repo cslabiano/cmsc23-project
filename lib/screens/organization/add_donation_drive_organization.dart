@@ -260,30 +260,29 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
 
   Widget get buttons => Column(
     children: [
-      Container(
-        height: 50,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          // color: Theme.of(context).colorScheme.primary,
-          gradient: LinearGradient(
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-            colors: [
-            Color.fromRGBO(14, 198, 178, 1),
-            Color.fromRGBO(37, 212, 147, 1)
-            ]
+      InkWell(
+        onTap: () {
+          if (_formKey.currentState!.validate()) {
+            _formKey.currentState!.save();
+            Navigator.pop(context);
+          }
+        },
+        child: Container(
+          height: 50,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+              colors: [
+              Color.fromRGBO(14, 198, 178, 1),
+              Color.fromRGBO(37, 212, 147, 1)
+              ]
+            ),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Theme.of(context).primaryColor),
+            boxShadow: kElevationToShadow[2],
           ),
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Theme.of(context).primaryColor),
-          boxShadow: kElevationToShadow[2],
-        ),
-        child: InkWell(
-          onTap: () {
-            if (_formKey.currentState!.validate()) {
-              _formKey.currentState!.save();
-              Navigator.pop(context);
-            }
-          },
           child: Text(
             "Create",
             style: TextStyle(
@@ -294,19 +293,19 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
         ),
       ),
       SizedBox(height: 10,),
-      Container(
-        height: 50,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Theme.of(context).primaryColor),
-          boxShadow: kElevationToShadow[2],
-        ),
-        child: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
+      InkWell(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Container(
+          height: 50,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Theme.of(context).primaryColor),
+            boxShadow: kElevationToShadow[2],
+          ),
           child: Text(
             "Cancel",
             style: TextStyle(

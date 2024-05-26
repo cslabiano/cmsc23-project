@@ -9,19 +9,15 @@ class DonationDriveProvider extends ChangeNotifier {
   FirebaseDonationDriveAPI firebaseService = FirebaseDonationDriveAPI();
   late Stream<QuerySnapshot> _donationDrivesStream;
 
-  DonationDriveProvider() {
-    fetchDonationDrives();
+  DonationDriveProvider(String userId) {
+    fetchDonationDrives(userId);
   }
 
   Stream<QuerySnapshot> get donationDrives => _donationDrivesStream;
 
-  void fetchDonationDrives() {
-    _donationDrivesStream = firebaseService.getAllDonationDrives();
+  void fetchDonationDrives(String userId) {
+    _donationDrivesStream = firebaseService.getAllDonationDrives(userId);
     notifyListeners();
-  }
-
-  Future<DonationDrive?> getDonationDrive(String id) async {
-    return await firebaseService.getDonationDrive(id);
   }
 
   void addDonationDrive(DonationDrive donationDrive) async {

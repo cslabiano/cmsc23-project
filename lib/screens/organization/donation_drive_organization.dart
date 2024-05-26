@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'dart:ui';
+
 import 'package:elbigay/models/donation_drive_model.dart';
 import 'package:elbigay/screens/organization/donation_drive_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +52,7 @@ class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Color.fromRGBO(26, 206, 161, 1),
           onPressed: () {
             Navigator.pushNamed(context, '/add_donation_drive');
           },
@@ -69,6 +72,8 @@ class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
               DonationDriveCard(donationDrives: _donationDrives, userType: "org")
             ],
           ),
-        )));
+        )
+      )
+    );
   }
 }
