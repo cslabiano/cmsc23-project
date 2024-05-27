@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Donor {
-  final String usertype;
+  final String? usertype;
   final String email;
   final String fname;
   final String lname;
@@ -10,7 +10,7 @@ class Donor {
   final List<String> address;
 
   Donor({
-    required this.usertype,
+    this.usertype,
     required this.email,
     required this.fname,
     required this.lname,
@@ -22,7 +22,6 @@ class Donor {
   // Factory constructor to instantiate object from json format
   factory Donor.fromJson(Map<String, dynamic> json) {
     return Donor(
-      usertype: json['usertype'],
       email: json['email'],
       fname: json['fname'],
       lname: json['lname'],

@@ -1,3 +1,6 @@
+import 'package:elbigay/providers/donation_provider.dart';
+import 'package:elbigay/providers/donor_provider.dart';
+import 'package:elbigay/screens/donor/donate_donor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,7 +34,9 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ((context) => UserAuthProvider()))
+        ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
+        ChangeNotifierProvider(create: ((context) => DonationProvider())),
+        ChangeNotifierProvider(create: ((context) => DonorProvider())),
       ],
       child: const MainApp(),
     ),
@@ -63,6 +68,7 @@ class MainApp extends StatelessWidget {
           '/signup_org': (context) => const SignUpOrg(),
           '/signup_option': (context) => const SignUpOption(),
           '/donor_navbar': (context) => const DonorNavbar(),
+          '/donor_donatepage': (context) => const DonatePage(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
           '/organization_navbar': (context) => const OrgNavbar(),
