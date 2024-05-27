@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/donor.dart';
-import '../models/org.dart';
+import '../models/donor_model.dart';
+import '../models/org_model.dart';
 
 class FirebaseAuthAPI {
   static final FirebaseAuth auth = FirebaseAuth.instance;
@@ -65,75 +65,6 @@ class FirebaseAuthAPI {
       return "Failed to sign in: $e";
     }
   }
-
-  // Future<String?> signIn(String uname, String password) async {
-  //   try {
-  //     // search for the provided username in the database
-  //     final QuerySnapshot result = await db
-  //         .collection("users")
-  //         .where('uname', isEqualTo: uname)
-  //         .limit(1)
-  //         .get();
-//
-  //     final List<DocumentSnapshot> documents = result.docs;
-//
-  //     if (documents.isNotEmpty) {
-  //       // if username exists, retrieve its corresponding usertype
-  //       final dynamic data = documents[0].data();
-//
-  //       if (data != null && data is Map<String, dynamic>) {
-  //         final usertype = data['usertype'];
-//
-  //         if (usertype != null) {
-  //           // based on the usertype, query the corresponding collection
-  //           String collectionName = 'donor';
-  //           if (usertype == 'donor') collectionName = 'donors';
-  //           if (usertype == 'org') collectionName = 'organizations';
-  //           if (usertype == 'admin') collectionName = 'admins';
-//
-  //           // query the corresponding collection to retrieve the email
-  //           final QuerySnapshot userQuery = await db
-  //               .collection(collectionName)
-  //               .where('uname', isEqualTo: uname)
-  //               .limit(1)
-  //               .get();
-//
-  //           final List<DocumentSnapshot> userDocuments = userQuery.docs;
-//
-  //           if (userDocuments.isNotEmpty) {
-  //             // retrieve the email from the user document
-  //             final userData = userDocuments[0].data();
-//
-  //             if (userData != null && userData is Map<String, dynamic>) {
-  //               final email = userData['email'];
-//
-  //               if (email != null) {
-  //                 await auth.signInWithEmailAndPassword(
-  //                     email: email, password: password);
-  //                 return null;
-  //               } else {
-  //                 return "Email not found for the username";
-  //               }
-  //             }
-  //           } else {
-  //             return "User not found";
-  //           }
-  //         } else {
-  //           return "Usertype not found";
-  //         }
-  //       }
-  //     } else {
-  //       return "Username not found";
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     // handle authentication exceptions
-  //     return e.message;
-  //   } catch (e) {
-  //     // handle other exceptions
-  //     return "Failed to sign in: $e";
-  //   }
-  //   return "";
-  // }
 
   Future<String?> signUpDonor(Donor donor, String password) async {
     if (await isUsernameTaken(donor.uname)) {
