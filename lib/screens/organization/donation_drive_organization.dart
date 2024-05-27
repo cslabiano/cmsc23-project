@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
-import 'dart:ui';
-
-import 'package:elbigay/models/donation_drive_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:elbigay/models/donation_drive_model.dart';
+import 'package:elbigay/providers/auth_provider.dart';
+import 'package:elbigay/providers/donation_drive_provider.dart';
 import 'package:elbigay/screens/organization/donation_drive_card_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrganizationDonationDrive extends StatefulWidget {
   const OrganizationDonationDrive({super.key});
@@ -15,38 +18,19 @@ class OrganizationDonationDrive extends StatefulWidget {
 }
 
 class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
-  final List<DonationDrive> _donationDrives = [
-    DonationDrive(
-        userId: '1',
-        title: 'title 1',
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        status: "Open"),
-    DonationDrive(
-        userId: '1',
-        title: 'title 2',
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        status: "Open"),
-    DonationDrive(
-        userId: '1',
-        title: 'title 3',
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        status: "Closed"),
-    DonationDrive(
-        userId: '1',
-        title: 'title 4',
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        status: "Open"),
-  ];
+  // final List<DonationDrive> _donationDrives = [];
+  User? user;
 
   @override
   Widget build(BuildContext context) {
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    user = context.read<UserAuthProvider>().user;
+    context.watch<DonationDriveProvider>().fetchDonationDrives(user!.uid);
+    Stream<QuerySnapshot> donationDriveStream =
+        context.watch<DonationDriveProvider>().donationDrives;
 
     return Scaffold(
         appBar: AppBar(
@@ -89,7 +73,7 @@ class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
             children: [
               const SizedBox(height: 10),
               DonationDriveCard(
-                  donationDrives: _donationDrives, userType: "org")
+                  donationDrives: donationDriveStream, userType: "org")
             ],
           ),
         )));

@@ -1,4 +1,5 @@
 import 'package:elbigay/firebase_options.dart';
+import 'package:elbigay/providers/donation_drive_provider.dart';
 import 'package:elbigay/screens/organization/add_donation_drive_organization.dart';
 import 'package:elbigay/providers/donation_provider.dart';
 import 'package:elbigay/providers/donor_provider.dart';
@@ -6,8 +7,6 @@ import 'package:elbigay/screens/donor/donate_donor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import '/firebase_options.dart';
 
 // import providers
 import '/providers/auth_provider.dart';
@@ -40,6 +39,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
         ChangeNotifierProvider(create: ((context) => DonationProvider())),
         ChangeNotifierProvider(create: ((context) => DonorProvider())),
+        ChangeNotifierProvider(create: ((context) => DonationDriveProvider()))
       ],
       child: const MainApp(),
     ),

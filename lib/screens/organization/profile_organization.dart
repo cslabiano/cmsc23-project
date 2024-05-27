@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
-import '../../models/donation_drive_model.dart';
 
 class OrganizationProfile extends StatefulWidget {
   const OrganizationProfile({super.key});
@@ -12,15 +13,16 @@ class OrganizationProfile extends StatefulWidget {
 }
 
 class _OrganizationProfileState extends State<OrganizationProfile> {
-  // final List<DonationDrive> _donationDrives = [
-  //   DonationDrive(userId: '1', title: 'title 1', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
-  //   DonationDrive(userId: '1', title: 'title 2', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
-  //   DonationDrive(userId: '1', title: 'title 3', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Closed"),
-  //   DonationDrive(userId: '1', title: 'title 4', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
-  // ];
+  User? user;
+  // late Stream<Organization?> organization;
 
   @override
   Widget build(BuildContext context) {
+    user = context.read<UserAuthProvider>().user;
+    print(user!.uid);
+    // context.read<UserAuthProvider>().getOrgDetails(user!.uid);
+    // organization = context.read<UserAuthProvider>().organizationStream;
+    // print(organization);
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -54,7 +56,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                 height: 60,
                               ),
                               Text(
-                                "Google",
+                                "name",
+                                // user.displayName,
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.1,
                                   fontWeight: FontWeight.w600,
@@ -63,7 +66,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                 ),
                               ),
                               Text(
-                                "@username",
+                                // "@username",
+                                user!.email!,
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.05,
                                   fontWeight: FontWeight.w600,

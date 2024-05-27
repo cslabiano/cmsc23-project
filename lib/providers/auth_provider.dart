@@ -1,3 +1,4 @@
+// import 'package:elbigay/models/organization_model.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../api/firebase_auth_api.dart';
@@ -8,6 +9,7 @@ class UserAuthProvider with ChangeNotifier {
   late FirebaseAuthAPI authService;
   late Stream<User?> _uStream;
   User? userObj;
+  // late Stream<Organization?> organizationStream;
 
   UserAuthProvider() {
     authService = FirebaseAuthAPI();
@@ -42,4 +44,10 @@ class UserAuthProvider with ChangeNotifier {
     await authService.signOut();
     notifyListeners();
   }
+
+  // void getOrgDetails(String uid) {
+  //   organizationStream =
+  //       authService.getOrgDetails(uid) as Stream<Organization?>;
+  //   notifyListeners();
+  // }
 }

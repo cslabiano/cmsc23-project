@@ -163,4 +163,8 @@ class FirebaseAuthAPI {
   Future<void> signOut() async {
     await auth.signOut();
   }
+
+  // Stream<DocumentSnapshot<Map<String, dynamic>>> getOrgDetails(String uid) {
+  //   return db.collection("organizations").doc(uid).snapshots();
+  // }
 }
