@@ -1,28 +1,28 @@
-import 'package:elbigay/firebase_options.dart';
-import 'package:elbigay/screens/donor/donation_drive_details.dart';
-import 'package:elbigay/providers/donation_drive_provider.dart';
-import 'package:elbigay/screens/organization/add_donation_drive_organization.dart';
-import 'package:elbigay/providers/donation_provider.dart';
-import 'package:elbigay/providers/donor_provider.dart';
-import 'package:elbigay/screens/donor/donate_donor.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import '/firebase_options.dart';
 
 // import providers
+import 'package:provider/provider.dart';
+import '/providers/donation_provider.dart';
+import '/providers/donor_provider.dart';
 import '/providers/auth_provider.dart';
+import '/providers/donation_drive_provider.dart';
 
 // import screens
 import '/screens/splash.dart';
 import '/screens/entry/sign_in.dart';
 import '/screens/entry/signup_donor.dart';
+import '/screens/donor/donate_donor.dart';
 import '/screens/entry/signup_org.dart';
 import '/screens/entry/signup_option.dart';
 import '/screens/donor/homepage_donor.dart';
 import '/screens/donor/profile_donor.dart';
+import '/screens/organization/add_donation_drive_organization.dart';
 import 'screens/organization/donation_drive_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
+import '/screens/donor/donation_drive_details.dart';
 
 //import navbars
 import 'navbars/navbar_donor.dart';
