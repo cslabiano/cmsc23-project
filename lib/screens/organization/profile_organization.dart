@@ -12,26 +12,12 @@ class OrganizationProfile extends StatefulWidget {
 }
 
 class _OrganizationProfileState extends State<OrganizationProfile> {
-  final List<DonationDrive> _donationDrives = [
-    DonationDrive(
-        image: 'assets/googlelogo.png',
-        title: "title1",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        timeLeft: "4 days left"),
-    DonationDrive(
-        image: 'assets/googlelogo.png',
-        title: "title2",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        timeLeft: "3 days left"),
-    DonationDrive(
-        image: 'assets/googlelogo.png',
-        title: "title3",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        timeLeft: "2 days left"),
-  ];
+  // final List<DonationDrive> _donationDrives = [
+  //   DonationDrive(userId: '1', title: 'title 1', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
+  //   DonationDrive(userId: '1', title: 'title 2', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
+  //   DonationDrive(userId: '1', title: 'title 3', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Closed"),
+  //   DonationDrive(userId: '1', title: 'title 4', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", status: "Open"),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -162,128 +148,19 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                 ],
                               ),
                               const SizedBox(height: 20),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "Donation drives:",
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.05,
-                                    fontWeight: FontWeight.w600,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                ),
-                              ),
-                              ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: _donationDrives.length,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        // navigate to donation drive page
-                                        print("tapped");
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20)),
-                                              color: Colors.white,
-                                              boxShadow: kElevationToShadow[2],
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  height: screenHeight * 0.1,
-                                                  width: screenWidth * 0.3,
-                                                  child: Image.asset(
-                                                      _donationDrives[index]
-                                                          .image),
-                                                ),
-                                                const SizedBox(width: 7),
-                                                Expanded(
-                                                    child: Container(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          0, 10, 20, 10),
-                                                  child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          _donationDrives[index]
-                                                              .title,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: TextStyle(
-                                                            fontSize:
-                                                                screenWidth *
-                                                                    0.05,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .secondary,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 2),
-                                                        Text(
-                                                          _donationDrives[index]
-                                                              .description,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          maxLines: 3,
-                                                          style: TextStyle(
-                                                            fontSize:
-                                                                screenWidth *
-                                                                    0.03,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 2),
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                              Icons
-                                                                  .timelapse_rounded,
-                                                              color: const Color
-                                                                  .fromRGBO(128,
-                                                                  128, 128, 1),
-                                                              size:
-                                                                  screenWidth *
-                                                                      0.05,
-                                                            ),
-                                                            const SizedBox(
-                                                                width: 3),
-                                                            Text(
-                                                              _donationDrives[
-                                                                      index]
-                                                                  .timeLeft,
-                                                              style: TextStyle(
-                                                                  color: const Color
-                                                                      .fromRGBO(
-                                                                      128,
-                                                                      128,
-                                                                      128,
-                                                                      1)),
-                                                            )
-                                                          ],
-                                                        )
-                                                      ]),
-                                                )),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(height: 20)
-                                        ],
-                                      ),
-                                    );
-                                  }),
+                              // Align(
+                              //   alignment: Alignment.topLeft,
+                              //   child: Text(
+                              //     "Donation drives:",
+                              //     style: TextStyle(
+                              //       fontSize: screenWidth * 0.05,
+                              //       fontWeight: FontWeight.w600,
+                              //       color:
+                              //           Theme.of(context).colorScheme.secondary,
+                              //     ),
+                              //   ),
+                              // ),
+                              // DonationDriveCard(donationDrives: _donationDrives, userType: "org"),
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
@@ -291,7 +168,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
-                                    width: 2,
+                                    width: 1,
                                   ),
                                 ),
                                 child: ListTile(
@@ -319,7 +196,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
-                                    width: 2,
+                                    width: 1,
                                   ),
                                 ),
                                 child: ListTile(
@@ -347,7 +224,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
-                                    width: 2,
+                                    width: 1,
                                   ),
                                 ),
                                 child: ListTile(
@@ -375,7 +252,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   border: Border.all(
                                     color: Color.fromRGBO(34, 38, 66, 1),
-                                    width: 2,
+                                    width: 1,
                                   ),
                                 ),
                                 child: ListTile(
