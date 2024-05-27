@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class DonationDriveCard extends StatelessWidget {
   final List<DonationDrive> donationDrives;
   final String userType;
-  const DonationDriveCard({super.key, required this.donationDrives, required this.userType});
+  const DonationDriveCard(
+      {super.key, required this.donationDrives, required this.userType});
 
-  
   @override
   Widget build(BuildContext context) {
     // Get the screen width and height
@@ -49,11 +49,9 @@ class DonationDriveCard extends StatelessWidget {
                             const SizedBox(width: 7),
                             Expanded(
                                 child: Container(
-                              padding: const EdgeInsets.fromLTRB(
-                                  0, 10, 20, 10),
+                              padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
                               child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       donationDrives[index].title,
@@ -85,11 +83,11 @@ class DonationDriveCard extends StatelessWidget {
                                           size: screenWidth * 0.05,
                                         ),
                                         const SizedBox(width: 3),
-                                        Text(
-                                          donationDrives[index].status,
-                                          style: const TextStyle(
-                                              color:Color.fromRGBO( 128, 128, 128, 1)),
-                                        )
+                                        // Text(
+                                        //   donationDrives[index].status,
+                                        //   style: const TextStyle(
+                                        //       color:Color.fromRGBO( 128, 128, 128, 1)),
+                                        // )
                                       ],
                                     )
                                   ]),
@@ -97,7 +95,6 @@ class DonationDriveCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      
                     ],
                   ),
                 ),
