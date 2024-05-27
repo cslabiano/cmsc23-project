@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 
@@ -15,7 +16,6 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
   Widget build(BuildContext context) {
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -44,18 +44,17 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                   margin: EdgeInsets.only(top: 150),
                   child: Column(
                     children: [
-                      // Container(height: 100),
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(height: 60),
+                              SizedBox(height: 70),
                               Text(
                                 "Google",
                                 style: TextStyle(
-                                  fontSize: screenWidth * 0.1,
+                                  fontSize: 28,
                                   fontWeight: FontWeight.w600,
                                   color:
                                       Theme.of(context).colorScheme.secondary,
@@ -352,13 +351,13 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                   ),
                 ),
                 Positioned(
-                  top: 75,
+                  top: 45,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
                       Container(
-                        height: 147,
-                        width: 147,
+                        height: 180,
+                        width: 180,
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.centerLeft,
@@ -370,17 +369,13 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                             ),
                             shape: BoxShape.circle),
                       ),
-                      Container(
-                        height: 130,
-                        width: 130,
-                        decoration: BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
-                      ),
                       SizedBox(
-                          height: 125,
-                          width: 125,
+                          height: 180,
+                          width: 180,
                           child: ClipRRect(
-                            child: Image.asset('assets/googlelogo.png'),
+                            child: Image.asset(
+                              'assets/googlelogo.png',
+                            ),
                           ))
                     ],
                   ),
