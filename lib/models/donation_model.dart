@@ -13,19 +13,18 @@ class Donation {
   String weight;
   String dateTime;
 
-  Donation({
-    required this.userId,
-    required this.donorName,
-    this.id,
-    this.orgId,
-    this.address,
-    this.contactNumber,
-    required this.status,
-    required this.itemType,
-    required this.modeOfDelivery,
-    required this.weight,
-    required this.dateTime}
-  );
+  Donation(
+      {required this.userId,
+      required this.donorName,
+      this.id,
+      this.orgId,
+      this.address,
+      this.contactNumber,
+      required this.status,
+      required this.itemType,
+      required this.modeOfDelivery,
+      required this.weight,
+      required this.dateTime});
 
   factory Donation.fromJson(Map<String, dynamic> json) {
     return Donation(

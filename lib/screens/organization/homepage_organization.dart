@@ -12,7 +12,7 @@ class OrganizationHomepage extends StatefulWidget {
 
 class _OrganizationHomepageState extends State<OrganizationHomepage> {
   // final List<Donation> _donations = [
-    
+
   // ];
 
   @override
@@ -59,8 +59,8 @@ class _OrganizationHomepageState extends State<OrganizationHomepage> {
                   SizedBox(
                     height: 10,
                     child: Container(
-                      decoration:
-                          BoxDecoration(color: Color.fromRGBO(157, 214, 193, 1)),
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(157, 214, 193, 1)),
                     ),
                   ),
                   Container(
@@ -75,41 +75,31 @@ class _OrganizationHomepageState extends State<OrganizationHomepage> {
                         Tab(
                           child: Text(
                             "Pending",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Confirmed",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Scheduled",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Cancelled",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Completed",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ),
                       ],
@@ -122,17 +112,14 @@ class _OrganizationHomepageState extends State<OrganizationHomepage> {
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: false,
           body: Center(
-            child: TabBarView(
-              children: [
-                Text("1st tab"),
-                Text("2nd tab"),
-                Text("3rd tab"),
-                Text("4th tab"),
-                Text("5th tab"),
-              ]
-            ),
-          )
-      ),
+            child: TabBarView(children: [
+              Text("1st tab"),
+              Text("2nd tab"),
+              Text("3rd tab"),
+              Text("4th tab"),
+              Text("5th tab"),
+            ]),
+          )),
     );
   }
 }
