@@ -66,6 +66,22 @@ class FirebaseAuthAPI {
     }
   }
 
+  Future<String?> getUsertype(String uname) async {
+    final QuerySnapshot result = await db
+        .collection("users")
+        .where('uname', isEqualTo: uname)
+        .limit(1)
+        .get();
+
+    if (result.docs.isEmpty) {
+      return "Username not found";
+    }
+
+    final data = result.docs[0].data() as Map<String, dynamic>;
+    final usertype = data['usertype'];
+    return usertype;
+  }
+
   Future<String?> signUpDonor(Donor donor, String password) async {
     if (await isUsernameTaken(donor.uname)) {
       return "Username already in use";

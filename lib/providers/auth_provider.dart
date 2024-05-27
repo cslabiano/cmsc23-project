@@ -38,6 +38,11 @@ class UserAuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> getUsertype(String uname) async {
+    await authService.getUsertype(uname);
+    notifyListeners();
+  }
+
   Future<void> signOut() async {
     await authService.signOut();
     notifyListeners();

@@ -122,10 +122,7 @@ class _SignInState extends State<SignIn> {
                                       });
                                     } else {
                                       if (context.mounted) {
-                                        Navigator.pushNamed(
-                                          context,
-                                          '/donor_navbar',
-                                        );
+                                        navigateToHome(context);
                                       }
                                     }
                                   }
@@ -266,5 +263,17 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  void navigateToHome(BuildContext context) async {
+    final userAuthProvider = context.read<UserAuthProvider>();
+    final userType = await userAuthProvider.authService.getUsertype(uname);
+    if (userType == 'donor') {
+      Navigator.pushNamed(context, '/donor_navbar');
+    } else if (userType == 'org') {
+      Navigator.pushNamed(context, '/organization_navbar');
+    } else if (userType == 'admin') {
+      Navigator.pushNamed(context, '/admin_navbar');
+    }
   }
 }
