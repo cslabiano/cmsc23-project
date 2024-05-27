@@ -16,8 +16,8 @@ class DonationProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchDonationsOrg(String? orgId) {
-    _donoStream = firebaseService.getDonationsOrg(orgId);
+  void fetchDonationsOrg(String? orgId, String status) {
+    _donoStream = firebaseService.getDonationsOrg(orgId, status);
     notifyListeners();
   }
 

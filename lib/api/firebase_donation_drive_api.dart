@@ -1,8 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:elbigay/models/donation_drive_model.dart';
-// import 'package:elbigay/models/donation_drive_model.dart';
 
 class FirebaseDonationDriveAPI {
   static final FirebaseFirestore db = FirebaseFirestore.instance;

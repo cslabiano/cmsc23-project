@@ -934,6 +934,7 @@ class _DonatePageState extends State<DonatePage> {
                         if (_modeOfDelivery == "Pickup") {
                           Donation donation = Donation(
                             userId: "2",
+                            donorName: "Myndie Labiano",
                             orgId: "1",
                             itemType: _itemType,
                             status: "Pending",
@@ -982,6 +983,7 @@ class _DonatePageState extends State<DonatePage> {
                         if (_modeOfDelivery == "Drop off") {
                           Donation donation = Donation(
                             userId: "2",
+                            donorName: "Myndie Labiano",
                             orgId: "1",
                             itemType: _itemType,
                             status: "Pending",
