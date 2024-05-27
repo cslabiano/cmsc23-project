@@ -51,10 +51,6 @@ class FirebaseAuthAPI {
       final userData = userQuery.docs[0].data() as Map<String, dynamic>;
       final email = userData['email'];
 
-      if (email == null) {
-        return "Email not found for the username";
-      }
-
       await auth.signInWithEmailAndPassword(email: email, password: password);
       return null;
     } on FirebaseAuthException catch (e) {
@@ -64,6 +60,22 @@ class FirebaseAuthAPI {
       // handle other exceptions
       return "Failed to sign in: $e";
     }
+  }
+
+  Future<String?> getUsertype(String uname) async {
+    final QuerySnapshot result = await db
+        .collection("users")
+        .where('uname', isEqualTo: uname)
+        .limit(1)
+        .get();
+
+    if (result.docs.isEmpty) {
+      return "Username not found";
+    }
+
+    final data = result.docs[0].data() as Map<String, dynamic>;
+    final usertype = data['usertype'];
+    return usertype;
   }
 
   Future<String?> signUpDonor(Donor donor, String password) async {

@@ -124,7 +124,7 @@ class _SignInState extends State<SignIn> {
                                       if (context.mounted) {
                                         Navigator.pushNamed(
                                           context,
-                                          '/organization_navbar',
+                                          '/donor_navbar',
                                         );
                                       }
                                     }
