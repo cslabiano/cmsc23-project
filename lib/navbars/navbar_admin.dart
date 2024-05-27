@@ -40,13 +40,13 @@ class _AdminNavbarState extends State<AdminNavbar> {
             icon: _selectedIndex == 1
                 ? const Icon(Icons.inventory)
                 : const Icon(Icons.inventory_outlined),
-            label: 'Donations',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 2
                 ? const Icon(Icons.person)
                 : const Icon(Icons.person_outline),
-            label: 'Profile',
+            label: '',
           ),
         ],
         currentIndex: _selectedIndex,
