@@ -98,18 +98,18 @@ class _DonorHomepageState extends State<DonorHomepage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      // itemCount: _donations.length,
-                      itemBuilder: (context, index) {
-                        return Column(children: [
-                          SizedBox(height: 20),
-                          // OrgCard(donation: _donations[index])
-                        ]);
-                      }),
-                ),
+                // SizedBox(
+                //   child: ListView.builder(
+                //       physics: NeverScrollableScrollPhysics(),
+                //       shrinkWrap: true,
+                //       // itemCount: _donations.length,
+                //       itemBuilder: (context, index) {
+                //         return Column(children: [
+                //           SizedBox(height: 20),
+                //           // OrgCard(donation: _donations[index])
+                //         ]);
+                //       }),
+                // ),
                 SizedBox(height: screenHeight * 0.1)
               ],
             ),
