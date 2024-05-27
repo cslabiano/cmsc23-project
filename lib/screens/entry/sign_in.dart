@@ -269,11 +269,17 @@ class _SignInState extends State<SignIn> {
     final userAuthProvider = context.read<UserAuthProvider>();
     final userType = await userAuthProvider.authService.getUsertype(uname);
     if (userType == 'donor') {
-      Navigator.pushNamed(context, '/donor_navbar');
+      if (context.mounted) {
+        Navigator.pushNamed(context, '/donor_navbar');
+      }
     } else if (userType == 'org') {
-      Navigator.pushNamed(context, '/organization_navbar');
+      if (context.mounted) {
+        Navigator.pushNamed(context, '/organization_navbar');
+      }
     } else if (userType == 'admin') {
-      Navigator.pushNamed(context, '/admin_navbar');
+      if (context.mounted) {
+        Navigator.pushNamed(context, '/admin_navbar');
+      }
     }
   }
 }
