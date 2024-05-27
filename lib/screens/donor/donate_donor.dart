@@ -996,14 +996,11 @@ class _DonatePageState extends State<DonatePage> {
                               .addDonation(donation);
                         }
 
-                        print("Success");
-                        print("$_isAnyChecked");
-                        print('$_itemType');
-                        print('$_modeOfDelivery');
-                        print('$_stringFinalDateTime');
-                        print('$_weight');
-                        print('$_address');
-                        print('$_contactNumber');
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Success!'),
+                        ));
+
+                        // Navigator.of(context).pop();
                       });
                     },
                     child:
