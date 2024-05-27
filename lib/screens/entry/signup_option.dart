@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignUpOption extends StatelessWidget {
@@ -26,9 +27,10 @@ class SignUpOption extends StatelessWidget {
         body: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+            borderRadius: BorderRadius.all(Radius.circular(30)),
           ),
-          margin: EdgeInsets.only(top: screenHeight * 0.15),
+          margin: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.15, horizontal: screenWidth * 0.04),
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
           child: Column(
             children: [
@@ -36,99 +38,84 @@ class SignUpOption extends StatelessWidget {
                 child: Center(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 50, left: 20, right: 20),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Continue as...",
-                              style: TextStyle(
-                                fontSize: screenWidth * 0.1,
-                                fontWeight: FontWeight.w900,
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: const Color.fromRGBO(62, 180, 137, 0.1),
-                              // color: const Color.fromRGBO(34, 38, 66, 0.1),
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.volunteer_activism_outlined,
-                                color: Theme.of(context).colorScheme.primary,
-                                size: screenWidth * 0.3,
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/signup_donor');
-                              },
-                            ),
-                          ),
-                          SizedBox(height: screenHeight * 0.05),
-                          Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: const Color.fromRGBO(62, 180, 137, 0.1),
-                              // color: const Color.fromRGBO(34, 38, 66, 0.1),
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.groups_outlined,
-                                color: Theme.of(context).colorScheme.primary,
-                                size: screenWidth * 0.3,
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/signup_org');
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Already have an account?",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
+                          Material(
+                            child: InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: screenHeight * 0.05),
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    // color: Colors.amber,
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, '/signin');
-                                    },
-                                    child: Text(
-                                      "Sign in",
-                                      style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.volunteer_activism_outlined,
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .secondary,
+                                            .primary,
+                                        size: screenWidth * 0.3,
                                       ),
-                                    ),
+                                      Text(
+                                        "Donor",
+                                        style: TextStyle(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/signup_donor');
+                                }),
+                          ),
+                          Divider(
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                          Material(
+                            child: InkWell(
+                              customBorder: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
                               ),
+                              child: Container(
+                                width: double.infinity,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: screenHeight * 0.05),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  // color: Colors.amber,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.groups_outlined,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      size: screenWidth * 0.3,
+                                    ),
+                                    Text(
+                                      "Organization",
+                                      style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/signup_org');
+                              },
                             ),
                           ),
                         ],
