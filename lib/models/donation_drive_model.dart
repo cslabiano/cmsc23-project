@@ -5,40 +5,36 @@ class DonationDrive {
   String userId;
   String title;
   String description;
-  String status;
-  
+  String dateTime;
+
   DonationDrive({
     required this.userId,
     required this.title,
     required this.description,
-    required this.status,
+    required this.dateTime,
   });
 
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'userId': userId,
-      'title': title,
-      'description': description,
-      'status': status,
-    };
-  }
-
-  factory DonationDrive.fromMap(Map<String, dynamic> map) {
+  factory DonationDrive.fromJson(Map<String, dynamic> json) {
     return DonationDrive(
-      userId: map['userId'] as String,
-      title: map['title'] as String,
-      description: map['description'] as String,
-      status: map['status'] as String,
-    );
+        userId: json['userId'],
+        title: json['title'],
+        description: json['description'],
+        dateTime: json['dateTime']);
   }
 
-  String toJson(DonationDrive donationDrive) => json.encode(toMap());
+  static List<DonationDrive> fromJsonArray(String jsonData) {
+    final Iterable<dynamic> data = jsonDecode(jsonData);
+    return data
+        .map<DonationDrive>((dynamic d) => DonationDrive.fromJson(d))
+        .toList();
+  }
 
-  factory DonationDrive.fromJson(String source) => DonationDrive.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'DonationDrive(userId: $userId, title: $title, description: $description, status: $status)';
+  Map<String, dynamic> toJson(DonationDrive donationDrive) {
+    return {
+      'userId': donationDrive.userId,
+      'title': donationDrive.title,
+      'description': donationDrive.description,
+      'dateTime': donationDrive.dateTime
+    };
   }
 }
