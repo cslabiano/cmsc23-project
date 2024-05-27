@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 import '/screens/entry/textfield.dart';
 import 'package:dotted_border/dotted_border.dart';
-import '../../models/org.dart';
+import '../../models/org_model.dart';
 
 class SignUpOrg extends StatefulWidget {
   const SignUpOrg({super.key});
