@@ -3,14 +3,14 @@ import 'package:elbigay/screens/donor/homepage_donor.dart';
 import 'package:elbigay/screens/donor/profile_donor.dart';
 import 'package:flutter/material.dart';
 
-class DonorNavbar extends StatefulWidget {
-  const DonorNavbar({super.key});
+class AdminNavbar extends StatefulWidget {
+  const AdminNavbar({super.key});
 
   @override
-  State<DonorNavbar> createState() => _DonorNavbarState();
+  State<AdminNavbar> createState() => _AdminNavbarState();
 }
 
-class _DonorNavbarState extends State<DonorNavbar> {
+class _AdminNavbarState extends State<AdminNavbar> {
   int _selectedIndex = 0;
 
   @override
@@ -34,7 +34,7 @@ class _DonorNavbarState extends State<DonorNavbar> {
             icon: _selectedIndex == 0
                 ? const Icon(Icons.home)
                 : const Icon(Icons.home_outlined),
-            label: 'Home',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 1

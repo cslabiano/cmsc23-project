@@ -6,8 +6,6 @@ import 'package:elbigay/screens/donor/donate_donor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import '/firebase_options.dart';
 
 // import providers
 import '/providers/auth_provider.dart';
@@ -18,7 +16,6 @@ import '/screens/entry/sign_in.dart';
 import '/screens/entry/signup_donor.dart';
 import '/screens/entry/signup_org.dart';
 import '/screens/entry/signup_option.dart';
-import 'navbars/navbar_donor.dart';
 import '/screens/donor/homepage_donor.dart';
 import '/screens/donor/profile_donor.dart';
 import 'screens/organization/donation_drive_organization.dart';
@@ -26,7 +23,9 @@ import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
 
 //import navbars
+import 'navbars/navbar_donor.dart';
 import '/navbars/navbar_org.dart';
+import '/navbars/navbar_admin.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +62,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/admin_navbar',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -80,6 +79,7 @@ class MainApp extends StatelessWidget {
           '/organization_donation': (context) =>
               const OrganizationDonationDrive(),
           '/add_donation_drive': (context) => const AddDonationDrive(),
+          'admin_navbar': (context) => const AdminNavbar(),
         });
   }
 }
