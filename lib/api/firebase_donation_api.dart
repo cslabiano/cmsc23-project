@@ -27,10 +27,11 @@ class FirebaseDonationAPI {
     }
   }
 
-  Stream<QuerySnapshot> getDonationsOrg(String? orgId) {
+  Stream<QuerySnapshot> getDonationsOrg(String? orgId, String status) {
     return db
         .collection("donations")
         .where('orgId', isEqualTo: orgId)
+        .where('status', isEqualTo: status)
         .snapshots();
   }
 

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 // import 'package:elbigay/models/donation_model.dart';
+import 'package:elbigay/screens/organization/homepage_tabs.dart';
 import 'package:flutter/material.dart';
 
 class OrganizationHomepage extends StatefulWidget {
@@ -11,10 +12,6 @@ class OrganizationHomepage extends StatefulWidget {
 }
 
 class _OrganizationHomepageState extends State<OrganizationHomepage> {
-  // final List<Donation> _donations = [
-
-  // ];
-
   @override
   Widget build(BuildContext context) {
     // Get the screen width and height
@@ -113,11 +110,11 @@ class _OrganizationHomepageState extends State<OrganizationHomepage> {
           resizeToAvoidBottomInset: false,
           body: Center(
             child: TabBarView(children: [
-              Text("1st tab"),
-              Text("2nd tab"),
-              Text("3rd tab"),
-              Text("4th tab"),
-              Text("5th tab"),
+              HomepageTab(tabTitle: "Pending"),
+              HomepageTab(tabTitle: "Confirmed"),
+              HomepageTab(tabTitle: "Scheduled"),
+              HomepageTab(tabTitle: "Cancelled"),
+              HomepageTab(tabTitle: "Completed"),
             ]),
           )),
     );

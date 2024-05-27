@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
-import 'dart:ui';
-
-import 'package:elbigay/models/donation_drive_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elbigay/providers/auth_provider.dart';
+import 'package:elbigay/providers/donation_drive_provider.dart';
 import 'package:elbigay/screens/organization/donation_drive_card_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrganizationDonationDrive extends StatefulWidget {
   const OrganizationDonationDrive({super.key});
@@ -15,11 +17,18 @@ class OrganizationDonationDrive extends StatefulWidget {
 }
 
 class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
+  User? user;
+
   @override
   Widget build(BuildContext context) {
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    user = context.read<UserAuthProvider>().user;
+    context.watch<DonationDriveProvider>().fetchDonationDrives(user!.uid);
+    Stream<QuerySnapshot> donationDriveStream =
+        context.watch<DonationDriveProvider>().donationDrives;
 
     return Scaffold(
         appBar: AppBar(
@@ -60,9 +69,9 @@ class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
           child: Column(
             children: [
-              const SizedBox(height: 10),
-              // DonationDriveCard(
-              //     donationDrives: _donationDrives, userType: "org")
+              const SizedBox(height: 20),
+              DonationDriveCard(
+                  donationDrives: donationDriveStream, userType: "org")
             ],
           ),
         )));

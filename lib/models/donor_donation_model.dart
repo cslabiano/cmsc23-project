@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class Donation {
   String userId;
+  String donorName;
   String? id;
   String? orgId;
   String? address;
@@ -14,6 +15,7 @@ class Donation {
 
   Donation(
       {required this.userId,
+      required this.donorName,
       this.id,
       this.orgId,
       this.address,
@@ -27,6 +29,7 @@ class Donation {
   factory Donation.fromJson(Map<String, dynamic> json) {
     return Donation(
         userId: json['userId'],
+        donorName: json['donorName'],
         id: json['id'],
         orgId: json['orgId'],
         address: json['address'],
@@ -48,6 +51,7 @@ class Donation {
   Map<String, dynamic> toJson(Donation donation) {
     return {
       'userId': donation.userId,
+      'donorName': donation.donorName,
       'id': donation.id,
       'orgId': donation.orgId,
       'address': address,
