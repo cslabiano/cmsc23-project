@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 import '/screens/entry/textfield.dart';
 import 'package:dotted_border/dotted_border.dart';
-import '../../models/donor.dart';
+import '../../models/donor_model.dart';
 
 class SignUpDonor extends StatefulWidget {
   const SignUpDonor({super.key});
