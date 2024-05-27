@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:elbigay/providers/auth_provider.dart';
@@ -56,8 +58,8 @@ class _HomepageTabState extends State<HomepageTab> {
                     children: [
                       ListTile(
                         leading: Icon(
-                          Icons.person,
-                          size: screenWidth * 0.08,
+                          Icons.account_circle,
+                          size: screenWidth * 0.1,
                         ),
                         title: Text(
                           donation.donorName,
@@ -68,10 +70,15 @@ class _HomepageTabState extends State<HomepageTab> {
                               shape: BoxShape.circle,
                               color: Color.fromRGBO(210, 237, 228, 1),
                             ),
-                            child: Icon(
-                              Icons.keyboard_arrow_right,
-                              size: screenWidth * 0.08,
-                              color: Theme.of(context).primaryColor,
+                            child: InkWell(
+                              onTap: () {
+                                print("Tapped");
+                              },
+                              child: Icon(
+                                Icons.keyboard_arrow_right,
+                                size: screenWidth * 0.08,
+                                color: Theme.of(context).primaryColor,
+                              ),
                             )),
                       ),
                       const SizedBox(
