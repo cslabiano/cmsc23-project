@@ -1,6 +1,9 @@
+import 'package:elbigay/firebase_options.dart';
+import 'package:elbigay/screens/organization/add_donation_drive_organization.dart';
 import 'package:elbigay/providers/donation_provider.dart';
 import 'package:elbigay/providers/donor_provider.dart';
 import 'package:elbigay/screens/donor/donate_donor.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,7 +21,7 @@ import '/screens/entry/signup_option.dart';
 import 'navbars/navbar_donor.dart';
 import '/screens/donor/homepage_donor.dart';
 import '/screens/donor/profile_donor.dart';
-import '/screens/organization/donation_organization.dart';
+import 'screens/organization/donation_drive_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
 
@@ -74,7 +77,9 @@ class MainApp extends StatelessWidget {
           '/organization_navbar': (context) => const OrgNavbar(),
           '/organization_homepage': (context) => const OrganizationHomepage(),
           '/organization_profile': (context) => const OrganizationProfile(),
-          '/organization_donation': (context) => const OrganizationDonation(),
+          '/organization_donation': (context) =>
+              const OrganizationDonationDrive(),
+          '/add_donation_drive': (context) => const AddDonationDrive(),
         });
   }
 }

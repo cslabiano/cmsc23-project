@@ -1,4 +1,4 @@
-import 'package:elbigay/screens/organization/donation_organization.dart';
+import 'package:elbigay/screens/organization/donation_drive_organization.dart';
 import 'package:elbigay/screens/organization/homepage_organization.dart';
 import 'package:flutter/material.dart';
 import '../screens/organization/profile_organization.dart';
@@ -22,7 +22,7 @@ class _OrgNavbarState extends State<OrgNavbar> {
           index: _selectedIndex,
           children: const <Widget>[
             OrganizationHomepage(),
-            OrganizationDonation(),
+            OrganizationDonationDrive(),
             OrganizationProfile(),
           ],
         ),
@@ -38,9 +38,9 @@ class _OrgNavbarState extends State<OrgNavbar> {
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 1
-                ? const Icon(Icons.account_box)
-                : const Icon(Icons.account_box_outlined),
-            label: 'Donations',
+                ? const Icon(Icons.add_box)
+                : const Icon(Icons.add_box_outlined),
+            label: 'Donation Drives',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 2

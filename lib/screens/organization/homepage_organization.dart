@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+// import 'package:elbigay/models/donation_model.dart';
 import 'package:flutter/material.dart';
-import '../../models/org_donation_model.dart';
 
 class OrganizationHomepage extends StatefulWidget {
   const OrganizationHomepage({super.key});
@@ -11,56 +11,9 @@ class OrganizationHomepage extends StatefulWidget {
 }
 
 class _OrganizationHomepageState extends State<OrganizationHomepage> {
-  final List<Donation> _donations = [
-    Donation(
-        category: "Monetary donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-    Donation(
-        category: "Clothes donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-    Donation(
-        category: "Other donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-    Donation(
-        category: "Monetary donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-    Donation(
-        category: "Monetary donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-    Donation(
-        category: "Monetary donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-    Donation(
-        category: "Monetary donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-    Donation(
-        category: "Monetary donation",
-        forPickup: false,
-        weight: 10,
-        status: "Pending",
-        donorName: "Myndie Labiano"),
-  ];
+  // final List<Donation> _donations = [
+
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -68,143 +21,105 @@ class _OrganizationHomepageState extends State<OrganizationHomepage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          toolbarHeight: screenHeight * 0.2,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.bottomLeft,
-                    end: Alignment.topRight,
-                    colors: [
-                  Color.fromRGBO(14, 198, 178, 1),
-                  Color.fromRGBO(37, 212, 147, 1)
-                ])),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // SizedBox(height: screenHeight * 0.1),
-                Container(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text(
-                    "Good day!",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: screenWidth * 0.09),
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            toolbarHeight: screenHeight * 0.15,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                    Color.fromRGBO(14, 198, 178, 1),
+                    Color.fromRGBO(37, 212, 147, 1)
+                  ])),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Good day!",
+                      style: TextStyle(
+                          color: Colors.white, fontSize: screenWidth * 0.06),
+                    ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text(
-                    "Here are the donations to you...",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: screenWidth * 0.05),
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Here are the donations to you...",
+                      style: TextStyle(
+                          color: Colors.white, fontSize: screenWidth * 0.045),
+                    ),
                   ),
-                ),
-                SizedBox(height: screenHeight * 0.03),
-                SizedBox(
-                  height: 15,
-                  child: Container(
-                    decoration:
-                        BoxDecoration(color: Color.fromRGBO(157, 214, 193, 1)),
+                  SizedBox(
+                    height: 10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(157, 214, 193, 1)),
+                    ),
                   ),
-                )
-              ],
+                  Container(
+                    color: Colors.white,
+                    child: TabBar(
+                      labelPadding: EdgeInsets.all(0.0),
+                      indicatorWeight: 6,
+                      labelColor: Colors.black,
+                      indicatorColor: Color.fromRGBO(158, 217, 195, 1),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            "Pending",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Confirmed",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Scheduled",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Cancelled",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Completed",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        backgroundColor: Color.fromRGBO(243, 237, 237, 1),
-        resizeToAvoidBottomInset: false,
-        body: Center(
-            child: Container(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _donations.length,
-                  itemBuilder: ((context, index) {
-                    return InkWell(
-                      onTap: () {},
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              color: Colors.white,
-                              boxShadow: kElevationToShadow[1],
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration:
-                                      BoxDecoration(shape: BoxShape.circle),
-                                  child: SizedBox(
-                                      height: screenHeight * 0.1,
-                                      width: screenWidth * 0.3,
-                                      child: ClipRRect(
-                                        child: Image.asset(
-                                            'assets/googlelogo.png'),
-                                      )),
-                                ),
-                                const SizedBox(width: 7),
-                                Expanded(
-                                  child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(_donations[index].category,
-                                              style: TextStyle(
-                                                fontSize: screenWidth * 0.05,
-                                                fontWeight: FontWeight.w600,
-                                                color: Color.fromRGBO(
-                                                    34, 38, 66, 1),
-                                              )),
-                                          Text(
-                                              "from ${_donations[index].donorName}",
-                                              style: TextStyle(
-                                                  fontSize: screenWidth * 0.04,
-                                                  fontWeight: FontWeight.w600,
-                                                  foreground: Paint()
-                                                    ..shader = LinearGradient(
-                                                        colors: [
-                                                          Color.fromRGBO(
-                                                              14, 198, 177, 1),
-                                                          Color.fromRGBO(
-                                                              33, 197, 139, 1)
-                                                        ]).createShader(
-                                                        Rect.fromLTWH(0.0, 0.0,
-                                                            200.0, 100.0)))),
-                                          SizedBox(height: 10),
-                                          Text(_donations[index].status,
-                                              style: TextStyle(
-                                                fontSize: screenWidth * 0.037,
-                                                fontWeight: FontWeight.w600,
-                                                color: Color.fromRGBO(
-                                                    156, 157, 159, 1),
-                                              )),
-                                        ],
-                                      )),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10)
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              ),
-            ],
-          ),
-        )));
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: false,
+          body: Center(
+            child: TabBarView(children: [
+              Text("1st tab"),
+              Text("2nd tab"),
+              Text("3rd tab"),
+              Text("4th tab"),
+              Text("5th tab"),
+            ]),
+          )),
+    );
   }
 }
