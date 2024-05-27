@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:elbigay/providers/donation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:elbigay/util/image_util.dart';
 
 class DonatePage extends StatefulWidget {
   const DonatePage({super.key});
@@ -15,6 +19,7 @@ class DonatePage extends StatefulWidget {
 
 class _DonatePageState extends State<DonatePage> {
   final _formKey = GlobalKey<FormState>();
+  File? _selectedImage;
   bool _food = false;
   bool _clothes = false;
   bool _cash = false;
@@ -57,6 +62,15 @@ class _DonatePageState extends State<DonatePage> {
     final String hour = timeOfDay!.hour.toString().padLeft(2, '0');
     final String minute = timeOfDay.minute.toString().padLeft(2, '0');
     return '$hour:$minute';
+  }
+
+  void setImage() async {
+    XFile? xfile = await getImage(context);
+    File img = File(xfile!.path);
+    setState(() {
+      _selectedImage = img;
+    });
+    print(_selectedImage);
   }
 
   Widget dropOff() {
@@ -807,7 +821,9 @@ class _DonatePageState extends State<DonatePage> {
                 if (_modeOfDelivery == "Pickup") pickup(),
                 SizedBox(height: 20),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    setImage();
+                  },
                   child: DottedBorder(
                     dashPattern: const [7, 3],
                     strokeWidth: 2,
@@ -1033,3 +1049,6 @@ class _DonatePageState extends State<DonatePage> {
     );
   }
 }
+
+// width: double.infinity,
+// height: screenHeight * 0.15,

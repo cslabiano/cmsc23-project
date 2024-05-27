@@ -1,4 +1,5 @@
 import 'package:elbigay/firebase_options.dart';
+import 'package:elbigay/screens/donor/donation_drive_details.dart';
 import 'package:elbigay/screens/organization/add_donation_drive_organization.dart';
 import 'package:elbigay/providers/donation_provider.dart';
 import 'package:elbigay/providers/donor_provider.dart';
@@ -63,7 +64,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/donor_donatepage',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -74,6 +75,7 @@ class MainApp extends StatelessWidget {
           '/donor_donatepage': (context) => const DonatePage(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
+          '/donation_drive_details': (context) => const DonationDriveDetails(),
           '/organization_navbar': (context) => const OrgNavbar(),
           '/organization_homepage': (context) => const OrganizationHomepage(),
           '/organization_profile': (context) => const OrganizationProfile(),
