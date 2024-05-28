@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:io';
+
 import 'package:elbigay/models/donation_drive_model.dart';
 import 'package:elbigay/providers/auth_provider.dart';
 import 'package:elbigay/providers/donation_drive_provider.dart';
+import 'package:elbigay/util/image_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class AddDonationDrive extends StatefulWidget {
@@ -18,11 +22,23 @@ class AddDonationDrive extends StatefulWidget {
 class _AddDonationDriveState extends State<AddDonationDrive> {
   final _formKey = GlobalKey<FormState>();
   late DonationDrive donationDrive;
+  User? user;
   String? userId;
   String? title;
   String? description;
-  String status = "Open";
-  User? user;
+  DateTime? date;
+  File? selectedImage;
+  String imagePath = "none";
+
+  void setImage() async {
+    XFile? xfile = await getImage(context);
+    File img = File(xfile!.path);
+    setState(() {
+      selectedImage = img;
+    });
+  }
+
+  final TextEditingController _dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +46,8 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     user = context.watch<UserAuthProvider>().user;
+
+    // print("Date now: ${DateTime.now().toLocal()}");
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -65,6 +83,84 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                     child: Row(
                       children: [
                         Text(
+                          "Closing Date",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        ),
+                        const Text(
+                          '*',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: _dateController,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.calendar_today),
+                      hintText: "Choose date",
+                      hintStyle: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 12),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    readOnly: true,
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
+                        return "Please pick a date";
+                      }
+                      return null;
+                    },
+                    onTap: () async {
+                      DateTime? selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(2100));
+                      if (selectedDate != null) {
+                        date = selectedDate;
+                        _dateController.text =
+                            selectedDate.toString().split(" ")[0];
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      children: [
+                        Text(
                           "Upload image",
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.secondary,
@@ -85,39 +181,61 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                     height: 5,
                   ),
                   GestureDetector(
-                    onTap: () {},
-                    child: DottedBorder(
-                      dashPattern: const [7, 3],
-                      strokeWidth: 2,
-                      color: Theme.of(context).colorScheme.primary,
-                      borderType: BorderType.RRect,
-                      radius: const Radius.circular(12),
-                      padding: const EdgeInsets.all(6),
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        child: Container(
-                          width: double.infinity,
-                          height: screenHeight * 0.15,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Center(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.photo_library,
-                                      color: Theme.of(context).primaryColor,
-                                      size: screenWidth * 0.15),
-                                  Text("Take a photo or browse",
-                                      style: TextStyle(
-                                          color: Theme.of(context).primaryColor,
-                                          fontWeight: FontWeight.bold)),
-                                ]),
+                    onTap: () {
+                      setImage();
+                    },
+                    child: selectedImage == null
+                        ? DottedBorder(
+                            dashPattern: const [7, 3],
+                            strokeWidth: 2,
+                            color: Theme.of(context).colorScheme.primary,
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(12),
+                            padding: const EdgeInsets.all(6),
+                            child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)),
+                              child: Container(
+                                width: double.infinity,
+                                height: screenHeight * 0.15,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Center(
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.photo_library,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            size: screenWidth * 0.15),
+                                        Text("Take a photo or browse",
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                fontWeight: FontWeight.bold)),
+                                      ]),
+                                ),
+                              ),
+                            ),
+                          )
+                        : DottedBorder(
+                            dashPattern: const [7, 3],
+                            strokeWidth: 2,
+                            color: Theme.of(context).colorScheme.primary,
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(12),
+                            padding: const EdgeInsets.all(6),
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: screenHeight * 0.15,
+                              child: ClipRRect(
+                                child: Image.file(selectedImage!),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                   ),
                   Expanded(
                       child:
@@ -273,13 +391,20 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                context.read<DonationDriveProvider>().addDonationDrive(
-                    DonationDrive(
-                        userId: user!.uid,
-                        title: title!,
-                        description: description!,
-                        dateTime: "none"));
-                Navigator.pop(context);
+                if (selectedImage != null) {
+                  imagePath = uploadFileForUser(selectedImage!);
+                  context.read<DonationDriveProvider>().addDonationDrive(
+                      DonationDrive(
+                          userId: user!.uid,
+                          title: title!,
+                          description: description!,
+                          date: date!.toString(),
+                          imagePath: imagePath));
+                  Navigator.pop(context);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Upload an Image!")));
+                }
               }
             },
             child: Container(

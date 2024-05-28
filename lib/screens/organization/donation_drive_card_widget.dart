@@ -62,9 +62,9 @@ class DonationDriveCard extends StatelessWidget {
                                   SizedBox(
                                     height: screenHeight * 0.1,
                                     width: screenWidth * 0.3,
-                                    // child: Image.asset(
-                                    //     _donationDrives[index]
-                                    //         .image),
+                                    // child: Image.network(
+                                    //     donationDrive.imagePath,
+                                    //     fit: BoxFit.fill),
                                   ),
                                   const SizedBox(width: 7),
                                   Expanded(
@@ -99,14 +99,14 @@ class DonationDriveCard extends StatelessWidget {
                                           Row(
                                             children: [
                                               Icon(
-                                                Icons.timelapse_rounded,
+                                                Icons.schedule_outlined,
                                                 color: const Color.fromRGBO(
                                                     128, 128, 128, 1),
                                                 size: screenWidth * 0.05,
                                               ),
                                               const SizedBox(width: 3),
                                               Text(
-                                                donationDrive.dateTime,
+                                                "${DateTime.parse(donationDrive.date).difference(DateTime.now().toLocal()).inDays} days left",
                                                 style: const TextStyle(
                                                     color: Color.fromRGBO(
                                                         128, 128, 128, 1)),
