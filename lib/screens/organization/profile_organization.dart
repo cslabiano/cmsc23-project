@@ -16,7 +16,6 @@ class OrganizationProfile extends StatefulWidget {
 
 class _OrganizationProfileState extends State<OrganizationProfile> {
   User? user;
-  late Org organization;
 
   @override
   Widget build(BuildContext context) {
