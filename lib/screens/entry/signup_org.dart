@@ -294,7 +294,8 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                             uname: uname,
                                             contact: contact,
                                             address: address,
-                                            isVerified: false);
+                                            isVerified: false,
+                                            isOpen: false);
 
                                         await context
                                             .read<UserAuthProvider>()

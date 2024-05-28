@@ -9,6 +9,7 @@ class Org {
   final String contact;
   final List<String> address;
   final bool isVerified;
+  final bool isOpen;
 
   Org(
       {required this.usertype,
@@ -17,7 +18,8 @@ class Org {
       required this.uname,
       required this.contact,
       required this.address,
-      required this.isVerified});
+      required this.isVerified,
+      required this.isOpen});
 
   // Factory constructor to instantiate object from Firestore document
   factory Org.fromDocument(DocumentSnapshot doc) {
@@ -31,19 +33,22 @@ class Org {
       contact: data['contact'],
       address: List<String>.from(data['address']),
       isVerified: data['isVerified'],
+      isOpen: data['isOpen'],
     );
   }
 
   // Factory constructor to instantiate object from json format
   factory Org.fromJson(Map<String, dynamic> json) {
     return Org(
-        usertype: json['usertype'],
-        email: json['email'],
-        orgname: json['orgname'],
-        uname: json['uname'],
-        contact: json['contact'],
-        address: List<String>.from(json['address']),
-        isVerified: json['isVerified']);
+      usertype: json['usertype'],
+      email: json['email'],
+      orgname: json['orgname'],
+      uname: json['uname'],
+      contact: json['contact'],
+      address: List<String>.from(json['address']),
+      isVerified: json['isVerified'],
+      isOpen: json['isOpen'],
+    );
   }
 
   static List<Org> fromJsonArray(String jsonData) {
@@ -60,6 +65,7 @@ class Org {
       'contact': org.contact,
       'address': org.address,
       'isVerified': org.isVerified
+      'isOpen': org.isOpen
     };
   }
 }
