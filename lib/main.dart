@@ -8,6 +8,8 @@ import '/providers/donation_provider.dart';
 import '/providers/donor_provider.dart';
 import '/providers/auth_provider.dart';
 import '/providers/donation_drive_provider.dart';
+import '/providers/org_provider.dart';
+import '/providers/admin_provider.dart';
 
 // import screens
 import '/screens/splash.dart';
@@ -41,7 +43,9 @@ Future<void> main() async {
         ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
         ChangeNotifierProvider(create: ((context) => DonationProvider())),
         ChangeNotifierProvider(create: ((context) => DonorProvider())),
-        ChangeNotifierProvider(create: ((context) => DonationDriveProvider()))
+        ChangeNotifierProvider(create: ((context) => DonationDriveProvider())),
+        ChangeNotifierProvider(create: ((context) => AdminProvider())),
+        ChangeNotifierProvider(create: ((context) => OrganizationProvider())),
       ],
       child: const MainApp(),
     ),
@@ -65,7 +69,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/admin_navbar',
+        initialRoute: '/signin',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -83,7 +87,7 @@ class MainApp extends StatelessWidget {
           '/organization_donation': (context) =>
               const OrganizationDonationDrive(),
           '/add_donation_drive': (context) => const AddDonationDrive(),
-          '/admin_navbar': (context) => const AdminNavbar(),
+          // '/admin_navbar': (context) => const AdminNavbar(),
         });
   }
 }
