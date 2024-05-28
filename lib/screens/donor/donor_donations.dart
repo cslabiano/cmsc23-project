@@ -49,7 +49,7 @@ class _DonorDonationsState extends State<DonorDonations> {
                   Container(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
-                      "Here are the donations to you...",
+                      "Here are your donations...",
                       style: TextStyle(
                           color: Colors.white, fontSize: screenWidth * 0.045),
                     ),

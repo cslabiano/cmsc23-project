@@ -18,6 +18,9 @@ class ReceiptPage extends StatefulWidget {
 
 class _ReceiptPageState extends State<ReceiptPage> {
   String? qrData;
+  bool showQR = false;
+  bool cancelled = false;
+  bool completed = false;
 
   Widget summaryRow(String label, String value) {
     return Row(
@@ -30,9 +33,12 @@ class _ReceiptPageState extends State<ReceiptPage> {
           ),
         ),
         Expanded(
-            child: Text(value,
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)))
+            child: Text(
+          value,
+          textAlign: TextAlign.left,
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+          overflow: TextOverflow.ellipsis,
+        ))
       ],
     );
   }
@@ -70,6 +76,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
           }
 
           return ListView.builder(
+            shrinkWrap: true,
             itemCount: snapshot.data?.docs.length,
             itemBuilder: ((context, index) {
               Donation donation = Donation.fromJson(
@@ -78,20 +85,28 @@ class _ReceiptPageState extends State<ReceiptPage> {
               DateTime datetime = DateTime.parse(date);
               String formattedDate = DateFormat('MMMM d, y').format(datetime);
               String formattedTime = DateFormat("jm").format(datetime);
+
+              if (donation.modeOfDelivery == "Pickup" &&
+                  donation.status != "Pending") showQR = true;
+
+              if (donation.status == "Cancelled") cancelled = true;
+              if (donation.status == "Completed") completed = true;
               return Padding(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.center,
-                        child: QrImageView(
-                            data: widget.id,
-                            version: QrVersions.auto,
-                            gapless: false,
-                            size: 270),
-                      ),
+                      showQR
+                          ? Align(
+                              alignment: Alignment.center,
+                              child: QrImageView(
+                                  data: widget.id,
+                                  version: QrVersions.auto,
+                                  gapless: false,
+                                  size: 270),
+                            )
+                          : SizedBox(height: 180),
                       SizedBox(height: 15),
                       Divider(
                         color: Theme.of(context).colorScheme.tertiary,
@@ -109,12 +124,11 @@ class _ReceiptPageState extends State<ReceiptPage> {
                             SizedBox(height: 8),
                             summaryRow("Time", formattedTime),
                             SizedBox(height: 8),
-                            summaryRow(
-                                "Location", "Org Address or smthng smthng"),
+                            summaryRow("Location", donation.address as String),
                           ],
                         ),
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: 30),
                       Divider(
                         color: Theme.of(context).colorScheme.tertiary,
                       ),
@@ -124,22 +138,43 @@ class _ReceiptPageState extends State<ReceiptPage> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 20),
-                      ListTile(
-                        title: Text(
-                          "Cancel Donation",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        onTap: () {},
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
+                      cancelled
+                          ? Text("Donation Cancelled!",
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20))
+                          : completed
+                              ? Text("Donation Completed!",
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20))
+                              : ListTile(
+                                  title: Text(
+                                    "Cancel Donation",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  onTap: () {
+                                    context
+                                        .read<DonationProvider>()
+                                        .changeStatus(
+                                            donation.id as String, "Cancelled");
+                                    setState(() {
+                                      cancelled = true;
+                                    });
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Theme.of(context).primaryColor,
+                                        width: 1),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                ),
                     ]),
               );
             }),
