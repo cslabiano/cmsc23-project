@@ -5,6 +5,7 @@ class Donation {
   String donorName;
   String? id;
   String? orgId;
+  String? imagePath;
   String? address;
   String? contactNumber;
   String status;
@@ -18,6 +19,7 @@ class Donation {
       required this.donorName,
       this.id,
       this.orgId,
+      this.imagePath,
       this.address,
       this.contactNumber,
       required this.status,
@@ -32,6 +34,7 @@ class Donation {
         donorName: json['donorName'],
         id: json['id'],
         orgId: json['orgId'],
+        imagePath: json['imagePath'],
         address: json['address'],
         contactNumber: json['contactNumber'],
         status: json['status'],
@@ -54,6 +57,7 @@ class Donation {
       'donorName': donation.donorName,
       'id': donation.id,
       'orgId': donation.orgId,
+      'imagePath': donation.imagePath,
       'address': address,
       'contactNumber': contactNumber,
       'status': donation.status,

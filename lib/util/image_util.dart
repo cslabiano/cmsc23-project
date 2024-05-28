@@ -58,17 +58,29 @@ getImage(BuildContext context) async {
   return _file;
 }
 
-Future<bool> uploadFileForUser(File file) async {
+String uploadFileForUser(File file) {
   try {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     final storageRef = FirebaseStorage.instance.ref();
     final fileName = file.path.split("/").last;
     final timestamp = DateTime.now().microsecondsSinceEpoch;
     final uploadRef = storageRef.child("$userId/uploads/$timestamp-$fileName");
-    await uploadRef.putFile(file);
-    return true;
+    String filePath = "$userId/uploads/$timestamp-$fileName";
+    print(filePath);
+    uploadRef.putFile(file);
+    return filePath;
   } catch (e) {
     print(e);
   }
-  return false;
+  return "none";
 }
+
+// Future<Reference>? getUserUploadedFile() async {
+//   try {
+//     final userId = FirebaseAuth.instance.currentUser?.uid;
+//     final storageRef = FirebaseStorage.instance.ref();
+//     final uploadsRef = storageRef.child("$userId/uploads/");
+//   } catch (e) {
+//     print(e);
+//   }
+// }
