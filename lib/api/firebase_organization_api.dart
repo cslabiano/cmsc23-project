@@ -55,4 +55,15 @@ class FirebaseOrganizationAPI {
       throw Exception("Organization document does not exist");
     }
   }
+
+  Future<Org> getOrg(String orgId) async {
+    DocumentSnapshot doc =
+        await db.collection("organizations").doc(orgId).get();
+
+    if (doc.exists) {
+      return Org.fromDocument(doc);
+    } else {
+      throw Exception("Organization document does not exist");
+    }
+  }
 }

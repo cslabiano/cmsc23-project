@@ -74,13 +74,3 @@ String uploadFileForUser(File file) {
   }
   return "none";
 }
-
-// Future<Reference>? getUserUploadedFile() async {
-//   try {
-//     final userId = FirebaseAuth.instance.currentUser?.uid;
-//     final storageRef = FirebaseStorage.instance.ref();
-//     final uploadsRef = storageRef.child("$userId/uploads/");
-//   } catch (e) {
-//     print(e);
-//   }
-// }

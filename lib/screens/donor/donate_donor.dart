@@ -914,7 +914,7 @@ class _DonatePageState extends State<DonatePage> {
                         _finalDateTime = DateTime(_date!.year, _date!.month,
                             _date!.day, _time!.hour, _time!.minute);
 
-                        DateFormat dateFormat = DateFormat("yyy-MM-dd HH:mm");
+                        DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm");
                         _stringFinalDateTime =
                             dateFormat.format(_finalDateTime!);
                         dateFormat.format(_finalDateTime!);

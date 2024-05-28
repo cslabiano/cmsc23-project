@@ -24,6 +24,11 @@ class OrganizationProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> getOrg(String orgId) async {
+    _organization = await firebaseService.getOrg(orgId);
+    notifyListeners();
+  }
+
   void fetchOrganizations() {
     _orgStream = firebaseService.getAllOrganizations();
     notifyListeners();

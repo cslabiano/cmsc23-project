@@ -21,13 +21,14 @@ class DonationProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchDonationsDonor(String? uid) {
-    _donoStream = firebaseService.getDonationsDonor(uid);
+  void fetchDonationsDonor(String? uid, String status) {
+    _donoStream = firebaseService.getDonationsDonor(uid, status);
     notifyListeners();
   }
 
   void fetchDonation(String? id) {
     _donoStream = firebaseService.getDonation(id);
+    notifyListeners();
   }
 
   void changeStatus(String id, String status) async {

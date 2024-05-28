@@ -2,6 +2,9 @@ import 'package:elbigay/firebase_options.dart';
 import 'package:elbigay/providers/org_provider.dart';
 import 'package:elbigay/screens/donor/donation_drive_details.dart';
 import 'package:elbigay/providers/donation_drive_provider.dart';
+import 'package:elbigay/screens/donor/donor_donations.dart';
+import 'package:elbigay/screens/donor/receipt.dart';
+import 'package:elbigay/screens/donor/test.dart';
 import 'package:elbigay/screens/organization/add_donation_drive_organization.dart';
 import 'package:elbigay/providers/donation_provider.dart';
 import 'package:elbigay/providers/donor_provider.dart';
@@ -52,9 +55,10 @@ Future<void> main() async {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+    String id;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -68,6 +72,14 @@ class MainApp extends StatelessWidget {
           ),
         ),
         initialRoute: '/',
+        onGenerateRoute: (settings) {
+          if (settings.name == '/donor_receiptpage') {
+            final id = settings.arguments as String;
+            return MaterialPageRoute(builder: (context) {
+              return ReceiptPage(id: id);
+            });
+          }
+        },
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -76,6 +88,7 @@ class MainApp extends StatelessWidget {
           '/signup_option': (context) => const SignUpOption(),
           '/donor_navbar': (context) => const DonorNavbar(),
           '/donor_donatepage': (context) => const DonatePage(),
+          '/donor_donations': (context) => const DonorDonations(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
           '/donation_drive_details': (context) => const DonationDriveDetails(),
