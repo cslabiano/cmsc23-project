@@ -65,7 +65,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/admin_navbar',
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -83,7 +83,7 @@ class MainApp extends StatelessWidget {
           '/organization_donation': (context) =>
               const OrganizationDonationDrive(),
           '/add_donation_drive': (context) => const AddDonationDrive(),
-          'admin_navbar': (context) => const AdminNavbar(),
+          '/admin_navbar': (context) => const AdminNavbar(),
         });
   }
 }
