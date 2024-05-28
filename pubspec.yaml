@@ -43,7 +43,6 @@ dependencies:
   screenshot: ^2.5.0
   intl: ^0.19.0
   firebase_storage: ^11.7.5
-  gallery_picker: ^0.5.
   image_picker: ^1.1.1
 
 dev_dependencies:
