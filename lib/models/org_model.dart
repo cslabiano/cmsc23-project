@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Org {
   final String usertype;
@@ -7,15 +8,34 @@ class Org {
   final String uname;
   final String contact;
   final List<String> address;
+  final bool isVerified;
+  final bool isOpen;
 
-  Org({
-    required this.usertype,
-    required this.email,
-    required this.orgname,
-    required this.uname,
-    required this.contact,
-    required this.address,
-  });
+  Org(
+      {required this.usertype,
+      required this.email,
+      required this.orgname,
+      required this.uname,
+      required this.contact,
+      required this.address,
+      required this.isVerified,
+      required this.isOpen});
+
+  // Factory constructor to instantiate object from Firestore document
+  factory Org.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+
+    return Org(
+      usertype: 'org',
+      email: data['email'],
+      orgname: data['orgname'],
+      uname: data['uname'],
+      contact: data['contact'],
+      address: List<String>.from(data['address']),
+      isVerified: data['isVerified'],
+      isOpen: data['isOpen'],
+    );
+  }
 
   // Factory constructor to instantiate object from json format
   factory Org.fromJson(Map<String, dynamic> json) {
@@ -26,6 +46,8 @@ class Org {
       uname: json['uname'],
       contact: json['contact'],
       address: List<String>.from(json['address']),
+      isVerified: json['isVerified'],
+      isOpen: json['isOpen'],
     );
   }
 
@@ -42,6 +64,8 @@ class Org {
       'uname': org.uname,
       'contact': org.contact,
       'address': org.address,
+      'isVerified': org.isVerified
+      'isOpen': org.isOpen
     };
   }
 }
