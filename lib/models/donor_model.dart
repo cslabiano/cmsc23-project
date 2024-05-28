@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Donor {
   final String? usertype;
   final String email;
@@ -18,6 +20,21 @@ class Donor {
     required this.contact,
     required this.address,
   });
+
+  factory Donor.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+
+    return Donor(
+      usertype: 'donor',
+      email: data['email'] ?? '',
+      fname: data['fname'] ?? '',
+      lname: data['lname'] ?? '',
+      uname: data['uname'] ?? '',
+      contact: data['contact'] ?? '',
+      address:
+          data['address'] != null ? List<String>.from(data['address']) : [],
+    );
+  }
 
   // Factory constructor to instantiate object from json format
   factory Donor.fromJson(Map<String, dynamic> json) {
