@@ -38,8 +38,8 @@ class _OrgNavbarState extends State<OrgNavbar> {
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 1
-                ? const Icon(Icons.add_box)
-                : const Icon(Icons.add_box_outlined),
+                ? const Icon(Icons.inventory_2)
+                : const Icon(Icons.inventory_2_outlined),
             label: 'Donation Drives',
           ),
           BottomNavigationBarItem(
