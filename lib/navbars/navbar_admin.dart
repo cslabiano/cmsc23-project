@@ -1,7 +1,5 @@
-import 'package:elbigay/screens/donor/donate_donor.dart';
-import 'package:elbigay/screens/donor/homepage_donor.dart';
-import 'package:elbigay/screens/donor/profile_donor.dart';
 import 'package:flutter/material.dart';
+import '../screens/admin/approval_screen.dart';
 
 class AdminNavbar extends StatefulWidget {
   const AdminNavbar({super.key});
@@ -21,9 +19,9 @@ class _AdminNavbarState extends State<AdminNavbar> {
         child: IndexedStack(
           index: _selectedIndex,
           children: const <Widget>[
-            DonorHomepage(),
-            DonatePage(),
-            DonorProfilepage()
+            ApprovalPage(),
+            // OrgListPage(),
+            // DonorListPage()
           ],
         ),
       ),
@@ -32,21 +30,21 @@ class _AdminNavbarState extends State<AdminNavbar> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: _selectedIndex == 0
-                ? const Icon(Icons.home)
-                : const Icon(Icons.home_outlined),
-            label: '',
+                ? const Icon(Icons.verified)
+                : const Icon(Icons.verified_outlined),
+            label: 'For Approval',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 1
-                ? const Icon(Icons.inventory)
-                : const Icon(Icons.inventory_outlined),
-            label: '',
+                ? const Icon(Icons.groups)
+                : const Icon(Icons.groups_outlined),
+            label: 'Organizations',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 2
-                ? const Icon(Icons.person)
-                : const Icon(Icons.person_outline),
-            label: '',
+                ? const Icon(Icons.volunteer_activism)
+                : const Icon(Icons.volunteer_activism_outlined),
+            label: 'Donors',
           ),
         ],
         currentIndex: _selectedIndex,

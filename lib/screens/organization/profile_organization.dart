@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/org_provider.dart';
+import '../../models/org_model.dart';
 
 class OrganizationProfile extends StatefulWidget {
   const OrganizationProfile({super.key});
@@ -14,15 +16,15 @@ class OrganizationProfile extends StatefulWidget {
 
 class _OrganizationProfileState extends State<OrganizationProfile> {
   User? user;
-  // late Stream<Organization?> organization;
 
   @override
   Widget build(BuildContext context) {
     user = context.read<UserAuthProvider>().user;
-    print(user!.uid);
-    // context.read<UserAuthProvider>().getOrgDetails(user!.uid);
-    // organization = context.read<UserAuthProvider>().organizationStream;
-    // print(organization);
+    Org? org = context.watch<OrganizationProvider>().organization;
+    if (org == null && user != null) {
+      context.read<OrganizationProvider>().getDetails(user!);
+    }
+
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -56,8 +58,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                 height: 60,
                               ),
                               Text(
-                                "name",
-                                // user.displayName,
+                                org!.orgname,
+                                // "displayName",
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.1,
                                   fontWeight: FontWeight.w600,
@@ -66,8 +68,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                 ),
                               ),
                               Text(
-                                // "@username",
-                                user!.email!,
+                                "@${org.uname}",
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.05,
                                   fontWeight: FontWeight.w600,
@@ -111,7 +112,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   ),
                                   const SizedBox(width: 7),
                                   Text(
-                                    "09123456789",
+                                    org.contact,
                                     style: TextStyle(
                                       fontSize: screenWidth * 0.03,
                                       fontWeight: FontWeight.w600,
@@ -127,7 +128,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   ),
                                   const SizedBox(width: 7),
                                   Text(
-                                    "org@gmail.com",
+                                    org.email,
                                     style: TextStyle(
                                       fontSize: screenWidth * 0.03,
                                       fontWeight: FontWeight.w600,
@@ -143,7 +144,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   ),
                                   const SizedBox(width: 7),
                                   Text(
-                                    "567R+VR3, Harold Cuzner Royal Palm Ave, Los Baños",
+                                    org.address[0],
                                     style: TextStyle(
                                       fontSize: screenWidth * 0.03,
                                       fontWeight: FontWeight.w600,

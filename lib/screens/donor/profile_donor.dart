@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+import '/models/donor_model.dart';
+import '/providers/donor_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import '../../providers/auth_provider.dart';
+import '/providers/auth_provider.dart';
 
 class DonorProfilepage extends StatefulWidget {
   const DonorProfilepage({super.key});
@@ -12,8 +13,16 @@ class DonorProfilepage extends StatefulWidget {
 }
 
 class _DonorProfilepageState extends State<DonorProfilepage> {
+  User? user;
+
   @override
   Widget build(BuildContext context) {
+    user = context.read<UserAuthProvider>().user;
+    Donor? donor = context.watch<DonorProvider>().donorDetails;
+    if (donor == null && user != null) {
+      context.read<DonorProvider>().getDetails(user!);
+    }
+
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -52,7 +61,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                             children: [
                               SizedBox(height: 70),
                               Text(
-                                "Google",
+                                "${donor!.fname} ${donor.lname}",
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w600,
@@ -61,7 +70,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                 ),
                               ),
                               Text(
-                                "@username",
+                                "@${donor.uname}",
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.05,
                                   fontWeight: FontWeight.w600,
@@ -105,7 +114,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                   ),
                                   const SizedBox(width: 7),
                                   Text(
-                                    "09123456789",
+                                    donor.contact,
                                     style:
                                         TextStyle(fontSize: screenWidth * 0.03),
                                   )
@@ -119,7 +128,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                   ),
                                   const SizedBox(width: 7),
                                   Text(
-                                    "org@gmail.com",
+                                    donor.email,
                                     style:
                                         TextStyle(fontSize: screenWidth * 0.03),
                                   )
@@ -133,7 +142,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                   ),
                                   const SizedBox(width: 7),
                                   Text(
-                                    "567R+VR3, Harold Cuzner Royal Palm Ave, Los Baños",
+                                    donor.address[0],
                                     style:
                                         TextStyle(fontSize: screenWidth * 0.03),
                                   )

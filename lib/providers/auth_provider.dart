@@ -49,10 +49,4 @@ class UserAuthProvider with ChangeNotifier {
     await authService.signOut();
     notifyListeners();
   }
-
-  // void getOrgDetails(String uid) {
-  //   organizationStream =
-  //       authService.getOrgDetails(uid) as Stream<Organization?>;
-  //   notifyListeners();
-  // }
 }
