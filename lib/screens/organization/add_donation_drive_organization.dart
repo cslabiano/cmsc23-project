@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:io';
 
 import 'package:elbigay/models/donation_drive_model.dart';
@@ -23,7 +21,6 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
   final _formKey = GlobalKey<FormState>();
   late DonationDrive donationDrive;
   User? user;
-  String? userId;
   String? title;
   String? description;
   DateTime? date;
@@ -47,7 +44,6 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
     double screenHeight = MediaQuery.of(context).size.height;
     user = context.watch<UserAuthProvider>().user;
 
-    // print("Date now: ${DateTime.now().toLocal()}");
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -105,7 +101,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                   TextFormField(
                     controller: _dateController,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.calendar_today),
+                      prefixIcon: const Icon(Icons.calendar_today),
                       hintText: "Choose date",
                       hintStyle: TextStyle(
                         fontStyle: FontStyle.italic,
@@ -269,7 +265,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           TextFormField(
@@ -309,7 +305,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ],
@@ -338,7 +334,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           TextFormField(
@@ -379,7 +375,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ],
@@ -403,7 +399,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                   Navigator.pop(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Upload an Image!")));
+                      const SnackBar(content: Text("Upload an Image!")));
                 }
               }
             },
@@ -411,7 +407,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                 height: 50,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                       begin: Alignment.bottomLeft,
                       end: Alignment.topRight,
                       colors: [
@@ -422,12 +418,12 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                   border: Border.all(color: Theme.of(context).primaryColor),
                   boxShadow: kElevationToShadow[2],
                 ),
-                child: Text(
+                child: const Text(
                   "Create",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           InkWell(
@@ -449,7 +445,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                       fontSize: 20, color: Theme.of(context).primaryColor),
                 )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           )
         ],

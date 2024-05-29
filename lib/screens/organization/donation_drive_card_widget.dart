@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/donation_drive_model.dart';
+import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
 import 'package:flutter/material.dart';
 
 class DonationDriveCard extends StatelessWidget {
@@ -40,13 +41,21 @@ class DonationDriveCard extends StatelessWidget {
                   DonationDrive donationDrive = DonationDrive.fromJson(
                       snapshot.data?.docs[index].data()
                           as Map<String, dynamic>);
-                  // donationDrive.user = snapshot.data?.[index].id;
+                  String? id = snapshot.data?.docs[index].id;
                   return Column(
                     children: [
                       InkWell(
                         onTap: () {
-                          // navigate to donation drive page
-                          print("tapped");
+                          if (userType == "org") {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        UpdateDeleteDonationDrive(
+                                          donationDrive: donationDrive,
+                                          documentId: id,
+                                        )));
+                          }
                         },
                         child: Column(
                           children: [

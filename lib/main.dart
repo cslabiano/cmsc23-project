@@ -1,3 +1,4 @@
+import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '/firebase_options.dart';
@@ -86,6 +87,8 @@ class MainApp extends StatelessWidget {
           '/organization_profile': (context) => const OrganizationProfile(),
           '/organization_donation': (context) =>
               const OrganizationDonationDrive(),
+          // '/update_delete_dontaion_drive': (context) =>
+          //     UpdateDeleteDonationDrive(),
           '/add_donation_drive': (context) => const AddDonationDrive(),
           // '/admin_navbar': (context) => const AdminNavbar(),
         });
