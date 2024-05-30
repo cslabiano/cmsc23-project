@@ -64,7 +64,7 @@ class Org {
       'uname': org.uname,
       'contact': org.contact,
       'address': org.address,
-      'isVerified': org.isVerified
+      'isVerified': org.isVerified,
       'isOpen': org.isOpen
     };
   }

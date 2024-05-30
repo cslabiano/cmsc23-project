@@ -42,7 +42,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
         ChangeNotifierProvider(create: ((context) => DonationProvider())),
-        ChangeNotifierProvider(create: ((context) => DonorProvider())),
+        ChangeNotifierProvider(create: ((context) => DonorProvider  ())),
         ChangeNotifierProvider(create: ((context) => DonationDriveProvider())),
         ChangeNotifierProvider(create: ((context) => AdminProvider())),
         ChangeNotifierProvider(create: ((context) => OrganizationProvider())),
