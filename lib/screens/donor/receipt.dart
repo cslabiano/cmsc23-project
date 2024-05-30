@@ -48,7 +48,6 @@ class _ReceiptPageState extends State<ReceiptPage> {
     context.watch<DonationProvider>().fetchDonation(widget.id);
     Stream<QuerySnapshot> donoStream =
         context.watch<DonationProvider>().donoStream;
-    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -75,112 +74,103 @@ class _ReceiptPageState extends State<ReceiptPage> {
             );
           }
 
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: snapshot.data?.docs.length,
-            itemBuilder: ((context, index) {
-              Donation donation = Donation.fromJson(
-                  snapshot.data?.docs[index].data() as Map<String, dynamic>);
-              String date = donation.dateTime;
-              DateTime datetime = DateTime.parse(date);
-              String formattedDate = DateFormat('MMMM d, y').format(datetime);
-              String formattedTime = DateFormat("jm").format(datetime);
+          Donation donation = Donation.fromJson(
+              snapshot.data?.docs[0].data() as Map<String, dynamic>);
+          String date = donation.dateTime;
+          DateTime datetime = DateTime.parse(date);
+          String formattedDate = DateFormat('MMMM d, y').format(datetime);
+          String formattedTime = DateFormat("jm").format(datetime);
 
-              if (donation.modeOfDelivery == "Pickup" &&
-                  donation.status != "Pending") showQR = true;
+          if (donation.modeOfDelivery == "Pickup" &&
+              donation.status != "Pending") showQR = true;
 
-              if (donation.status == "Cancelled") cancelled = true;
-              if (donation.status == "Completed") completed = true;
-              return Padding(
-                padding: EdgeInsets.only(left: 20, right: 20),
+          if (donation.status == "Cancelled") cancelled = true;
+          if (donation.status == "Completed") completed = true;
+
+          return Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              SizedBox(height: 20),
+              showQR
+                  ? Align(
+                      alignment: Alignment.center,
+                      child: QrImageView(
+                          data: widget.id,
+                          version: QrVersions.auto,
+                          gapless: false,
+                          size: 270),
+                    )
+                  : SizedBox(height: 180),
+              SizedBox(height: 15),
+              Divider(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              SizedBox(height: 15),
+              Padding(
+                padding: EdgeInsets.only(left: 40),
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 20),
-                      showQR
-                          ? Align(
-                              alignment: Alignment.center,
-                              child: QrImageView(
-                                  data: widget.id,
-                                  version: QrVersions.auto,
-                                  gapless: false,
-                                  size: 270),
-                            )
-                          : SizedBox(height: 180),
-                      SizedBox(height: 15),
-                      Divider(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                      SizedBox(height: 15),
-                      Padding(
-                        padding: EdgeInsets.only(left: 40),
-                        child: Column(
-                          children: [
-                            summaryRow("Name", donation.donorName),
-                            SizedBox(height: 8),
-                            summaryRow("Status", donation.status),
-                            SizedBox(height: 8),
-                            summaryRow("Date", formattedDate),
-                            SizedBox(height: 8),
-                            summaryRow("Time", formattedTime),
-                            SizedBox(height: 8),
-                            summaryRow("Location", donation.address as String),
-                          ],
+                  children: [
+                    summaryRow("Name", donation.donorName),
+                    SizedBox(height: 8),
+                    summaryRow("Status", donation.status),
+                    SizedBox(height: 8),
+                    summaryRow("Date", formattedDate),
+                    SizedBox(height: 8),
+                    summaryRow("Time", formattedTime),
+                    SizedBox(height: 8),
+                    summaryRow("Location", donation.address as String),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
+              Divider(
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+              Text(
+                "Please show this receipt to the organizers to confirm your donation. Make sure that the details in this receipt is correct.",
+                style: TextStyle(color: Colors.grey, fontSize: 13),
+                textAlign: TextAlign.center,
+              ),
+              Expanded(child: Container()),
+              cancelled
+                  ? Text("Donation Cancelled!",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20))
+                  : completed
+                      ? Text("Donation Completed!",
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20))
+                      : InkWell(
+                          onTap: () {
+                            context.read<DonationProvider>().changeStatus(
+                                donation.id as String, "Cancelled");
+                            setState(() {
+                              cancelled = true;
+                            });
+                          },
+                          child: Container(
+                            height: 50,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                  color: Theme.of(context).primaryColor),
+                              boxShadow: kElevationToShadow[2],
+                            ),
+                            child: Text("Cancel",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Theme.of(context).primaryColor)),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 30),
-                      Divider(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                      Text(
-                        "Please show this receipt to the organizers to confirm your donation. Make sure that the details in this receipt is correct.",
-                        style: TextStyle(color: Colors.grey, fontSize: 13),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 20),
-                      cancelled
-                          ? Text("Donation Cancelled!",
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20))
-                          : completed
-                              ? Text("Donation Completed!",
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20))
-                              : InkWell(
-                                  onTap: () {
-                                    context
-                                        .read<DonationProvider>()
-                                        .changeStatus(
-                                            donation.id as String, "Cancelled");
-                                    setState(() {
-                                      cancelled = true;
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                      boxShadow: kElevationToShadow[2],
-                                    ),
-                                    child: Text("Cancelled",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Theme.of(context)
-                                                .primaryColor)),
-                                  ),
-                                ),
-                    ]),
-              );
-            }),
+              SizedBox(height: 50),
+            ]),
           );
         }),
       ),

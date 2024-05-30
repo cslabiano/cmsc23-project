@@ -26,9 +26,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
     if (donor == null && user != null) {
       context.read<DonorProvider>().getDetails(user!);
     }
-    // double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
+    context.read<OrganizationProvider>().fetchOrganizations();
     Stream<QuerySnapshot> orgStream = context.watch<OrganizationProvider>().org;
 
     return Scaffold(
@@ -97,6 +95,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
               OrgCard(organizations: orgStream),
             ],
           ),

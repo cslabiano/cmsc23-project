@@ -143,11 +143,13 @@ class FirebaseAuthAPI {
       });
 
       await db.collection("organizations").doc(credential.user!.uid).set({
+        'orgId': credential.user!.uid,
         'email': org.email,
         'orgname': org.orgname,
         'uname': org.uname,
         'contact': org.contact,
-        'address': org.address
+        'address': org.address,
+        'usertype': org.usertype,
       });
 
       return "";

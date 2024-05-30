@@ -11,9 +11,9 @@ class OrganizationProvider with ChangeNotifier {
 
   Stream<User?> get oStream => _oStream;
 
-  OrganizationProvider() {
-    fetchOrganizations();
-  }
+  // OrganizationProvider() {
+  //   fetchOrganizations();
+  // }
 
   Org? _organization;
   Org? get organization => _organization;

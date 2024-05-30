@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Org {
+  final String? orgId;
   final String usertype;
   final String email;
   final String orgname;
@@ -14,7 +15,8 @@ class Org {
   final bool isOpen;
 
   Org(
-      {required this.usertype,
+      {this.orgId,
+      required this.usertype,
       required this.email,
       required this.orgname,
       required this.uname,
@@ -28,6 +30,7 @@ class Org {
     final data = doc.data() as Map<String, dynamic>;
 
     return Org(
+      orgId: data['orgId'],
       usertype: 'org',
       email: data['email'],
       orgname: data['orgname'],
@@ -42,6 +45,7 @@ class Org {
   // Factory constructor to instantiate object from json format
   factory Org.fromJson(Map<String, dynamic> json) {
     return Org(
+      orgId: json['orgId'],
       usertype: json['usertype'],
       email: json['email'],
       orgname: json['orgname'],
@@ -60,6 +64,7 @@ class Org {
 
   Map<String, dynamic> toJson(Org org) {
     return {
+      'orgId': org.orgId,
       'usertype': org.usertype,
       'email': org.email,
       'fname': org.orgname,

@@ -57,8 +57,6 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
-    String id;
-
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -79,6 +77,13 @@ class MainApp extends StatelessWidget {
               return ReceiptPage(id: id);
             });
           }
+
+          if (settings.name == '/donor_donatepage') {
+            final orgId = settings.arguments as String;
+            return MaterialPageRoute(builder: (context) {
+              return DonatePage(orgId: orgId);
+            });
+          }
         },
         routes: {
           '/': (context) => const Splash(),
@@ -87,7 +92,6 @@ class MainApp extends StatelessWidget {
           '/signup_org': (context) => const SignUpOrg(),
           '/signup_option': (context) => const SignUpOption(),
           '/donor_navbar': (context) => const DonorNavbar(),
-          '/donor_donatepage': (context) => const DonatePage(),
           '/donor_donations': (context) => const DonorDonations(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
