@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:elbigay/models/donor_donation_model.dart';
+import 'package:elbigay/providers/auth_provider.dart';
 import 'package:elbigay/providers/donation_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,6 +22,7 @@ class DonatePage extends StatefulWidget {
 class _DonatePageState extends State<DonatePage> {
   final _formKey = GlobalKey<FormState>();
   File? _selectedImage;
+  String _imagePath = "none";
   bool _food = false;
   bool _clothes = false;
   bool _cash = false;
@@ -70,7 +73,6 @@ class _DonatePageState extends State<DonatePage> {
     setState(() {
       _selectedImage = img;
     });
-    print(_selectedImage);
   }
 
   Widget dropOff() {
@@ -824,37 +826,56 @@ class _DonatePageState extends State<DonatePage> {
                   onTap: () {
                     setImage();
                   },
-                  child: DottedBorder(
-                    dashPattern: const [7, 3],
-                    strokeWidth: 2,
-                    color: Theme.of(context).colorScheme.primary,
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(12),
-                    padding: const EdgeInsets.all(6),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      child: Container(
-                        width: double.infinity,
-                        height: screenHeight * 0.15,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(Icons.photo_library,
-                                    color: Theme.of(context).primaryColor,
-                                    size: screenWidth * 0.15),
-                                Text("Take a photo or browse",
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontWeight: FontWeight.bold)),
-                              ]),
+                  child: _selectedImage == null
+                      ? DottedBorder(
+                          dashPattern: const [7, 3],
+                          strokeWidth: 2,
+                          color: Theme.of(context).colorScheme.primary,
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(12),
+                          padding: const EdgeInsets.all(6),
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12)),
+                            child: Container(
+                              width: double.infinity,
+                              height: screenHeight * 0.15,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Center(
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.photo_library,
+                                          color: Theme.of(context).primaryColor,
+                                          size: screenWidth * 0.15),
+                                      Text("Take a photo or browse",
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontWeight: FontWeight.bold)),
+                                    ]),
+                              ),
+                            ),
+                          ),
+                        )
+                      : DottedBorder(
+                          dashPattern: const [7, 3],
+                          strokeWidth: 2,
+                          color: Theme.of(context).colorScheme.primary,
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(12),
+                          padding: const EdgeInsets.all(6),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: screenHeight * 0.15,
+                            child: ClipRRect(
+                              child: Image.file(_selectedImage!),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
                 SizedBox(height: 30),
                 Container(
@@ -893,7 +914,7 @@ class _DonatePageState extends State<DonatePage> {
                         _finalDateTime = DateTime(_date!.year, _date!.month,
                             _date!.day, _time!.hour, _time!.minute);
 
-                        DateFormat dateFormat = DateFormat("yyy-MM-dd HH:mm");
+                        DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm");
                         _stringFinalDateTime =
                             dateFormat.format(_finalDateTime!);
                         dateFormat.format(_finalDateTime!);
@@ -948,10 +969,12 @@ class _DonatePageState extends State<DonatePage> {
                         }
 
                         if (_modeOfDelivery == "Pickup") {
+                          _imagePath = uploadFileForUser(_selectedImage!);
                           Donation donation = Donation(
-                            userId: "2",
+                            userId: context.read<UserAuthProvider>().user!.uid,
                             donorName: "Myndie Labiano",
                             orgId: "1",
+                            imagePath: _imagePath,
                             itemType: _itemType,
                             status: "Pending",
                             address: _address,
@@ -997,10 +1020,13 @@ class _DonatePageState extends State<DonatePage> {
                           );
                         }
                         if (_modeOfDelivery == "Drop off") {
+                          _imagePath = uploadFileForUser(_selectedImage!);
+
                           Donation donation = Donation(
-                            userId: "2",
+                            userId: context.read<UserAuthProvider>().user!.uid,
                             donorName: "Myndie Labiano",
                             orgId: "1",
+                            imagePath: _imagePath,
                             itemType: _itemType,
                             status: "Pending",
                             address: "none",
@@ -1013,7 +1039,6 @@ class _DonatePageState extends State<DonatePage> {
                               .read<DonationProvider>()
                               .addDonation(donation);
                         }
-
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Success!'),
                         ));

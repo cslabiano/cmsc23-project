@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:elbigay/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '/firebase_options.dart';
 
 // import providers
 import 'package:provider/provider.dart';
@@ -9,7 +9,7 @@ import '/providers/donor_provider.dart';
 import '/providers/auth_provider.dart';
 import '/providers/donation_drive_provider.dart';
 import '/providers/org_provider.dart';
-import '/providers/admin_provider.dart';
+// import '/providers/admin_provider.dart';
 
 // import screens
 import '/screens/splash.dart';
@@ -25,11 +25,13 @@ import 'screens/organization/donation_drive_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
 import '/screens/donor/donation_drive_details.dart';
+import 'package:elbigay/screens/donor/receipt.dart';
+import '/screens/donor/donor_donations.dart';
 
 //import navbars
 import 'navbars/navbar_donor.dart';
 import '/navbars/navbar_org.dart';
-import '/navbars/navbar_admin.dart';
+// import '/navbars/navbar_admin.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,9 +44,8 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
         ChangeNotifierProvider(create: ((context) => DonationProvider())),
-        ChangeNotifierProvider(create: ((context) => DonorProvider  ())),
+        ChangeNotifierProvider(create: ((context) => DonorProvider())),
         ChangeNotifierProvider(create: ((context) => DonationDriveProvider())),
-        ChangeNotifierProvider(create: ((context) => AdminProvider())),
         ChangeNotifierProvider(create: ((context) => OrganizationProvider())),
       ],
       child: const MainApp(),
@@ -54,9 +55,10 @@ Future<void> main() async {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+    String id;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -69,7 +71,15 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/signin',
+        initialRoute: '/',
+        onGenerateRoute: (settings) {
+          if (settings.name == '/donor_receiptpage') {
+            final id = settings.arguments as String;
+            return MaterialPageRoute(builder: (context) {
+              return ReceiptPage(id: id);
+            });
+          }
+        },
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -78,6 +88,7 @@ class MainApp extends StatelessWidget {
           '/signup_option': (context) => const SignUpOption(),
           '/donor_navbar': (context) => const DonorNavbar(),
           '/donor_donatepage': (context) => const DonatePage(),
+          '/donor_donations': (context) => const DonorDonations(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
           '/donation_drive_details': (context) => const DonationDriveDetails(),

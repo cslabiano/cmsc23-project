@@ -20,7 +20,6 @@ class Donor {
     required this.address,
   });
 
-  // Factory constructor to instantiate object from Firestore document
   factory Donor.fromDocument(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
 

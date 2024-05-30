@@ -9,7 +9,7 @@ class FirebaseOrganizationAPI {
   Stream<QuerySnapshot> getAllOrganizations() {
     return db
         .collection("organizations")
-        .where("donationStatus", isEqualTo: "Open")
+        .where("isVerified", isEqualTo: true)
         .snapshots();
   }
 
@@ -48,6 +48,17 @@ class FirebaseOrganizationAPI {
   Future<Org> getDetails(User user) async {
     DocumentSnapshot doc =
         await db.collection("organizations").doc(user.uid).get();
+
+    if (doc.exists) {
+      return Org.fromDocument(doc);
+    } else {
+      throw Exception("Organization document does not exist");
+    }
+  }
+
+  Future<Org> getOrg(String orgId) async {
+    DocumentSnapshot doc =
+        await db.collection("organizations").doc(orgId).get();
 
     if (doc.exists) {
       return Org.fromDocument(doc);
