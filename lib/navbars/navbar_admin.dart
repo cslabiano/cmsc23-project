@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/admin/approval_screen.dart';
+import '/screens/admin/admin_profile.dart';
 
 class AdminNavbar extends StatefulWidget {
   const AdminNavbar({super.key});
@@ -9,7 +10,7 @@ class AdminNavbar extends StatefulWidget {
 }
 
 class _AdminNavbarState extends State<AdminNavbar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +20,10 @@ class _AdminNavbarState extends State<AdminNavbar> {
         child: IndexedStack(
           index: _selectedIndex,
           children: const <Widget>[
-            ApprovalPage(),
-            // OrgListPage(),
-            // DonorListPage()
+            AdminProfile(),
+            AdminProfile(),
+            AdminProfile(),
+            AdminProfile(),
           ],
         ),
       ),
@@ -45,6 +47,12 @@ class _AdminNavbarState extends State<AdminNavbar> {
                 ? const Icon(Icons.volunteer_activism)
                 : const Icon(Icons.volunteer_activism_outlined),
             label: 'Donors',
+          ),
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 0
+                ? const Icon(Icons.account_circle_outlined)
+                : const Icon(Icons.account_circle),
+            label: 'Account',
           ),
         ],
         currentIndex: _selectedIndex,
