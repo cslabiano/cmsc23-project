@@ -150,15 +150,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
                                       color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20))
-                              : ListTile(
-                                  title: Text(
-                                    "Cancel Donation",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Theme.of(context).primaryColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                              : InkWell(
                                   onTap: () {
                                     context
                                         .read<DonationProvider>()
@@ -168,11 +160,22 @@ class _ReceiptPageState extends State<ReceiptPage> {
                                       cancelled = true;
                                     });
                                   },
-                                  shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 1),
-                                    borderRadius: BorderRadius.circular(15),
+                                  child: Container(
+                                    height: 50,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                      boxShadow: kElevationToShadow[2],
+                                    ),
+                                    child: Text("Cancelled",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Theme.of(context)
+                                                .primaryColor)),
                                   ),
                                 ),
                     ]),
