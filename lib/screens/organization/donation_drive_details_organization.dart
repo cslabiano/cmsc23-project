@@ -50,12 +50,28 @@ class _UpdateDeleteDonationDriveState extends State<UpdateDeleteDonationDrive> {
               SizedBox(
                 height: screenHeight * 0.02,
               ),
-              Text(
-                "Update Donation Drive",
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: screenWidth * 0.06,
-                    fontWeight: FontWeight.w600),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    "Update Donation Drive",
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: screenWidth * 0.06,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
               )
             ],
           ),
@@ -345,46 +361,48 @@ class _UpdateDeleteDonationDriveState extends State<UpdateDeleteDonationDrive> {
                 height: 50,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                      colors: [
-                        Color.fromRGBO(14, 198, 178, 1),
-                        Color.fromRGBO(37, 212, 147, 1)
-                      ]),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Theme.of(context).primaryColor),
-                  boxShadow: kElevationToShadow[2],
-                ),
-                child: const Text(
-                  "Delete",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                )),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
+                  // gradient: const LinearGradient(
+                  //     begin: Alignment.bottomLeft,
+                  //     end: Alignment.topRight,
+                  //     colors: [
+                  //       Color.fromRGBO(14, 198, 178, 1),
+                  //       Color.fromRGBO(37, 212, 147, 1)
+                  //     ]),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(color: Theme.of(context).primaryColor),
                   boxShadow: kElevationToShadow[2],
                 ),
                 child: Text(
-                  "Cancel",
+                  "Delete",
                   style: TextStyle(
                       fontSize: 20, color: Theme.of(context).primaryColor),
                 )),
           ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          //   child: Container(
+          //       height: 50,
+          //       alignment: Alignment.center,
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.circular(15),
+          //         border: Border.all(color: Theme.of(context).primaryColor),
+          //         boxShadow: kElevationToShadow[2],
+          //       ),
+          //       child: Text(
+          //         "Cancel",
+          //         style: TextStyle(
+          //             fontSize: 20, color: Theme.of(context).primaryColor),
+          //       )),
+          // ),
           const SizedBox(
-            height: 30,
+            height: 20,
           )
         ],
       );

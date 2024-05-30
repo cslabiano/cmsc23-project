@@ -55,12 +55,28 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: screenHeight * 0.02),
-                Text(
-                  "Create New Donation Drive",
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: screenWidth * 0.06,
-                      fontWeight: FontWeight.w600),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Create New Donation Drive",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: screenWidth * 0.06,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -423,30 +439,30 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
           ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          //   child: Container(
+          //       height: 50,
+          //       alignment: Alignment.center,
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.circular(15),
+          //         border: Border.all(color: Theme.of(context).primaryColor),
+          //         boxShadow: kElevationToShadow[2],
+          //       ),
+          //       child: Text(
+          //         "Cancel",
+          //         style: TextStyle(
+          //             fontSize: 20, color: Theme.of(context).primaryColor),
+          //       )),
+          // ),
           const SizedBox(
-            height: 10,
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Theme.of(context).primaryColor),
-                  boxShadow: kElevationToShadow[2],
-                ),
-                child: Text(
-                  "Cancel",
-                  style: TextStyle(
-                      fontSize: 20, color: Theme.of(context).primaryColor),
-                )),
-          ),
-          const SizedBox(
-            height: 30,
+            height: 20,
           )
         ],
       );
