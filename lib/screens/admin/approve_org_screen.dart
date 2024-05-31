@@ -6,15 +6,15 @@ import 'package:elbigay/screens/organization/donation_drive_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ApproveOrgView extends StatefulWidget {
+class AdminApproveOrg extends StatefulWidget {
   final String orgId;
-  const ApproveOrgView({required this.orgId, super.key});
+  const AdminApproveOrg({required this.orgId, super.key});
 
   @override
-  State<ApproveOrgView> createState() => _ApproveOrgViewState();
+  State<AdminApproveOrg> createState() => _AdminApproveOrgState();
 }
 
-class _ApproveOrgViewState extends State<ApproveOrgView> {
+class _AdminApproveOrgState extends State<AdminApproveOrg> {
   Org? organization;
   @override
   void initState() {
@@ -177,7 +177,7 @@ class _ApproveOrgViewState extends State<ApproveOrgView> {
                             ),
                             const SizedBox(height: 15),
                             const Text(
-                              "Donation drives:",
+                              "Proof of legitimacy:",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             )
@@ -186,8 +186,6 @@ class _ApproveOrgViewState extends State<ApproveOrgView> {
                       ),
                       SizedBox(
                         height: 230,
-                        child: DonationDriveCard(
-                            donationDrives: donationDriveStream),
                       ),
                       Positioned.fill(
                         child: Align(
