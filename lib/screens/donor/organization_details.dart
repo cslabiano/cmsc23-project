@@ -108,7 +108,7 @@ class _OrganizationDetailsState extends State<OrganizationDetails> {
                                     fontSize: 25,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold)),
-                            top: screenHeight * 0.22,
+                            top: screenHeight * 0.20,
                             left: screenWidth * 0.04)
                       ]),
                       SizedBox(height: 25),

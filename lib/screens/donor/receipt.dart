@@ -155,6 +155,8 @@ class _ReceiptPageState extends State<ReceiptPage> {
                                 donation.id as String,
                                 "Cancelled",
                                 widget.orgId);
+                            print(widget.orgId);
+                            print(donation.id);
                             setState(() {
                               cancelled = true;
                             });

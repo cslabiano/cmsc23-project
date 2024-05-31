@@ -51,60 +51,64 @@ class _DonorDonationsTabState extends State<DonorDonationsTab> {
               );
             }
 
-            return ListView.builder(
-                itemCount: snapshot.data?.docs.length,
-                itemBuilder: ((context, index) {
-                  Donation donation = Donation.fromJson(
-                      snapshot.data?.docs[index].data()
-                          as Map<String, dynamic>);
+            return (snapshot.data!.docs.isEmpty)
+                ? Center(
+                    child: Text("No ${widget.tabTitle} donations!"),
+                  )
+                : ListView.builder(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: ((context, index) {
+                      Donation donation = Donation.fromJson(
+                          snapshot.data?.docs[index].data()
+                              as Map<String, dynamic>);
 
-                  Org? organization =
-                      context.watch<OrganizationProvider>().organization;
-                  if (organization == null && user != null) {
-                    context
-                        .read<OrganizationProvider>()
-                        .getOrg(donation.orgId!);
-                  }
-                  String? orgId = snapshot.data?.docs[index].id;
-                  return Column(
-                    children: [
-                      ListTile(
-                        leading: Icon(
-                          Icons.inventory_2,
-                          size: screenWidth * 0.1,
-                        ),
-                        title: Text(
-                          organization!.uname,
-                          style: TextStyle(fontSize: screenWidth * 0.05),
-                        ),
-                        trailing: Container(
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(210, 237, 228, 1),
+                      Org? organization =
+                          context.watch<OrganizationProvider>().organization;
+                      if (organization == null && user != null) {
+                        context
+                            .read<OrganizationProvider>()
+                            .getOrg(donation.orgId!);
+                      }
+                      return Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(
+                              Icons.inventory_2,
+                              size: screenWidth * 0.1,
                             ),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ReceiptPage(
-                                              itemId: donation.id as String,
-                                              orgId: orgId as String,
-                                            )));
-                              },
-                              child: Icon(
-                                Icons.keyboard_arrow_right,
-                                size: screenWidth * 0.08,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            )),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      )
-                    ],
-                  );
-                }));
+                            title: Text(
+                              organization!.uname,
+                              style: TextStyle(fontSize: screenWidth * 0.05),
+                            ),
+                            trailing: Container(
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color.fromRGBO(210, 237, 228, 1),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ReceiptPage(
+                                                  itemId: donation.id as String,
+                                                  orgId: organization.orgId
+                                                      as String,
+                                                )));
+                                  },
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    size: screenWidth * 0.08,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          )
+                        ],
+                      );
+                    }));
           })),
     );
   }
