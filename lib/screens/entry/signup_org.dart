@@ -29,6 +29,7 @@ class _SignUpOrgState extends State<SignUpOrg> {
   late String password;
   late String contact;
   late List<String> address;
+  late String description;
 
   void setImage() async {
     XFile? xfile = await getImage(context);
@@ -106,6 +107,12 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                     callback: (String val) => orgname = val,
                                     text: "organization name",
                                     label: "org name",
+                                    type: "String"),
+                                const SizedBox(height: 12),
+                                InputField(
+                                    callback: (String val) => description = val,
+                                    text: "description",
+                                    label: "description",
                                     type: "String"),
                                 const SizedBox(height: 12),
 
@@ -335,6 +342,7 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                               usertype: usertype,
                                               email: email,
                                               orgname: orgname,
+                                              description: description,
                                               uname: uname,
                                               imageProofPath: imageProofPath,
                                               contact: contact,

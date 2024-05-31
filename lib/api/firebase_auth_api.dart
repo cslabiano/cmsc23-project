@@ -154,7 +154,8 @@ class FirebaseAuthAPI {
         'usertype': org.usertype,
         'isVerified': org.isVerified,
         'isOpen': org.isOpen,
-        'imageProofPath': org.imageProofPath
+        'imageProofPath': org.imageProofPath,
+        'description': org.description
       });
 
       return "";

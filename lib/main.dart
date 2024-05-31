@@ -73,7 +73,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/signup_org',
         routes: {
           '/scanner': (context) => const Scanner(),
           '/': (context) => const Splash(),
