@@ -70,9 +70,10 @@ class AdminProfile extends StatelessWidget {
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.end,
                             ),
                             const Padding(
-                              padding: EdgeInsets.only(left: 15.0),
+                              padding: EdgeInsets.only(left: 25.0),
                               child: Text("organizations registered"),
                             ),
                           ],
@@ -84,9 +85,10 @@ class AdminProfile extends StatelessWidget {
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.end,
                             ),
                             const Padding(
-                              padding: EdgeInsets.only(left: 15.0),
+                              padding: EdgeInsets.only(left: 25.0),
                               child: Text("donors signed up"),
                             ),
                           ],
@@ -98,9 +100,10 @@ class AdminProfile extends StatelessWidget {
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.end,
                             ),
                             const Padding(
-                              padding: EdgeInsets.only(left: 15.0),
+                              padding: EdgeInsets.only(left: 25.0),
                               child: Text("money raised overall"),
                             ),
                           ],

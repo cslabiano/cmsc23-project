@@ -1,4 +1,4 @@
-import '/screens/admin/donor_list_tabs.dart';
+import '../screens/admin/donation_list_tabs.dart';
 import 'package:flutter/material.dart';
 import '/screens/admin/admin_profile.dart';
 
@@ -41,13 +41,13 @@ class _AdminNavbarState extends State<AdminNavbar> {
             icon: _selectedIndex == 1
                 ? const Icon(Icons.groups)
                 : const Icon(Icons.groups_outlined),
-            label: 'Organizations',
+            label: 'Users',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 2
                 ? const Icon(Icons.volunteer_activism)
                 : const Icon(Icons.volunteer_activism_outlined),
-            label: 'Donors',
+            label: 'Donations',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 0

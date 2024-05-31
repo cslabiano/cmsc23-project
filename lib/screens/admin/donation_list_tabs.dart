@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 // import 'package:elbigay/models/donation_model.dart';
-import '/screens/admin/donor_list_screen.dart';
+import 'donation_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class DonorListTabs extends StatefulWidget {
