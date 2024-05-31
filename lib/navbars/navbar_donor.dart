@@ -23,8 +23,8 @@ class _DonorNavbarState extends State<DonorNavbar> {
           index: _selectedIndex,
           children: const <Widget>[
             DonorHomepage(),
-            DonorDonations(),
-            // DonatePage(),
+            // DonorDonations(),
+            DonatePage(),
             DonorProfilepage()
           ],
         ),
