@@ -49,52 +49,57 @@ class _HomepageTabState extends State<HomepageTab> {
               );
             }
 
-            return ListView.builder(
-                itemCount: snapshot.data?.docs.length,
-                itemBuilder: ((context, index) {
-                  Donation donation = Donation.fromJson(
-                      snapshot.data?.docs[index].data()
-                          as Map<String, dynamic>);
-                  String? donationId = snapshot.data?.docs[index].id;
-                  return Column(
-                    children: [
-                      ListTile(
-                        leading: Icon(
-                          Icons.account_circle,
-                          size: screenWidth * 0.1,
-                        ),
-                        title: Text(
-                          donation.donorName,
-                          style: TextStyle(fontSize: screenWidth * 0.05),
-                        ),
-                        trailing: Container(
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(210, 237, 228, 1),
+            return (snapshot.data!.docs.isEmpty)
+                ? Center(
+                    child: Text("No ${widget.tabTitle} donations!"),
+                  )
+                : ListView.builder(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: ((context, index) {
+                      Donation donation = Donation.fromJson(
+                          snapshot.data?.docs[index].data()
+                              as Map<String, dynamic>);
+                      String? donationId = snapshot.data?.docs[index].id;
+                      return Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(
+                              Icons.account_circle,
+                              size: screenWidth * 0.1,
                             ),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DonationDetails(
-                                              donation: donation,
-                                              donationId: donationId!,
-                                            )));
-                              },
-                              child: Icon(
-                                Icons.keyboard_arrow_right,
-                                size: screenWidth * 0.08,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            )),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      )
-                    ],
-                  );
-                }));
+                            title: Text(
+                              donation.donorName,
+                              style: TextStyle(fontSize: screenWidth * 0.05),
+                            ),
+                            trailing: Container(
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color.fromRGBO(210, 237, 228, 1),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DonationDetails(
+                                                  donation: donation,
+                                                  donationId: donationId!,
+                                                )));
+                                  },
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    size: screenWidth * 0.08,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          )
+                        ],
+                      );
+                    }));
           })),
     );
   }
