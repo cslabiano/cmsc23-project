@@ -126,6 +126,8 @@ class FirebaseAuthAPI {
   }
 
   Future<String?> signUpOrg(Org org, String password) async {
+    print("====================================");
+    print(org);
     if (await isUsernameTaken(org.uname)) {
       return "Username already in use";
     }
@@ -151,7 +153,8 @@ class FirebaseAuthAPI {
         'address': org.address,
         'usertype': org.usertype,
         'isVerified': org.isVerified,
-        'isOpen': org.isOpen
+        'isOpen': org.isOpen,
+        'imageProofPath': org.imageProofPath
       });
 
       return "";

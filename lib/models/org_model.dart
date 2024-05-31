@@ -26,6 +26,8 @@ class Org {
 
   // Factory constructor to instantiate object from json format
   factory Org.fromJson(Map<String, dynamic> json) {
+    print("%%%%%%%%%%%%%%%%%%%%%%5\nmodel");
+    print(json);
     return Org(
       orgId: json['orgId'],
       usertype: 'org',

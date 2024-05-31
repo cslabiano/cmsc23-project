@@ -31,6 +31,8 @@ class UserAuthProvider with ChangeNotifier {
   }
 
   Future<void> signUpOrg(Org org, String password) async {
+    print("%%%%%%%%%%%%%%%%%%%%%%5\nauthapi");
+    print(org);
     await authService.signUpOrg(org, password);
     notifyListeners();
   }

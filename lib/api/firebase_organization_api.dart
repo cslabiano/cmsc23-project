@@ -23,6 +23,8 @@ class FirebaseOrganizationAPI {
 
   // create an organization
   Future<String> addOrganization(organization) async {
+    print("%%%%%%%%%%%%%%%%%%%%%%5\naddorgapi");
+    print(organization);
     try {
       await db.collection("organizations").add(organization);
       return "Successfully added organization!";

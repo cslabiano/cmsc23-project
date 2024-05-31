@@ -348,8 +348,10 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                               .signUpOrg(org, password);
 
                                           if (context.mounted) {
-                                            Navigator.pushNamed(
-                                                context, '/org_navbar');
+                                            print(
+                                                "%%%%%%%%%%%%%%%%%%%%%%5\nsignup");
+                                            Navigator.pushNamed(context,
+                                                '/organization_navbar');
                                           }
                                         } else {
                                           ScaffoldMessenger.of(context)
