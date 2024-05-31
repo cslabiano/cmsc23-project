@@ -150,6 +150,8 @@ class FirebaseAuthAPI {
         'contact': org.contact,
         'address': org.address,
         'usertype': org.usertype,
+        'isVerified': org.isVerified,
+        'isOpen': org.isOpen
       });
 
       return "";

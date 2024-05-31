@@ -349,7 +349,7 @@ class _SignUpOrgState extends State<SignUpOrg> {
 
                                           if (context.mounted) {
                                             Navigator.pushNamed(
-                                                context, '/donor_navbar');
+                                                context, '/org_navbar');
                                           }
                                         } else {
                                           ScaffoldMessenger.of(context)
