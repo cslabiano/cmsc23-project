@@ -1,85 +1,109 @@
-// ignore_for_file: avoid_print
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '/models/donor_donation_model.dart';
-import '/providers/donation_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class ApprovalPage extends StatefulWidget {
-  const ApprovalPage({super.key});
+class ApprovalScreen extends StatefulWidget {
+  const ApprovalScreen({super.key});
 
   @override
-  State<ApprovalPage> createState() => _ApprovalPageState();
+  State<ApprovalScreen> createState() => _ApprovalScreenState();
 }
 
-class _ApprovalPageState extends State<ApprovalPage> {
+class _ApprovalScreenState extends State<ApprovalScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    final List<String> donors = [
+      'Adrian Javier',
+      'Nathan Abellanida',
+      'Myndie Labiano'
+    ];
 
-    Stream<QuerySnapshot> donations =
-        context.watch<DonationProvider>().donoStream;
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 189,
+            width: screenWidth,
+            child: ClipRRect(
+              child: Image.asset(
+                'assets/donation_drive.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(height: 13),
+          Container(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Donation Drive",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+                Text(
+                  "May 30, 2024",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
 
-    return Expanded(
-      child: StreamBuilder(
-          stream: donations,
-          builder: ((context, snapshot) {
-            // print("Length" + snapshot.data!.docs.length.toString());
-            if (snapshot.hasError) {
-              return Center(
-                child: Text("Error encountered! ${snapshot.error}"),
-              );
-            } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (!snapshot.hasData) {
-              return const Center(
-                child: Text("No Donations Found"),
-              );
-            }
-
-            return ListView.builder(
-                itemCount: snapshot.data?.docs.length,
-                itemBuilder: ((context, index) {
-                  Donation donation = Donation.fromJson(
-                      snapshot.data?.docs[index].data()
-                          as Map<String, dynamic>);
-                  return Column(
-                    children: [
-                      ListTile(
-                        leading: Icon(
-                          Icons.account_circle,
-                          size: screenWidth * 0.1,
-                        ),
-                        title: Text(
-                          donation.donorName,
-                          style: TextStyle(fontSize: screenWidth * 0.05),
-                        ),
-                        trailing: Container(
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(210, 237, 228, 1),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                print("Tapped");
-                              },
-                              child: Icon(
-                                Icons.keyboard_arrow_right,
-                                size: screenWidth * 0.08,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            )),
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.''',
+                  style: TextStyle(fontSize: 12),
+                ),
+                SizedBox(height: 10),
+                Divider(color: Theme.of(context).colorScheme.tertiary),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text("Donors",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(left: 60),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: donors.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("${donors[index]}"),
+                              SizedBox(height: 20)
+                            ],
+                          );
+                        },
                       ),
-                      const SizedBox(
-                        height: 5,
-                      )
-                    ],
-                  );
-                }));
-          })),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.05)
+        ],
+      ),
     );
   }
 }

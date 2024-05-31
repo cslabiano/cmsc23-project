@@ -29,6 +29,7 @@ import '/screens/donor/receipt.dart';
 import '/screens/donor/donor_donations.dart';
 import 'screens/admin/admin_profile.dart';
 import '/screens/admin/approval_screen.dart';
+import '/screens/admin/donation_drive_list.dart';
 
 //import navbars
 import 'navbars/navbar_donor.dart';
@@ -73,7 +74,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/admin_navbar',
+        initialRoute: '/signin',
         onGenerateRoute: (settings) {
           if (settings.name == '/donor_receiptpage') {
             final id = settings.arguments as String;
@@ -103,7 +104,7 @@ class MainApp extends StatelessWidget {
           '/add_donation_drive': (context) => const AddDonationDrive(),
           '/admin_navbar': (context) => const AdminNavbar(),
           '/admin_profile': (context) => const AdminProfile(),
-          '/admin_approval': (context) => const ApprovalPage(),
+          // '/admin_approval': (context) => const ApprovalPage(),
         });
   }
 }
