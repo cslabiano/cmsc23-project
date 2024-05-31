@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:elbigay/util/image_util.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 import '/screens/entry/textfield.dart';
@@ -20,9 +24,19 @@ class _SignUpOrgState extends State<SignUpOrg> {
   late String email;
   late String orgname;
   late String uname;
+  late String imageProofPath;
+  File? selectedImage;
   late String password;
   late String contact;
   late List<String> address;
+
+  void setImage() async {
+    XFile? xfile = await getImage(context);
+    File img = File(xfile!.path);
+    setState(() {
+      selectedImage = img;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,48 +125,76 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                   height: 5,
                                 ),
                                 GestureDetector(
-                                  onTap: () {},
-                                  child: DottedBorder(
-                                    dashPattern: const [7, 3],
-                                    strokeWidth: 2,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    borderType: BorderType.RRect,
-                                    radius: const Radius.circular(12),
-                                    padding: const EdgeInsets.all(6),
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(12)),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: screenHeight * 0.15,
-                                        decoration: BoxDecoration(
+                                  onTap: () {
+                                    setImage();
+                                  },
+                                  child: selectedImage == null
+                                      ? DottedBorder(
+                                          dashPattern: const [7, 3],
+                                          strokeWidth: 2,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          borderType: BorderType.RRect,
+                                          radius: const Radius.circular(12),
+                                          padding: const EdgeInsets.all(6),
+                                          child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
-                                        child: Center(
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Icon(Icons.upload,
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                    size: screenWidth * 0.15),
-                                                Text("Browse",
-                                                    style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                                const Text(
-                                                    "File supported: .png & .jpg"),
-                                              ]),
+                                                const BorderRadius.all(
+                                                    Radius.circular(12)),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: screenHeight * 0.15,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                              child: Center(
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(Icons.upload,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
+                                                          size: screenWidth *
+                                                              0.15),
+                                                      Text("Browse",
+                                                          style: TextStyle(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .primaryColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                      const Text(
+                                                          "File supported: .png & .jpg"),
+                                                    ]),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : DottedBorder(
+                                          dashPattern: const [7, 3],
+                                          strokeWidth: 2,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          borderType: BorderType.RRect,
+                                          radius: const Radius.circular(12),
+                                          padding: const EdgeInsets.all(6),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            height: screenHeight * 0.15,
+                                            child: ClipRRect(
+                                              child: Image.file(selectedImage!),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
                                 ),
 
                                 const SizedBox(height: 12),
@@ -280,31 +322,40 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                     onPressed: () async {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
+                                        if (selectedImage != null) {
+                                          imageProofPath = uploadProof(
+                                              selectedImage!, uname);
+                                          // collect addresses
+                                          address = addressControllers
+                                              .map((controller) =>
+                                                  controller.text)
+                                              .toList();
 
-                                        // collect addresses
-                                        address = addressControllers
-                                            .map(
-                                                (controller) => controller.text)
-                                            .toList();
+                                          org = Org(
+                                              usertype: usertype,
+                                              email: email,
+                                              orgname: orgname,
+                                              uname: uname,
+                                              imageProofPath: imageProofPath,
+                                              contact: contact,
+                                              address: address,
+                                              isVerified: false,
+                                              isOpen: false);
 
-                                        org = Org(
-                                            usertype: usertype,
-                                            email: email,
-                                            orgname: orgname,
-                                            uname: uname,
-                                            contact: contact,
-                                            address: address,
-                                            isVerified: false,
-                                            isOpen: false);
+                                          await context
+                                              .read<UserAuthProvider>()
+                                              .authService
+                                              .signUpOrg(org, password);
 
-                                        await context
-                                            .read<UserAuthProvider>()
-                                            .authService
-                                            .signUpOrg(org, password);
-
-                                        if (context.mounted) {
-                                          Navigator.pushNamed(
-                                              context, '/donor_navbar');
+                                          if (context.mounted) {
+                                            Navigator.pushNamed(
+                                                context, '/donor_navbar');
+                                          }
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "Please upload proof!")));
                                         }
                                       }
                                     },

@@ -76,3 +76,19 @@ String uploadFileForUser(File file) {
   }
   return "none";
 }
+
+String uploadProof(File file, String username) {
+  try {
+    final storageRef = FirebaseStorage.instance.ref();
+    final fileName = file.path.split("/").last;
+    final timestamp = DateTime.now().microsecondsSinceEpoch;
+    final uploadRef = storageRef.child("proofs/$username/$timestamp-$fileName");
+    String filePath = "proofs/$username/$timestamp-$fileName";
+    print(filePath);
+    uploadRef.putFile(file);
+    return filePath;
+  } catch (e) {
+    print(e);
+  }
+  return "none";
+}

@@ -4,10 +4,11 @@ class Donation {
   String userId;
   String donorName;
   String? id;
-  String? orgId;
+  String orgId;
   String? imagePath;
   String? address;
   String? contactNumber;
+  String? donationDriveId;
   String status;
   List<String> itemType;
   String modeOfDelivery;
@@ -18,10 +19,11 @@ class Donation {
       {required this.userId,
       required this.donorName,
       this.id,
-      this.orgId,
+      required this.orgId,
       this.imagePath,
       this.address,
       this.contactNumber,
+      this.donationDriveId,
       required this.status,
       required this.itemType,
       required this.modeOfDelivery,
@@ -37,6 +39,7 @@ class Donation {
         imagePath: json['imagePath'],
         address: json['address'],
         contactNumber: json['contactNumber'],
+        donationDriveId: json['donationDriveId'],
         status: json['status'],
         itemType: (json['itemType'] as List<dynamic>)
             .map((item) => item as String)
@@ -60,6 +63,7 @@ class Donation {
       'imagePath': donation.imagePath,
       'address': address,
       'contactNumber': contactNumber,
+      'donationDriveId': donation.donationDriveId,
       'status': donation.status,
       'itemType': donation.itemType,
       'modeOfDelivery': donation.modeOfDelivery,
