@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:elbigay/providers/auth_provider.dart';
+import 'package:elbigay/providers/donation_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +73,7 @@ class _DonationDetailsState extends State<DonationDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Text(
                   "Item type:",
@@ -108,7 +109,7 @@ class _DonationDetailsState extends State<DonationDetails> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Text(
                   "Mode of Delivery:",
@@ -145,7 +146,7 @@ class _DonationDetailsState extends State<DonationDetails> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Text(
                   "Weight:",
@@ -175,7 +176,7 @@ class _DonationDetailsState extends State<DonationDetails> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Text(
                   (widget.donation.modeOfDelivery == "Drop off")
@@ -247,7 +248,7 @@ class _DonationDetailsState extends State<DonationDetails> {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 (widget.donation.modeOfDelivery == "Drop off")
                     ? Container()
@@ -282,7 +283,7 @@ class _DonationDetailsState extends State<DonationDetails> {
                             ),
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
                           Text(
                             "Contact No.:",

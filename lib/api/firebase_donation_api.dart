@@ -56,4 +56,17 @@ class FirebaseDonationAPI {
       return "Error in ${e.code}: ${e.message}";
     }
   }
+
+  Future<String> linkDonationDrive(String id, String donationDriveId) async {
+    try {
+      await db
+          .collection('donations')
+          .doc(id)
+          .update({"donationDriveId": donationDriveId});
+
+      return "Successfully linked donation to donation drive!";
+    } on FirebaseException catch (e) {
+      return "Error in ${e.code}: ${e.message}";
+    }
+  }
 }

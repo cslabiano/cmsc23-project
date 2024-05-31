@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/api/firebase_donation_api.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,13 @@ class DonationProvider with ChangeNotifier {
 
   void changeStatus(String id, String status) async {
     await firebaseService.changeStatus(id, status);
+    notifyListeners();
+  }
+
+  void linkDonationDrive(String id, String donationDriveId) async {
+    String message =
+        await firebaseService.linkDonationDrive(id, donationDriveId);
+    print(message);
     notifyListeners();
   }
 }

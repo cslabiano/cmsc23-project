@@ -38,6 +38,7 @@ class _DonatePageState extends State<DonatePage> {
   String _modeOfDelivery = 'Drop off';
   String _address = '';
   String _contactNumber = '';
+  String _donationDriveId = 'none';
 
   List<String> _itemType = [];
   List<bool> _selectedMode = [true, false];
@@ -993,6 +994,7 @@ class _DonatePageState extends State<DonatePage> {
                                       status: "Pending",
                                       address: _address,
                                       contactNumber: _contactNumber,
+                                      donationDriveId: _donationDriveId,
                                       modeOfDelivery: _modeOfDelivery,
                                       weight: _weight,
                                       dateTime: _stringFinalDateTime!,
@@ -1049,6 +1051,7 @@ class _DonatePageState extends State<DonatePage> {
                                       status: "Pending",
                                       address: "none",
                                       contactNumber: "none",
+                                      donationDriveId: _donationDriveId,
                                       modeOfDelivery: _modeOfDelivery,
                                       weight: _weight,
                                       dateTime: _stringFinalDateTime!,
