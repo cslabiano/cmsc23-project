@@ -1,108 +1,73 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elbigay/cards/org_card.dart';
+import 'package:elbigay/models/donor_model.dart';
+import 'package:elbigay/providers/auth_provider.dart';
+import 'package:elbigay/providers/donor_provider.dart';
+import 'package:elbigay/providers/org_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+// import '../../models/donor_donation_model.dart';
 
-class ApprovalScreen extends StatefulWidget {
-  const ApprovalScreen({super.key});
+class DonorHomepage extends StatefulWidget {
+  const DonorHomepage({super.key});
 
   @override
-  State<ApprovalScreen> createState() => _ApprovalScreenState();
+  State<DonorHomepage> createState() => _DonorHomepageState();
 }
 
-class _ApprovalScreenState extends State<ApprovalScreen> {
+class _DonorHomepageState extends State<DonorHomepage> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    final List<String> donors = [
-      'Adrian Javier',
-      'Nathan Abellanida',
-      'Myndie Labiano'
-    ];
+    context.watch<OrganizationProvider>().fetchOrganizations();
+    Stream<QuerySnapshot> orgStream = context.watch<OrganizationProvider>().org;
 
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 189,
-            width: screenWidth,
-            child: ClipRRect(
-              child: Image.asset(
-                'assets/donation_drive.jpg',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(height: 13),
-          Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Donation Drive",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                Text(
-                  "May 30, 2024",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 14),
-                ),
-                SizedBox(height: 15),
-                Text(
-                  '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.''',
-                  style: TextStyle(fontSize: 12),
-                ),
-                SizedBox(height: 10),
-                Divider(color: Theme.of(context).colorScheme.tertiary),
-              ],
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text("Donors",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(left: 60),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: donors.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("${donors[index]}"),
-                              SizedBox(height: 20)
-                            ],
-                          );
-                        },
-                      ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(),
+      body: Container(
+        padding: const EdgeInsets.only(right: 20, left: 20),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: -4,
+                      blurRadius: 3,
+                      blurStyle: BlurStyle.outer,
                     ),
                   ],
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 5),
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              SizedBox(height: 20),
+              OrgCard(organizations: orgStream),
+            ],
           ),
-          SizedBox(height: screenHeight * 0.05)
-        ],
+        ),
       ),
     );
   }

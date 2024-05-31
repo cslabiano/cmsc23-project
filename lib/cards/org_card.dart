@@ -31,7 +31,7 @@ class OrgCard extends StatelessWidget {
         return SizedBox(
           child: Column(children: [
             ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: snapshot.data?.docs.length,
               itemBuilder: ((context, index) {
@@ -44,14 +44,14 @@ class OrgCard extends StatelessWidget {
                       Navigator.pushNamed(context, '/organization_details',
                           arguments: org.orgId);
                     },
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20)),
                     child: Container(
                       height: screenHeight * 0.2,
                       width: screenWidth * 0.85,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
                         boxShadow: [
@@ -62,7 +62,7 @@ class OrgCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: ClipRRect(
+                      child: const ClipRRect(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
@@ -78,14 +78,14 @@ class OrgCard extends StatelessWidget {
                       Navigator.pushNamed(context, '/organization_details',
                           arguments: org.orgId);
                     },
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20)),
                     child: Container(
                       height: screenHeight * 0.069,
                       width: screenWidth * 0.85,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(20),
                               bottomRight: Radius.circular(20)),
                           color: Colors.white,
@@ -94,13 +94,13 @@ class OrgCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: 2),
+                          const SizedBox(height: 2),
                           Container(
-                            padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                            padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                             child: Text(
                               org.orgname,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color.fromRGBO(62, 180, 137, 1),
                                 fontFamily: 'Lato',
                                 fontSize: 14,
@@ -109,8 +109,8 @@ class OrgCard extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
-                            child: Text(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 20, 10),
+                            child: const Text(
                               "",
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -126,7 +126,7 @@ class OrgCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ]);
               }),
             ),
