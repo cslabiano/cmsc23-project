@@ -73,7 +73,7 @@ class _AddDonationDriveState extends State<AddDonationDrive> {
                       "Create New Donation Drive",
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
-                          fontSize: screenWidth * 0.06,
+                          fontSize: screenWidth * 0.05,
                           fontWeight: FontWeight.w600),
                     ),
                   ],
