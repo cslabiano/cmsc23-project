@@ -110,7 +110,7 @@ elBigay is a comprehensive solution designed to facilitate and streamline the pr
 2. Use your device's camera to scan the donor's QR code.
 3. The donation status will automatically update to "Completed."
 
-# Admin Guide
+## Admin Guide
 
 **Approving Organizations**
 
