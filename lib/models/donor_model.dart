@@ -8,28 +8,29 @@ class Donor {
   final String uname;
   final String contact;
   final List<String> address;
+  final String bio;
 
-  Donor({
-    this.usertype,
-    required this.email,
-    required this.fname,
-    required this.lname,
-    required this.uname,
-    required this.contact,
-    required this.address,
-  });
+  Donor(
+      {this.usertype,
+      required this.email,
+      required this.fname,
+      required this.lname,
+      required this.uname,
+      required this.contact,
+      required this.address,
+      required this.bio});
 
   // Factory constructor to instantiate object from json format
   factory Donor.fromJson(Map<String, dynamic> json) {
     return Donor(
-      usertype: 'donor',
-      email: json['email'],
-      fname: json['fname'],
-      lname: json['lname'],
-      uname: json['uname'],
-      contact: json['contact'],
-      address: List<String>.from(json['address']),
-    );
+        usertype: 'donor',
+        email: json['email'],
+        fname: json['fname'],
+        lname: json['lname'],
+        uname: json['uname'],
+        contact: json['contact'],
+        address: List<String>.from(json['address']),
+        bio: json['bio']);
   }
 
   static List<Donor> fromJsonArray(String jsonData) {
@@ -46,6 +47,7 @@ class Donor {
       'uname': donor.uname,
       'contact': donor.contact,
       'address': donor.address,
+      'bio': donor.bio
     };
   }
 }

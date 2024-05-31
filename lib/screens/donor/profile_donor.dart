@@ -29,7 +29,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -50,16 +50,17 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                       color: Colors.white,
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(30))),
-                  margin: EdgeInsets.only(top: 150),
+                  margin: const EdgeInsets.only(top: 150),
                   child: Column(
                     children: [
                       Center(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 20, right: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(height: 70),
+                              const SizedBox(height: 70),
                               Text(
                                 "${donor!.fname} ${donor.lname}",
                                 style: TextStyle(
@@ -77,11 +78,11 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                   color: const Color.fromRGBO(128, 128, 128, 1),
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  "About us:",
+                                  "About me:",
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.05,
                                     fontWeight: FontWeight.w600,
@@ -90,9 +91,9 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                   ),
                                 ),
                               ),
-                              const Text(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                              ),
+                              Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(donor.bio)),
                               const SizedBox(height: 20),
                               Align(
                                 alignment: Alignment.topLeft,
@@ -148,33 +149,35 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                   )
                                 ],
                               ),
-                              SizedBox(height: 40),
+                              const SizedBox(height: 40),
                               Container(
-                                padding: EdgeInsets.only(top: 5),
+                                padding: const EdgeInsets.only(top: 5),
                                 child: Column(
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
+                                        borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5),
                                           bottomLeft: Radius.circular(5),
                                           bottomRight: Radius.circular(5),
                                         ),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                               color:
                                                   Color.fromRGBO(0, 0, 0, 0.25),
                                               offset: Offset(0, 0),
                                               blurRadius: 3.119379758834839)
                                         ],
-                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        color: const Color.fromRGBO(
+                                            255, 255, 255, 1),
                                         border: Border.all(
-                                          color: Color.fromRGBO(34, 38, 66, 1),
+                                          color: const Color.fromRGBO(
+                                              34, 38, 66, 1),
                                           width: 1,
                                         ),
                                       ),
-                                      child: ListTile(
+                                      child: const ListTile(
                                         title: Text(
                                           "My Account",
                                           textAlign: TextAlign.left,
@@ -198,31 +201,33 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(top: 5),
+                                padding: const EdgeInsets.only(top: 5),
                                 child: Column(
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
+                                        borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5),
                                           bottomLeft: Radius.circular(5),
                                           bottomRight: Radius.circular(5),
                                         ),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                               color:
                                                   Color.fromRGBO(0, 0, 0, 0.25),
                                               offset: Offset(0, 0),
                                               blurRadius: 3.119379758834839)
                                         ],
-                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        color: const Color.fromRGBO(
+                                            255, 255, 255, 1),
                                         border: Border.all(
-                                          color: Color.fromRGBO(34, 38, 66, 1),
+                                          color: const Color.fromRGBO(
+                                              34, 38, 66, 1),
                                           width: 1,
                                         ),
                                       ),
-                                      child: ListTile(
+                                      child: const ListTile(
                                         title: Text(
                                           "Settings",
                                           textAlign: TextAlign.left,
@@ -245,31 +250,33 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(top: 5),
+                                padding: const EdgeInsets.only(top: 5),
                                 child: Column(
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
+                                        borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5),
                                           bottomLeft: Radius.circular(5),
                                           bottomRight: Radius.circular(5),
                                         ),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                               color:
                                                   Color.fromRGBO(0, 0, 0, 0.25),
                                               offset: Offset(0, 0),
                                               blurRadius: 3.119379758834839)
                                         ],
-                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        color: const Color.fromRGBO(
+                                            255, 255, 255, 1),
                                         border: Border.all(
-                                          color: Color.fromRGBO(34, 38, 66, 1),
+                                          color: const Color.fromRGBO(
+                                              34, 38, 66, 1),
                                           width: 1,
                                         ),
                                       ),
-                                      child: ListTile(
+                                      child: const ListTile(
                                         title: Text(
                                           "Help Center",
                                           textAlign: TextAlign.left,
@@ -293,32 +300,34 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(top: 5),
+                                padding: const EdgeInsets.only(top: 5),
                                 child: Column(
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
+                                        borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(5),
                                           topRight: Radius.circular(5),
                                           bottomLeft: Radius.circular(5),
                                           bottomRight: Radius.circular(5),
                                         ),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                               color:
                                                   Color.fromRGBO(0, 0, 0, 0.25),
                                               offset: Offset(0, 0),
                                               blurRadius: 3.119379758834839)
                                         ],
-                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        color: const Color.fromRGBO(
+                                            255, 255, 255, 1),
                                         border: Border.all(
-                                          color: Color.fromRGBO(34, 38, 66, 1),
+                                          color: const Color.fromRGBO(
+                                              34, 38, 66, 1),
                                           width: 1,
                                         ),
                                       ),
                                       child: ListTile(
-                                        title: Text(
+                                        title: const Text(
                                           "Logout",
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
@@ -331,9 +340,10 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                               fontWeight: FontWeight.normal,
                                               height: 1),
                                         ),
-                                        leading: Icon(Icons.logout_outlined),
-                                        trailing:
-                                            Icon(Icons.keyboard_arrow_right),
+                                        leading:
+                                            const Icon(Icons.logout_outlined),
+                                        trailing: const Icon(
+                                            Icons.keyboard_arrow_right),
                                         onTap: () async {
                                           await context
                                               .read<UserAuthProvider>()
@@ -351,7 +361,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 100)
+                              const SizedBox(height: 100)
                             ],
                           ),
                         ),
@@ -367,7 +377,7 @@ class _DonorProfilepageState extends State<DonorProfilepage> {
                       Container(
                         height: 180,
                         width: 180,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,

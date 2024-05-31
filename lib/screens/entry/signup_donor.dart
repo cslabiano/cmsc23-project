@@ -25,6 +25,7 @@ class _SignUpDonorState extends State<SignUpDonor> {
   late String password;
   late String contact;
   late List<String> address;
+  late String bio;
 
   // error message variables
   String? emailError;
@@ -100,7 +101,7 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                 Row(
                                   children: [
                                     SizedBox(
-                                      width: screenWidth * 0.4,
+                                      width: screenWidth * 0.38,
                                       child: InputField(
                                           callback: (String val) => fname = val,
                                           text: "first name",
@@ -130,6 +131,12 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                   type: "String",
                                   error: unameError,
                                 ),
+                                const SizedBox(height: 12),
+                                InputField(
+                                    callback: (String val) => bio = val,
+                                    text: "about me",
+                                    label: "about me",
+                                    type: "String"),
                                 const SizedBox(height: 12),
                                 InputField(
                                   callback: (String val) => password = val,
@@ -272,7 +279,8 @@ class _SignUpDonorState extends State<SignUpDonor> {
                                             lname: lname,
                                             uname: uname,
                                             contact: contact,
-                                            address: address);
+                                            address: address,
+                                            bio: bio);
 
                                         String? result = await context
                                             .read<UserAuthProvider>()

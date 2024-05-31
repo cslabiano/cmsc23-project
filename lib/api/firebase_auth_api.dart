@@ -106,7 +106,8 @@ class FirebaseAuthAPI {
         'lname': donor.lname,
         'uname': donor.uname,
         'contact': donor.contact,
-        'address': donor.address
+        'address': donor.address,
+        'bio': donor.bio
       });
 
       return "";
