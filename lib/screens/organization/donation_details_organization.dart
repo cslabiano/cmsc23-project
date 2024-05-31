@@ -149,13 +149,13 @@ class _DonationDetailsState extends State<DonationDetails> {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.15),
+                              horizontal: screenWidth * 0.13),
                           child: Text('Drop off',
                               style: TextStyle(fontSize: screenWidth * 0.04)),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.15),
+                              horizontal: screenWidth * 0.13),
                           child: Text('Pickup',
                               style: TextStyle(fontSize: screenWidth * 0.04)),
                         ),

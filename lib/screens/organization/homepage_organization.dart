@@ -28,7 +28,7 @@ class _OrganizationHomepageState extends State<OrganizationHomepage> {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            toolbarHeight: screenHeight * 0.15,
+            toolbarHeight: screenHeight * 0.16,
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -77,31 +77,31 @@ class _OrganizationHomepageState extends State<OrganizationHomepage> {
                         Tab(
                           child: Text(
                             "Pending",
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Confirmed",
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Scheduled",
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Cancelled",
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                         ),
                         Tab(
                           child: Text(
                             "Completed",
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                         ),
                       ],
