@@ -1,3 +1,4 @@
+import 'package:elbigay/screens/donor/organization_details.dart';
 import 'package:flutter/material.dart';
 import 'package:elbigay/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -82,6 +83,13 @@ class MainApp extends StatelessWidget {
             final orgId = settings.arguments as String;
             return MaterialPageRoute(builder: (context) {
               return DonatePage(orgId: orgId);
+            });
+          }
+
+          if (settings.name == '/organization_details') {
+            final orgId = settings.arguments as String;
+            return MaterialPageRoute(builder: (context) {
+              return OrganizationDetails(orgId: orgId);
             });
           }
         },

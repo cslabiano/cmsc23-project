@@ -8,6 +8,7 @@ class OrganizationProvider with ChangeNotifier {
   FirebaseOrganizationAPI firebaseService = FirebaseOrganizationAPI();
   late Stream<User?> _oStream;
   late Stream<QuerySnapshot> _orgStream;
+  Org? _organization;
 
   Stream<User?> get oStream => _oStream;
 
@@ -15,7 +16,6 @@ class OrganizationProvider with ChangeNotifier {
   //   fetchOrganizations();
   // }
 
-  Org? _organization;
   Org? get organization => _organization;
   Stream<QuerySnapshot> get org => _orgStream;
 
@@ -27,6 +27,10 @@ class OrganizationProvider with ChangeNotifier {
   Future<void> getOrg(String orgId) async {
     _organization = await firebaseService.getOrg(orgId);
     notifyListeners();
+  }
+
+  void getOrgStream(String orgId) {
+    _orgStream = firebaseService.getOrgStream(orgId);
   }
 
   void fetchOrganizations() {

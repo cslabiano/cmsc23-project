@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 
 class DonationDriveCard extends StatelessWidget {
   final Stream<QuerySnapshot> donationDrives;
-  final String userType;
-  const DonationDriveCard(
-      {super.key, required this.donationDrives, required this.userType});
+  const DonationDriveCard({super.key, required this.donationDrives});
 
   @override
   Widget build(BuildContext context) {

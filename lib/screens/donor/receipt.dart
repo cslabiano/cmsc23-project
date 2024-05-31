@@ -119,11 +119,14 @@ class _ReceiptPageState extends State<ReceiptPage> {
                     SizedBox(height: 8),
                     summaryRow("Time", formattedTime),
                     SizedBox(height: 8),
-                    summaryRow("Location", donation.address as String),
+                    summaryRow("Mode of Delivery", donation.modeOfDelivery),
+                    SizedBox(height: 8),
+                    if (donation.modeOfDelivery == "Pickup")
+                      summaryRow("Location", donation.address as String),
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 22),
               Divider(
                 color: Theme.of(context).colorScheme.tertiary,
               ),

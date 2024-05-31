@@ -24,7 +24,7 @@ class _DonationDriveDetailsState extends State<DonationDriveDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 189,
+            height: screenHeight * 0.24,
             width: screenWidth,
             child: ClipRRect(
               child: Image.asset(

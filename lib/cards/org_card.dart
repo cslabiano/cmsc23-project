@@ -43,7 +43,7 @@ class OrgCard extends StatelessWidget {
                 return Column(children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, '/donor_donatepage',
+                      Navigator.pushNamed(context, '/organization_details',
                           arguments: org.orgId);
                       print("Tapped");
                       print(org.orgId);
@@ -79,7 +79,10 @@ class OrgCard extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
+                      Navigator.pushNamed(context, '/organization_details',
+                          arguments: org.orgId);
                       print("Tapped");
+                      print(org.orgId);
                     },
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20),
@@ -114,7 +117,7 @@ class OrgCard extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
                             child: Text(
-                              org.address[0],
+                              "",
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: TextStyle(
