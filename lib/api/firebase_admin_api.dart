@@ -4,31 +4,26 @@ class FirebaseAdminAPI {
   static final FirebaseFirestore db = FirebaseFirestore.instance;
 
   //get all organizations for approval
-  Stream<QuerySnapshot> getAllApproval() {
+  Stream<QuerySnapshot> getUnverified() {
     return db
         .collection('organizations')
         .where('isVerified', isEqualTo: false)
         .snapshots();
   }
 
-  // get all organizations
-  Stream<QuerySnapshot> getAllOrganizations() {
+  //get all approved organizations
+  Stream<QuerySnapshot> getVerified() {
     return db
-        .collection("organizations")
-        .where("isVerified", isEqualTo: true)
+        .collection('organizations')
+        .where('isVerified', isEqualTo: true)
         .snapshots();
   }
 
-  Stream<QuerySnapshot> getAllDonors(String status) {
+  Stream<QuerySnapshot> getDonations(String status) {
     return db
         .collection("donations")
         .where('status', isEqualTo: status)
         .snapshots();
-  }
-
-  // get all donations, for admin
-  Stream<QuerySnapshot> getAllDonations() {
-    return db.collection("donations").snapshots();
   }
 
   // edit organization account status

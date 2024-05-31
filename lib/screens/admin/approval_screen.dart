@@ -1,26 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/cards/org_card.dart';
-import 'package:elbigay/models/donor_model.dart';
-import 'package:elbigay/providers/auth_provider.dart';
-import 'package:elbigay/providers/donor_provider.dart';
-import 'package:elbigay/providers/org_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/providers/admin_provider.dart';
 // import '../../models/donor_donation_model.dart';
 
-class DonorHomepage extends StatefulWidget {
-  const DonorHomepage({super.key});
+class ApprovalScreen extends StatefulWidget {
+  const ApprovalScreen({super.key});
 
   @override
-  State<DonorHomepage> createState() => _DonorHomepageState();
+  State<ApprovalScreen> createState() => _ApprovalScreenState();
 }
 
-class _DonorHomepageState extends State<DonorHomepage> {
+class _ApprovalScreenState extends State<ApprovalScreen> {
   @override
   Widget build(BuildContext context) {
-    context.watch<OrganizationProvider>().fetchOrganizations();
-    Stream<QuerySnapshot> orgStream = context.watch<OrganizationProvider>().org;
+    context.watch<AdminProvider>().fetchUnverifiedOrgs();
+    Stream<QuerySnapshot> orgStream = context.watch<AdminProvider>().uStream;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -63,7 +59,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               OrgCard(organizations: orgStream),
             ],
           ),

@@ -19,7 +19,7 @@ class _DonorListState extends State<DonorList> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    context.watch<AdminProvider>().fetchDonors(widget.tabTitle);
+    context.watch<AdminProvider>().fetchDonations(widget.tabTitle);
     Stream<QuerySnapshot> donations = context.watch<AdminProvider>().dStream;
 
     return Expanded(
