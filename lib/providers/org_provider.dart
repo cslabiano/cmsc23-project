@@ -31,6 +31,7 @@ class OrganizationProvider with ChangeNotifier {
 
   void getOrgStream(String orgId) {
     _orgStream = firebaseService.getOrgStream(orgId);
+    notifyListeners();
   }
 
   void fetchOrganizations() {

@@ -36,4 +36,9 @@ class AdminProvider with ChangeNotifier {
     _dStream = firebaseService.getDonations(status);
     notifyListeners();
   }
+
+  void approveOrg(String? orgId) async {
+    await firebaseService.editVerification(orgId!);
+    notifyListeners();
+  }
 }

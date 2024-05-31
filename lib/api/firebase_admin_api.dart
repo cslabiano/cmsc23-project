@@ -30,4 +30,16 @@ class FirebaseAdminAPI {
         .where('status', isEqualTo: status)
         .snapshots();
   }
+
+  Future<String> editVerification(String orgId) async {
+    try {
+      await db
+          .collection("organizations")
+          .doc(orgId)
+          .update({"isVerified": true});
+      return "Successfully approved organization!";
+    } on FirebaseException catch (e) {
+      return "Error in ${e.code}";
+    }
+  }
 }

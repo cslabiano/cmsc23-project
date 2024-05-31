@@ -347,7 +347,7 @@ class _SignUpOrgState extends State<SignUpOrg> {
                                               imageProofPath: imageProofPath,
                                               contact: contact,
                                               address: address,
-                                              isVerified: false,
+                                              isVerified: true,
                                               isOpen: false);
 
                                           await context

@@ -12,8 +12,8 @@ class ApprovalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    context.watch<AdminProvider>().fetchVerifiedOrgs();
-    Stream<QuerySnapshot> orgStream = context.watch<AdminProvider>().vStream;
+    context.watch<AdminProvider>().fetchUnverifiedOrgs();
+    Stream<QuerySnapshot> orgStream = context.watch<AdminProvider>().uStream;
     return Scaffold(
       appBar: AppBar(
         title: Text("For Approval",
@@ -61,6 +61,7 @@ class ApprovalScreen extends StatelessWidget {
                               ),
                               child: InkWell(
                                 onTap: () {
+                                  print(org.orgId);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
