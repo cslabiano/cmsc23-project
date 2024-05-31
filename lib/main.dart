@@ -1,4 +1,5 @@
 import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
+import 'package:elbigay/screens/donor/organization_details.dart';
 import 'package:flutter/material.dart';
 import 'package:elbigay/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -61,8 +62,6 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
-    String id;
-
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -83,7 +82,19 @@ class MainApp extends StatelessWidget {
               return ReceiptPage(id: id);
             });
           }
-          return null;
+          if (settings.name == '/donor_donatepage') {
+            final orgId = settings.arguments as String;
+            return MaterialPageRoute(builder: (context) {
+              return DonatePage(orgId: orgId);
+            });
+          }
+
+          if (settings.name == '/organization_details') {
+            final orgId = settings.arguments as String;
+            return MaterialPageRoute(builder: (context) {
+              return OrganizationDetails(orgId: orgId);
+            });
+          }
         },
         routes: {
           '/': (context) => const Splash(),
@@ -92,7 +103,6 @@ class MainApp extends StatelessWidget {
           '/signup_org': (context) => const SignUpOrg(),
           '/signup_option': (context) => const SignUpOption(),
           '/donor_navbar': (context) => const DonorNavbar(),
-          '/donor_donatepage': (context) => const DonatePage(),
           '/donor_donations': (context) => const DonorDonations(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),

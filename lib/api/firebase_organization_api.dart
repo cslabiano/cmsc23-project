@@ -70,4 +70,12 @@ class FirebaseOrganizationAPI {
       throw Exception("Organization document does not exist");
     }
   }
+
+  Stream<QuerySnapshot> getOrgStream(String id) {
+    return db
+        .collection("organizations")
+        .where("isVerified", isEqualTo: true)
+        .where("orgId", isEqualTo: id)
+        .snapshots();
+  }
 }

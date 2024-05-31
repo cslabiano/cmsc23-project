@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 
 class DonationDriveCard extends StatelessWidget {
   final Stream<QuerySnapshot> donationDrives;
-  final String userType;
-  const DonationDriveCard(
-      {super.key, required this.donationDrives, required this.userType});
+  const DonationDriveCard({super.key, required this.donationDrives});
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +44,14 @@ class DonationDriveCard extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          if (userType == "org") {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        UpdateDeleteDonationDrive(
-                                          donationDrive: donationDrive,
-                                          documentId: id,
-                                        )));
-                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      UpdateDeleteDonationDrive(
+                                        donationDrive: donationDrive,
+                                        documentId: id,
+                                      )));
                         },
                         child: Column(
                           children: [

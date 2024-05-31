@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Org {
+  final String? orgId;
   final String usertype;
   final String email;
   final String orgname;
@@ -14,7 +12,8 @@ class Org {
   final bool isOpen;
 
   Org(
-      {required this.usertype,
+      {this.orgId,
+      required this.usertype,
       required this.email,
       required this.orgname,
       required this.uname,
@@ -44,6 +43,7 @@ class Org {
 
   Map<String, dynamic> toJson(Org org) {
     return {
+      'orgId': org.orgId,
       'usertype': org.usertype,
       'email': org.email,
       'fname': org.orgname,

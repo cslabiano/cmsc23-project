@@ -70,8 +70,7 @@ class _OrganizationDonationDriveState extends State<OrganizationDonationDrive> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              DonationDriveCard(
-                  donationDrives: donationDriveStream, userType: "org")
+              DonationDriveCard(donationDrives: donationDriveStream)
             ],
           ),
         )));

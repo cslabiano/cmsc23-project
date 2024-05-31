@@ -67,8 +67,7 @@ class _DonationDriveListState extends State<DonationDriveList> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              DonationDriveCard(
-                  donationDrives: donationDriveStream, userType: "org")
+              DonationDriveCard(donationDrives: donationDriveStream)
             ],
           ),
         )));
