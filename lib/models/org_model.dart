@@ -23,27 +23,10 @@ class Org {
       required this.isVerified,
       required this.isOpen});
 
-  // Factory constructor to instantiate object from Firestore document
-  factory Org.fromDocument(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-
-    return Org(
-      usertype: 'org',
-      email: data['email'] ?? '',
-      orgname: data['orgname'] ?? '',
-      uname: data['uname'] ?? '',
-      contact: data['contact'] ?? '',
-      address:
-          data['address'] != null ? List<String>.from(data['address']) : [],
-      isVerified: data['isVerified'] ?? true,
-      isOpen: data['isOpen'] ?? true,
-    );
-  }
-
   // Factory constructor to instantiate object from json format
   factory Org.fromJson(Map<String, dynamic> json) {
     return Org(
-      usertype: json['usertype'],
+      usertype: 'org',
       email: json['email'],
       orgname: json['orgname'],
       uname: json['uname'],

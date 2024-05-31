@@ -45,14 +45,18 @@ class FirebaseOrganizationAPI {
     }
   }
 
-  Future<Org> getDetails(User user) async {
-    DocumentSnapshot doc =
-        await db.collection("organizations").doc(user.uid).get();
-
-    if (doc.exists) {
-      return Org.fromDocument(doc);
-    } else {
-      throw Exception("Organization document does not exist");
+  Future<Org?> getDetails(User user) async {
+    try {
+      DocumentSnapshot doc = await db.collection("donors").doc(user.uid).get();
+      if (doc.exists) {
+        return Org.fromJson(doc.data() as Map<String, dynamic>);
+      } else {
+        print('Document does not exist');
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
     }
   }
 
@@ -61,7 +65,7 @@ class FirebaseOrganizationAPI {
         await db.collection("organizations").doc(orgId).get();
 
     if (doc.exists) {
-      return Org.fromDocument(doc);
+      return Org.fromJson(doc.data() as Map<String, dynamic>);
     } else {
       throw Exception("Organization document does not exist");
     }

@@ -13,12 +13,18 @@ class FirebaseDonorAPI {
     return db.collection("donors").where("email", isEqualTo: email).snapshots();
   }
 
-  Future<Donor> getDetails(User user) async {
-    DocumentSnapshot doc = await db.collection("donors").doc(user.uid).get();
-    if (doc.exists) {
-      return Donor.fromDocument(doc);
-    } else {
-      throw Exception("Donor document does not exist");
+  Future<Donor?> getDetails(User user) async {
+    try {
+      DocumentSnapshot doc = await db.collection("donors").doc(user.uid).get();
+      if (doc.exists) {
+        return Donor.fromJson(doc.data() as Map<String, dynamic>);
+      } else {
+        print('Document does not exist');
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
     }
   }
 }

@@ -26,13 +26,16 @@ import 'screens/organization/donation_drive_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
 import '/screens/donor/donation_drive_details.dart';
-import 'package:elbigay/screens/donor/receipt.dart';
+import '/screens/donor/receipt.dart';
 import '/screens/donor/donor_donations.dart';
+import 'screens/admin/admin_profile.dart';
+import '/screens/admin/approval_screen.dart';
+import '/screens/admin/donation_drive_list.dart';
 
 //import navbars
 import 'navbars/navbar_donor.dart';
 import '/navbars/navbar_org.dart';
-// import '/navbars/navbar_admin.dart';
+import '/navbars/navbar_admin.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +75,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/signin',
         onGenerateRoute: (settings) {
           if (settings.name == '/donor_receiptpage') {
             final id = settings.arguments as String;
@@ -102,7 +105,9 @@ class MainApp extends StatelessWidget {
           // '/update_delete_dontaion_drive': (context) =>
           //     UpdateDeleteDonationDrive(),
           '/add_donation_drive': (context) => const AddDonationDrive(),
-          // '/admin_navbar': (context) => const AdminNavbar(),
+          '/admin_navbar': (context) => const AdminNavbar(),
+          '/admin_profile': (context) => const AdminProfile(),
+          // '/admin_approval': (context) => const ApprovalPage(),
         });
   }
 }
