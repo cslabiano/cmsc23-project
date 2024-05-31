@@ -43,35 +43,54 @@ class _DonationDriveModalState extends State<DonationDriveModal> {
                 );
               }
 
-              return Container(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data?.docs.length,
-                    itemBuilder: ((context, index) {
-                      DonationDrive donationDrive = DonationDrive.fromJson(
-                          snapshot.data?.docs[index].data()
-                              as Map<String, dynamic>);
-                      String? donationDriveId = snapshot.data?.docs[index].id;
-                      return InkWell(
-                        onTap: () {
-                          context.read<DonationProvider>().linkDonationDrive(
-                              widget.donationId, donationDriveId!);
-                          Navigator.pop(context);
-                        },
-                        child: ListTile(
-                            leading: Icon(
-                              Icons.fiber_manual_record_outlined,
-                              size: screenWidth * 0.04,
-                            ),
-                            title: Text(donationDrive.title)),
-                      );
-                    }),
-                  ),
-                ),
-              );
+              return (snapshot.data!.docs.isEmpty)
+                  ? const Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text("No donation drives found!"),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    )
+                  : Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                      child: SizedBox(
+                        width: double.maxFinite,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshot.data?.docs.length,
+                          itemBuilder: ((context, index) {
+                            DonationDrive donationDrive =
+                                DonationDrive.fromJson(
+                                    snapshot.data?.docs[index].data()
+                                        as Map<String, dynamic>);
+                            String? donationDriveId =
+                                snapshot.data?.docs[index].id;
+                            return InkWell(
+                              onTap: () {
+                                context
+                                    .read<DonationProvider>()
+                                    .linkDonationDrive(
+                                        widget.donationId, donationDriveId!);
+                                Navigator.pop(context);
+                              },
+                              child: ListTile(
+                                  leading: Icon(
+                                    Icons.fiber_manual_record_outlined,
+                                    size: screenWidth * 0.04,
+                                  ),
+                                  title: Text(donationDrive.title)),
+                            );
+                          }),
+                        ),
+                      ),
+                    );
             })),
         Container(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),

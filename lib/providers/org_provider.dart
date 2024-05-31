@@ -38,4 +38,11 @@ class OrganizationProvider with ChangeNotifier {
     _orgStream = firebaseService.getAllOrganizations();
     notifyListeners();
   }
+
+  void updateDonationStatus(String id, bool status) async {
+    String message = await firebaseService.updateDonationStatus(id, status);
+    // ignore: avoid_print
+    print(message);
+    notifyListeners();
+  }
 }
