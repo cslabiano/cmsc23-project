@@ -23,8 +23,6 @@ class FirebaseOrganizationAPI {
 
   // create an organization
   Future<String> addOrganization(organization) async {
-    print("%%%%%%%%%%%%%%%%%%%%%%5\naddorgapi");
-    print(organization);
     try {
       await db.collection("organizations").add(organization);
       return "Successfully added organization!";
@@ -80,5 +78,14 @@ class FirebaseOrganizationAPI {
         .where("isVerified", isEqualTo: true)
         .where("orgId", isEqualTo: id)
         .snapshots();
+  }
+
+  Future<String> updateDonationStatus(String id, bool status) async {
+    try {
+      await db.collection("organizations").doc(id).update({'isOpen': status});
+      return "Successfully updated donation status!";
+    } on FirebaseException catch (e) {
+      return "Error in ${e.code}: ${e.message}";
+    }
   }
 }

@@ -16,6 +16,7 @@ class OrganizationProfile extends StatefulWidget {
 
 class _OrganizationProfileState extends State<OrganizationProfile> {
   User? user;
+  late bool isAccepting;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,8 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
     if (org == null && user != null) {
       context.read<OrganizationProvider>().getDetails(user!);
     }
+
+    isAccepting = org!.isOpen;
 
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
@@ -74,6 +77,48 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                   fontWeight: FontWeight.w600,
                                   color: const Color.fromRGBO(128, 128, 128, 1),
                                 ),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Accepting Donations? ",
+                                    style: TextStyle(
+                                      fontSize: screenWidth * 0.05,
+                                      fontWeight: FontWeight.w600,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      if (isAccepting == true) {
+                                        setState(() {
+                                          isAccepting = false;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          isAccepting = true;
+                                        });
+                                      }
+                                      context
+                                          .read<OrganizationProvider>()
+                                          .updateDonationStatus(
+                                              org.orgId!, isAccepting);
+                                    },
+                                    child: (org.isOpen == false)
+                                        ? Icon(
+                                            Icons.toggle_off_outlined,
+                                            size: screenWidth * 0.1,
+                                          )
+                                        : Icon(
+                                            Icons.toggle_on_outlined,
+                                            size: screenWidth * 0.1,
+                                          ),
+                                  ),
+                                ],
                               ),
                               const SizedBox(height: 20),
                               Align(

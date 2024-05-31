@@ -417,7 +417,9 @@ class _DonationDetailsState extends State<DonationDetails> {
                   ),
                   InkWell(
                     onTap: () {
-                      if (widget.donation.donationDriveId == 'none') {
+                      if (widget.donation.status != "Cancelled" &&
+                          (widget.donation.donationDriveId == 'none' ||
+                              widget.donation.donationDriveId == null)) {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) =>
@@ -426,10 +428,11 @@ class _DonationDetailsState extends State<DonationDetails> {
                                   donationId: widget.donationId,
                                 ));
                       } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text(
-                              "Donation is already linked to a donation drive!"),
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: (widget.donation.status == "Cancelled")
+                              ? const Text("Cannot link a cancelled donation!")
+                              : const Text(
+                                  "Donation is already linked to a donation drive!"),
                         ));
                       }
                     },
