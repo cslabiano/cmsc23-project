@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '/screens/organization/donation_details_organization.dart';
+import 'package:elbigay/screens/admin/org_details.dart';
 import '/models/org_model.dart';
 import '/models/donor_model.dart';
 import '/providers/admin_provider.dart';
@@ -82,7 +82,14 @@ class OrganizationList extends StatelessWidget {
                               color: Color.fromRGBO(210, 237, 228, 1),
                             ),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AdminViewOrgDetails(
+                                          orgId: org.orgId!),
+                                    ));
+                              },
                               child: Icon(
                                 Icons.keyboard_arrow_right,
                                 size: screenWidth * 0.08,
@@ -151,7 +158,14 @@ class DonorList extends StatelessWidget {
                               color: Color.fromRGBO(210, 237, 228, 1),
                             ),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => AdminViewOrgDetails(
+                                //           uname: donor.uname),
+                                //     ));
+                              },
                               child: Icon(
                                 Icons.keyboard_arrow_right,
                                 size: screenWidth * 0.08,

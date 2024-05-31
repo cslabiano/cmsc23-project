@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:elbigay/cards/org_card.dart';
+import '/screens/admin/org_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/providers/admin_provider.dart';
@@ -60,7 +60,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              OrgCard(organizations: orgStream),
+              AdminOrgCard(organizations: orgStream),
             ],
           ),
         ),
