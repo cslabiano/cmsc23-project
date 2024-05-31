@@ -23,7 +23,7 @@ class DonatePage extends StatefulWidget {
 class _DonatePageState extends State<DonatePage> {
   final _formKey = GlobalKey<FormState>();
   File? _selectedImage;
-  String _imagePath = "none";
+  String? _imagePath;
   bool _food = false;
   bool _clothes = false;
   bool _cash = false;
@@ -964,7 +964,10 @@ class _DonatePageState extends State<DonatePage> {
                               }
 
                               if (_modeOfDelivery == "Pickup") {
-                                _imagePath = uploadFileForUser(_selectedImage!);
+                                if (_selectedImage != null)
+                                  _imagePath =
+                                      uploadFileForUser(_selectedImage!);
+
                                 Donation donation = Donation(
                                   userId: context
                                       .read<UserAuthProvider>()
@@ -1017,9 +1020,11 @@ class _DonatePageState extends State<DonatePage> {
                                   },
                                 );
                               }
-                              if (_modeOfDelivery == "Drop off") {
-                                _imagePath = uploadFileForUser(_selectedImage!);
 
+                              if (_modeOfDelivery == "Drop off") {
+                                if (_selectedImage != null)
+                                  _imagePath =
+                                      uploadFileForUser(_selectedImage!);
                                 Donation donation = Donation(
                                   userId: context
                                       .read<UserAuthProvider>()
@@ -1036,6 +1041,7 @@ class _DonatePageState extends State<DonatePage> {
                                   weight: _weight,
                                   dateTime: _stringFinalDateTime!,
                                 );
+
                                 context
                                     .read<DonationProvider>()
                                     .addDonation(donation);

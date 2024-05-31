@@ -95,36 +95,35 @@ class OrgCard extends StatelessWidget {
                           boxShadow: kElevationToShadow[2]),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          SizedBox(height: 2),
                           Container(
-                              padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
-                              child: Text(org.uname)
-                              // child:
-                              // Text(
-                              //   widget.donation.title,
-                              //   overflow: TextOverflow.ellipsis,
-                              //   style: TextStyle(
-                              //     color: Color.fromRGBO(62, 180, 137, 1),
-                              //     fontFamily: 'Lato',
-                              //     fontSize: 14,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
+                            padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                            child: Text(
+                              org.orgname,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Color.fromRGBO(62, 180, 137, 1),
+                                fontFamily: 'Lato',
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
                               ),
+                            ),
+                          ),
                           Container(
                             padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
-                            // child: Text(
-                            //   widget.donation.description,
-                            //   overflow: TextOverflow.ellipsis,
-                            //   maxLines: 2,
-                            //   style: TextStyle(
-                            //     color: Color.fromRGBO(34, 38, 66, 1),
-                            //     fontFamily: 'Lato',
-                            //     fontSize: 8,
-                            //     fontWeight: FontWeight.normal,
-                            //   ),
-                            // ),
+                            child: Text(
+                              org.address[0],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: TextStyle(
+                                color: Color.fromRGBO(34, 38, 66, 1),
+                                fontFamily: 'Lato',
+                                fontSize: 8,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
                           ),
                         ],
                       ),
