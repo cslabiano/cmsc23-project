@@ -14,12 +14,6 @@ class Scanner extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Scan QR Code"),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.qr_code_scanner),
-              onPressed: () {},
-            )
-          ],
         ),
         body: MobileScanner(
             onDetect: (capture) {
@@ -33,15 +27,11 @@ class Scanner extends StatelessWidget {
                 String? itemId = barcodes.first.rawValue;
 
                 context
-                    .watch<DonationProvider>()
-                    .changeStatus(itemId!, "Confirmed", orgId);
+                    .read<DonationProvider>()
+                    .changeStatus(itemId!, "Completed", orgId);
 
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                          title: Text("Changed Status to Confirmed"));
-                    });
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Successfully changed the status!")));
               }
             },
             controller: MobileScannerController(

@@ -117,8 +117,8 @@ class OrgCard extends StatelessWidget {
                           ),
                           Container(
                             padding: const EdgeInsets.fromLTRB(10, 0, 20, 10),
-                            child: const Text(
-                              "",
+                            child: Text(
+                              org.description,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: TextStyle(

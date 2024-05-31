@@ -15,11 +15,6 @@ class _DonationDriveDetailsState extends State<DonationDriveDetails> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    final List<String> donors = [
-      'Adrian Javier',
-      'Nathan Abellanida',
-      'Myndie Labiano'
-    ];
 
     return Scaffold(
       body: Column(
@@ -90,43 +85,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             ),
           ),
           SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text("Donors",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          ),
           SizedBox(height: 10),
-          SizedBox(
-            child:
-                // StreamBuilder(stream: ,)
-                SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(left: 60),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: donors.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("${donors[index]}"),
-                              SizedBox(height: 20)
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
           SizedBox(height: screenHeight * 0.05)
         ],
       ),

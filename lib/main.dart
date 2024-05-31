@@ -1,4 +1,3 @@
-import 'package:elbigay/cards/scanner.dart';
 import 'package:elbigay/providers/admin_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:elbigay/firebase_options.dart';
@@ -75,7 +74,6 @@ class MainApp extends StatelessWidget {
         ),
         initialRoute: '/admin_navbar',
         routes: {
-          // '/scanner': (context) => const Scanner(),
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
           '/signup_donor': (context) => const SignUpDonor(),
@@ -85,7 +83,6 @@ class MainApp extends StatelessWidget {
           '/donor_donations': (context) => const DonorDonations(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
-          // '/donation_drive_details': (context) => const DonationDriveDetails(),
           '/organization_navbar': (context) => const OrgNavbar(),
           '/organization_homepage': (context) => const OrganizationHomepage(),
           '/organization_profile': (context) => const OrganizationProfile(),
