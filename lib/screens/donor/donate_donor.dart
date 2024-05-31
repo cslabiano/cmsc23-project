@@ -4,8 +4,10 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:elbigay/models/donor_donation_model.dart';
+import 'package:elbigay/models/org_model.dart';
 import 'package:elbigay/providers/auth_provider.dart';
 import 'package:elbigay/providers/donation_provider.dart';
+import 'package:elbigay/providers/org_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -41,6 +43,7 @@ class _DonatePageState extends State<DonatePage> {
 
   List<String> _itemType = [];
   List<bool> _selectedMode = [true, false];
+  List<String> addresses = [];
 
   TextEditingController _dateController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
@@ -262,6 +265,9 @@ class _DonatePageState extends State<DonatePage> {
   }
 
   Widget pickup() {
+    context.read<OrganizationProvider>().getOrg(widget.orgId);
+    Org? organization = context.watch<OrganizationProvider>().organization;
+    String dropDownValue = organization!.address[0];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -449,45 +455,19 @@ class _DonatePageState extends State<DonatePage> {
               TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1),
         ),
         SizedBox(height: 10),
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: "Enter address",
-            hintStyle: TextStyle(
-              fontStyle: FontStyle.italic,
-              color: Theme.of(context).colorScheme.tertiary,
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.tertiary,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.tertiary,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          validator: (val) {
-            if (val == null || val.isEmpty) {
-              return "Please enter an address";
-            }
-          },
-          onChanged: (value) {
+        DropdownButton(
+          value: dropDownValue,
+          items: organization!.address.map((String address) {
+            return DropdownMenuItem(child: Text(address), value: dropDownValue);
+          }).toList(),
+          onChanged: (String? newValue) {
             setState(() {
-              _address = value;
+              dropDownValue = newValue!;
+              _address = newValue;
             });
           },
+          icon: Icon(Icons.keyboard_arrow_down),
+          isExpanded: true,
         ),
         SizedBox(height: 15),
         Text(
@@ -547,7 +527,6 @@ class _DonatePageState extends State<DonatePage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,

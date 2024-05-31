@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/org_model.dart';
 import 'package:elbigay/providers/donation_drive_provider.dart';
 import 'package:elbigay/providers/org_provider.dart';
+import 'package:elbigay/screens/donor/donor_donation_drive_card_widget.dart';
 import 'package:elbigay/screens/organization/donation_drive_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -183,9 +184,11 @@ class _OrganizationDetailsState extends State<OrganizationDetails> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      SizedBox(height: 10),
+                      Container(
                         height: 230,
-                        child: DonationDriveCard(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: DonationDriveCardDonor(
                             donationDrives: donationDriveStream),
                       ),
                       Positioned.fill(

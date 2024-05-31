@@ -1,3 +1,4 @@
+import 'package:elbigay/cards/scanner.dart';
 import 'package:elbigay/providers/admin_provider.dart';
 import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
 import 'package:elbigay/screens/donor/organization_details.dart';
@@ -76,7 +77,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/signin',
+        initialRoute: '/',
         onGenerateRoute: (settings) {
           if (settings.name == '/donor_receiptpage') {
             final id = settings.arguments as String;
@@ -99,6 +100,7 @@ class MainApp extends StatelessWidget {
           }
         },
         routes: {
+          '/scanner': (context) => const Scanner(),
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
           '/signup_donor': (context) => const SignUpDonor(),
