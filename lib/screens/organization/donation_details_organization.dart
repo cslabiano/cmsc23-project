@@ -2,14 +2,17 @@ import 'dart:ui';
 
 import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:elbigay/providers/auth_provider.dart';
-import 'package:elbigay/providers/donation_provider.dart';
+// import 'package:elbigay/providers/donation_provider.dart';
+import 'package:elbigay/screens/organization/donation_drive_modal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DonationDetails extends StatefulWidget {
   final Donation donation;
-  const DonationDetails({super.key, required this.donation});
+  final String donationId;
+  const DonationDetails(
+      {super.key, required this.donation, required this.donationId});
 
   @override
   State<DonationDetails> createState() => _DonationDetailsState();
@@ -84,9 +87,7 @@ class _DonationDetailsState extends State<DonationDetails> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.tertiary),
-                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.transparent),
                   ),
                   child: Expanded(
                     child: ListView.builder(
@@ -318,7 +319,22 @@ class _DonationDetailsState extends State<DonationDetails> {
                   child: Container(),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    if (widget.donation.donationDriveId == 'none' ||
+                        widget.donation.donationDriveId == null) {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => DonationDriveModal(
+                                orgId: widget.donation.orgId,
+                                donationId: widget.donationId,
+                              ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                            "Donation is already linked to a donation drive!"),
+                      ));
+                    }
+                  },
                   child: Container(
                       height: 50,
                       alignment: Alignment.center,

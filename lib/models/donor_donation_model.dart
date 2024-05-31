@@ -4,7 +4,7 @@ class Donation {
   String userId;
   String donorName;
   String? id;
-  String? orgId;
+  String orgId;
   String? imagePath;
   String? address;
   String? contactNumber;
@@ -19,7 +19,7 @@ class Donation {
       {required this.userId,
       required this.donorName,
       this.id,
-      this.orgId,
+      required this.orgId,
       this.imagePath,
       this.address,
       this.contactNumber,

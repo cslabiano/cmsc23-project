@@ -55,6 +55,7 @@ class _HomepageTabState extends State<HomepageTab> {
                   Donation donation = Donation.fromJson(
                       snapshot.data?.docs[index].data()
                           as Map<String, dynamic>);
+                  String? donationId = snapshot.data?.docs[index].id;
                   return Column(
                     children: [
                       ListTile(
@@ -77,7 +78,9 @@ class _HomepageTabState extends State<HomepageTab> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DonationDetails(
-                                            donation: donation)));
+                                              donation: donation,
+                                              donationId: donationId!,
+                                            )));
                               },
                               child: Icon(
                                 Icons.keyboard_arrow_right,
