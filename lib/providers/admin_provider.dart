@@ -7,10 +7,18 @@ class AdminProvider with ChangeNotifier {
   late Stream<QuerySnapshot> _uStream;
   late Stream<QuerySnapshot> _dStream;
   late Stream<QuerySnapshot> _vStream;
+  late Stream<QuerySnapshot> _donorStream;
 
   Stream<QuerySnapshot> get dStream => _dStream;
   Stream<QuerySnapshot> get uStream => _uStream;
   Stream<QuerySnapshot> get vStream => _vStream;
+  Stream<QuerySnapshot> get donorStream => _donorStream;
+
+  Stream<QuerySnapshot> fetchAllDonor() {
+    _donorStream = firebaseService.getAllDonor();
+    notifyListeners();
+    return _donorStream;
+  }
 
   Stream<QuerySnapshot> fetchUnverifiedOrgs() {
     _uStream = firebaseService.getUnverified();

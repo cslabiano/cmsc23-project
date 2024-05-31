@@ -19,23 +19,15 @@ class FirebaseAdminAPI {
         .snapshots();
   }
 
+  //get all approved organizations
+  Stream<QuerySnapshot> getAllDonor() {
+    return db.collection('donors').snapshots();
+  }
+
   Stream<QuerySnapshot> getDonations(String status) {
     return db
         .collection("donations")
         .where('status', isEqualTo: status)
         .snapshots();
-  }
-
-  // edit organization account status
-  Future<String> editOrganizationAccountStatus(String id, String status) async {
-    try {
-      await db
-          .collection("organizations")
-          .doc(id)
-          .update({"accountStatus": status});
-      return "Successfully edited organization account status!";
-    } on FirebaseException catch (e) {
-      return "Error in ${e.code}: ${e.message}";
-    }
   }
 }

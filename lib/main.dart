@@ -76,7 +76,7 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/signin',
+        initialRoute: '/admin_navbar',
         onGenerateRoute: (settings) {
           if (settings.name == '/donor_receiptpage') {
             final id = settings.arguments as String;
