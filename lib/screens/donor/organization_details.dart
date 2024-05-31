@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/org_model.dart';
 import 'package:elbigay/providers/donation_drive_provider.dart';
 import 'package:elbigay/providers/org_provider.dart';
+import 'package:elbigay/screens/donor/donate_donor.dart';
 import 'package:elbigay/screens/donor/donor_donation_drive_card_widget.dart';
 import 'package:elbigay/screens/organization/donation_drive_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -200,9 +201,11 @@ class _OrganizationDetailsState extends State<OrganizationDetails> {
                                 padding: EdgeInsets.only(left: 20, right: 20),
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/donor_donatepage',
-                                        arguments: widget.orgId);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DonatePage(
+                                                orgId: widget.orgId)));
                                   },
                                   child: Container(
                                     height: 50,

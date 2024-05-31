@@ -79,27 +79,6 @@ class MainApp extends StatelessWidget {
           ),
         ),
         initialRoute: '/',
-        onGenerateRoute: (settings) {
-          if (settings.name == '/donor_receiptpage') {
-            final id = settings.arguments as String;
-            return MaterialPageRoute(builder: (context) {
-              return ReceiptPage(id: id);
-            });
-          }
-          if (settings.name == '/donor_donatepage') {
-            final orgId = settings.arguments as String;
-            return MaterialPageRoute(builder: (context) {
-              return DonatePage(orgId: orgId);
-            });
-          }
-
-          if (settings.name == '/organization_details') {
-            final orgId = settings.arguments as String;
-            return MaterialPageRoute(builder: (context) {
-              return OrganizationDetails(orgId: orgId);
-            });
-          }
-        },
         routes: {
           '/scanner': (context) => const Scanner(),
           '/': (context) => const Splash(),

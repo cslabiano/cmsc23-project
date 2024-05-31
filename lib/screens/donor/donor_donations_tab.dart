@@ -6,6 +6,7 @@ import 'package:elbigay/models/org_model.dart';
 import 'package:elbigay/providers/auth_provider.dart';
 import 'package:elbigay/providers/donation_provider.dart';
 import 'package:elbigay/providers/org_provider.dart';
+import 'package:elbigay/screens/donor/receipt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,6 @@ class _DonorDonationsTabState extends State<DonorDonationsTab> {
 
                   Org? organization =
                       context.watch<OrganizationProvider>().organization;
-
                   if (organization == null && user != null) {
                     context
                         .read<OrganizationProvider>()
@@ -84,10 +84,11 @@ class _DonorDonationsTabState extends State<DonorDonationsTab> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(
-                                    context, "/donor_receiptpage",
-                                    arguments: donation.id);
-                                print("Tapped");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ReceiptPage(
+                                            id: donation.id as String)));
                               },
                               child: Icon(
                                 Icons.keyboard_arrow_right,

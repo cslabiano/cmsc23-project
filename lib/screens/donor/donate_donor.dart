@@ -947,6 +947,7 @@ class _DonatePageState extends State<DonatePage> {
                                 if (_selectedImage != null)
                                   _imagePath =
                                       uploadFileForUser(_selectedImage!);
+                                _imagePath = "none";
 
                                 Donation donation = Donation(
                                   userId: context
@@ -1005,6 +1006,9 @@ class _DonatePageState extends State<DonatePage> {
                                 if (_selectedImage != null)
                                   _imagePath =
                                       uploadFileForUser(_selectedImage!);
+
+                                _imagePath = "none";
+
                                 Donation donation = Donation(
                                   userId: context
                                       .read<UserAuthProvider>()

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/org_model.dart';
+import 'package:elbigay/screens/donor/organization_details.dart';
 import 'package:flutter/material.dart';
 
 class OrgCard extends StatelessWidget {
@@ -62,21 +63,24 @@ class OrgCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const ClipRRect(
+                      child: ClipRRect(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
-                        // child: Image.asset(
-                        // widget.donation.image,
-                        // fit: BoxFit.cover,
-                        //     ),
+                        child: Image.asset(
+                          'assets/donation_drive.jpg',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, '/organization_details',
-                          arguments: org.orgId);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrganizationDetails(
+                                  orgId: org.orgId as String)));
                     },
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
