@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:elbigay/models/org_model.dart';
-import 'package:elbigay/models/organization_model.dart';
 import 'package:flutter/material.dart';
 
 class OrgCard extends StatelessWidget {
@@ -36,7 +35,7 @@ class OrgCard extends StatelessWidget {
               shrinkWrap: true,
               itemCount: snapshot.data?.docs.length,
               itemBuilder: ((context, index) {
-                Organization org = Organization.fromJson(
+                Org org = Org.fromJson(
                     snapshot.data?.docs[index].data() as Map<String, dynamic>);
 
                 return Text("HELLO");
