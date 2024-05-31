@@ -29,13 +29,14 @@ class Org {
 
     return Org(
       usertype: 'org',
-      email: data['email'],
-      orgname: data['orgname'],
-      uname: data['uname'],
-      contact: data['contact'],
-      address: List<String>.from(data['address']),
-      isVerified: data['isVerified'],
-      isOpen: data['isOpen'],
+      email: data['email'] ?? '',
+      orgname: data['orgname'] ?? '',
+      uname: data['uname'] ?? '',
+      contact: data['contact'] ?? '',
+      address:
+          data['address'] != null ? List<String>.from(data['address']) : [],
+      isVerified: data['isVerified'] ?? true,
+      isOpen: data['isOpen'] ?? true,
     );
   }
 

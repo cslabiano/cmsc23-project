@@ -5,21 +5,23 @@ class DonationDrive {
   String userId;
   String title;
   String description;
-  String dateTime;
+  String date;
+  String imagePath;
 
-  DonationDrive({
-    required this.userId,
-    required this.title,
-    required this.description,
-    required this.dateTime,
-  });
+  DonationDrive(
+      {required this.userId,
+      required this.title,
+      required this.description,
+      required this.date,
+      required this.imagePath});
 
   factory DonationDrive.fromJson(Map<String, dynamic> json) {
     return DonationDrive(
         userId: json['userId'],
         title: json['title'],
         description: json['description'],
-        dateTime: json['dateTime']);
+        date: json['date'],
+        imagePath: json['imagePath']);
   }
 
   static List<DonationDrive> fromJsonArray(String jsonData) {
@@ -34,7 +36,8 @@ class DonationDrive {
       'userId': donationDrive.userId,
       'title': donationDrive.title,
       'description': donationDrive.description,
-      'dateTime': donationDrive.dateTime
+      'date': donationDrive.date,
+      'imagePath': donationDrive.imagePath
     };
   }
 }

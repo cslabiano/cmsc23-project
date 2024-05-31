@@ -59,7 +59,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                               ),
                               Text(
                                 org!.orgname,
-                                // user.displayName,
+                                // "displayName",
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.1,
                                   fontWeight: FontWeight.w600,

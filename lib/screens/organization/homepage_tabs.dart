@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elbigay/screens/organization/donation_details_organization.dart';
 import '/models/donor_donation_model.dart';
 import '/providers/auth_provider.dart';
 import '/providers/donation_provider.dart';
@@ -72,7 +73,11 @@ class _HomepageTabState extends State<HomepageTab> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                print("Tapped");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DonationDetails(
+                                            donation: donation)));
                               },
                               child: Icon(
                                 Icons.keyboard_arrow_right,

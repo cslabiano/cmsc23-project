@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, avoid_print, prefer_final_fields, use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';

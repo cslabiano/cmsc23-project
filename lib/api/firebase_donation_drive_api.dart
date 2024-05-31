@@ -25,10 +25,12 @@ class FirebaseDonationDriveAPI {
 
   // update a donation drive
   Future<String> editDonationDrive(
-      String id, String title, String description, bool status) async {
+      String id, String title, String description, String date) async {
     try {
-      await db.collection("donationDrives").doc(id).update(
-          {"title": title, "description": description, "status": status});
+      await db
+          .collection("donationDrives")
+          .doc(id)
+          .update({"title": title, "description": description, "date": date});
       return "Successfully edited donation drive!";
     } on FirebaseException catch (e) {
       return "Error in ${e.code}: ${e.message}";
