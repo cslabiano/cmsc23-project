@@ -1,28 +1,36 @@
-import 'package:elbigay/firebase_options.dart';
-import 'package:elbigay/screens/donor/donation_drive_details.dart';
-import 'package:elbigay/providers/donation_drive_provider.dart';
-import 'package:elbigay/screens/organization/add_donation_drive_organization.dart';
-import 'package:elbigay/providers/donation_provider.dart';
-import 'package:elbigay/providers/donor_provider.dart';
-import 'package:elbigay/screens/donor/donate_donor.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:elbigay/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 // import providers
+import 'package:provider/provider.dart';
+import '/providers/donation_provider.dart';
+import '/providers/donor_provider.dart';
 import '/providers/auth_provider.dart';
+import '/providers/donation_drive_provider.dart';
+import '/providers/org_provider.dart';
+// import '/providers/admin_provider.dart';
 
 // import screens
 import '/screens/splash.dart';
 import '/screens/entry/sign_in.dart';
 import '/screens/entry/signup_donor.dart';
+import '/screens/donor/donate_donor.dart';
 import '/screens/entry/signup_org.dart';
 import '/screens/entry/signup_option.dart';
 import '/screens/donor/homepage_donor.dart';
 import '/screens/donor/profile_donor.dart';
+import '/screens/organization/add_donation_drive_organization.dart';
 import 'screens/organization/donation_drive_organization.dart';
 import '/screens/organization/homepage_organization.dart';
 import '/screens/organization/profile_organization.dart';
+import '/screens/donor/donation_drive_details.dart';
+import '/screens/donor/receipt.dart';
+import '/screens/donor/donor_donations.dart';
+import 'screens/admin/admin_profile.dart';
+import '/screens/admin/approval_screen.dart';
+import '/screens/admin/donation_drive_list.dart';
 
 //import navbars
 import 'navbars/navbar_donor.dart';
@@ -41,7 +49,8 @@ Future<void> main() async {
         ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
         ChangeNotifierProvider(create: ((context) => DonationProvider())),
         ChangeNotifierProvider(create: ((context) => DonorProvider())),
-        ChangeNotifierProvider(create: ((context) => DonationDriveProvider()))
+        ChangeNotifierProvider(create: ((context) => DonationDriveProvider())),
+        ChangeNotifierProvider(create: ((context) => OrganizationProvider())),
       ],
       child: const MainApp(),
     ),
@@ -50,9 +59,10 @@ Future<void> main() async {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+    String id;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -65,7 +75,16 @@ class MainApp extends StatelessWidget {
             tertiary: Color.fromRGBO(156, 157, 150, 1),
           ),
         ),
-        initialRoute: '/',
+        initialRoute: '/signin',
+        onGenerateRoute: (settings) {
+          if (settings.name == '/donor_receiptpage') {
+            final id = settings.arguments as String;
+            return MaterialPageRoute(builder: (context) {
+              return ReceiptPage(id: id);
+            });
+          }
+          return null;
+        },
         routes: {
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
@@ -74,6 +93,7 @@ class MainApp extends StatelessWidget {
           '/signup_option': (context) => const SignUpOption(),
           '/donor_navbar': (context) => const DonorNavbar(),
           '/donor_donatepage': (context) => const DonatePage(),
+          '/donor_donations': (context) => const DonorDonations(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
           '/donation_drive_details': (context) => const DonationDriveDetails(),
@@ -82,8 +102,12 @@ class MainApp extends StatelessWidget {
           '/organization_profile': (context) => const OrganizationProfile(),
           '/organization_donation': (context) =>
               const OrganizationDonationDrive(),
+          // '/update_delete_dontaion_drive': (context) =>
+          //     UpdateDeleteDonationDrive(),
           '/add_donation_drive': (context) => const AddDonationDrive(),
-          'admin_navbar': (context) => const AdminNavbar(),
+          '/admin_navbar': (context) => const AdminNavbar(),
+          '/admin_profile': (context) => const AdminProfile(),
+          // '/admin_approval': (context) => const ApprovalPage(),
         });
   }
 }

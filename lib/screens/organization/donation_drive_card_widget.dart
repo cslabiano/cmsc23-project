@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elbigay/models/donation_drive_model.dart';
+import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
 import 'package:flutter/material.dart';
 
 class DonationDriveCard extends StatelessWidget {
@@ -40,13 +41,21 @@ class DonationDriveCard extends StatelessWidget {
                   DonationDrive donationDrive = DonationDrive.fromJson(
                       snapshot.data?.docs[index].data()
                           as Map<String, dynamic>);
-                  // donationDrive.user = snapshot.data?.[index].id;
+                  String? id = snapshot.data?.docs[index].id;
                   return Column(
                     children: [
                       InkWell(
                         onTap: () {
-                          // navigate to donation drive page
-                          print("tapped");
+                          if (userType == "org") {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        UpdateDeleteDonationDrive(
+                                          donationDrive: donationDrive,
+                                          documentId: id,
+                                        )));
+                          }
                         },
                         child: Column(
                           children: [
@@ -62,9 +71,9 @@ class DonationDriveCard extends StatelessWidget {
                                   SizedBox(
                                     height: screenHeight * 0.1,
                                     width: screenWidth * 0.3,
-                                    // child: Image.asset(
-                                    //     _donationDrives[index]
-                                    //         .image),
+                                    // child: Image.network(
+                                    //     donationDrive.imagePath,
+                                    //     fit: BoxFit.fill),
                                   ),
                                   const SizedBox(width: 7),
                                   Expanded(
@@ -99,14 +108,14 @@ class DonationDriveCard extends StatelessWidget {
                                           Row(
                                             children: [
                                               Icon(
-                                                Icons.timelapse_rounded,
+                                                Icons.schedule_outlined,
                                                 color: const Color.fromRGBO(
                                                     128, 128, 128, 1),
                                                 size: screenWidth * 0.05,
                                               ),
                                               const SizedBox(width: 3),
                                               Text(
-                                                donationDrive.dateTime,
+                                                "${DateTime.parse(donationDrive.date).difference(DateTime.now().toLocal()).inDays} days left",
                                                 style: const TextStyle(
                                                     color: Color.fromRGBO(
                                                         128, 128, 128, 1)),

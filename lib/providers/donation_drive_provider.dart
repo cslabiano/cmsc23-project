@@ -28,9 +28,9 @@ class DonationDriveProvider extends ChangeNotifier {
   }
 
   void editDonationDrive(
-      String id, String title, String description, bool status) async {
+      String id, String title, String description, String date) async {
     String message =
-        await firebaseService.editDonationDrive(id, title, description, status);
+        await firebaseService.editDonationDrive(id, title, description, date);
     print(message);
     notifyListeners();
   }
