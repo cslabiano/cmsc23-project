@@ -50,6 +50,8 @@ class Org {
   }
 
   Map<String, dynamic> toJson(Org org) {
+    print("==============%%%%%%%%%%%%%%%%%%%%%%%%%%%=====================");
+    print(org.isVerified);
     return {
       'orgId': org.orgId,
       'usertype': org.usertype,

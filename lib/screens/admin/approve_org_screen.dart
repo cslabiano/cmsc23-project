@@ -16,9 +16,27 @@ class AdminApproveOrg extends StatefulWidget {
 
 class _AdminApproveOrgState extends State<AdminApproveOrg> {
   Org? organization;
+
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<void> _approveOrganization() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('organizations')
+          .doc(widget.orgId)
+          .update({'isVerified': true});
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Organization approved successfully')),
+      );
+      Navigator.of(context).pop(); // Optionally, navigate back after approval
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error approving organization: $e')),
+      );
+    }
   }
 
   @override
@@ -184,7 +202,7 @@ class _AdminApproveOrgState extends State<AdminApproveOrg> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 230,
                       ),
                       Positioned.fill(
@@ -196,8 +214,7 @@ class _AdminApproveOrgState extends State<AdminApproveOrg> {
                                 padding:
                                     const EdgeInsets.only(left: 20, right: 20),
                                 child: InkWell(
-                                  // TODO: approve
-                                  onTap: () {},
+                                  onTap: _approveOrganization,
                                   child: Container(
                                     height: 50,
                                     alignment: Alignment.center,
