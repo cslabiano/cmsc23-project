@@ -1,7 +1,6 @@
+import '../screens/admin/donation_list_tabs.dart';
 import 'package:flutter/material.dart';
-import '../screens/admin/approval_screen.dart';
 import '/screens/admin/admin_profile.dart';
-import '/screens/admin/donation_drive_list.dart';
 
 class AdminNavbar extends StatefulWidget {
   const AdminNavbar({super.key});
@@ -24,7 +23,7 @@ class _AdminNavbarState extends State<AdminNavbar> {
             // DonationDriveList(),
             AdminProfile(),
             AdminProfile(),
-            AdminProfile(),
+            DonorListTabs(),
             AdminProfile(),
           ],
         ),
@@ -42,13 +41,13 @@ class _AdminNavbarState extends State<AdminNavbar> {
             icon: _selectedIndex == 1
                 ? const Icon(Icons.groups)
                 : const Icon(Icons.groups_outlined),
-            label: 'Organizations',
+            label: 'Users',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 2
                 ? const Icon(Icons.volunteer_activism)
                 : const Icon(Icons.volunteer_activism_outlined),
-            label: 'Donors',
+            label: 'Donations',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 0

@@ -26,20 +26,23 @@ class _DonorHomepageState extends State<DonorHomepage> {
     if (donor == null && user != null) {
       context.read<DonorProvider>().getDetails(user!);
     }
-    context.read<OrganizationProvider>().fetchOrganizations();
+    // double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    context.watch<OrganizationProvider>().fetchOrganizations();
     Stream<QuerySnapshot> orgStream = context.watch<OrganizationProvider>().org;
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        padding: EdgeInsets.only(right: 20, left: 20),
+        padding: const EdgeInsets.only(right: 20, left: 20),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.only(top: 40),
                 child: Text(
                   "Hello ${donor!.uname}!",
                   textAlign: TextAlign.left,
@@ -51,8 +54,8 @@ class _DonorHomepageState extends State<DonorHomepage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 5),
-                child: Text(
+                padding: const EdgeInsets.only(top: 5),
+                child: const Text(
                   "Where do you want to donate today",
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -63,7 +66,7 @@ class _DonorHomepageState extends State<DonorHomepage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -74,9 +77,9 @@ class _DonorHomepageState extends State<DonorHomepage> {
                       blurStyle: BlurStyle.outer,
                     ),
                   ],
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
                 ),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),

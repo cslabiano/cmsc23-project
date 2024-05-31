@@ -11,17 +11,19 @@ class FirebaseAdminAPI {
         .snapshots();
   }
 
-  // get all organizations, for admin
+  // get all organizations
   Stream<QuerySnapshot> getAllOrganizations() {
     return db
         .collection("organizations")
-        .where('isVerified', isEqualTo: true)
+        .where("isVerified", isEqualTo: true)
         .snapshots();
   }
 
-  // get all donors, for admin
-  Stream<QuerySnapshot> getAllDonors() {
-    return db.collection("donors").snapshots();
+  Stream<QuerySnapshot> getAllDonors(String status) {
+    return db
+        .collection("donations")
+        .where('status', isEqualTo: status)
+        .snapshots();
   }
 
   // get all donations, for admin
