@@ -341,57 +341,83 @@ class _DonationDetailsState extends State<DonationDetails> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    "Donation Status:",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontSize: screenWidth * 0.045),
-                  ),
-                  Row(
-                    children: [
-                      DropdownButton(
-                          value: _selectedValue,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedValue = value;
-                            });
-                          },
-                          items: dropdownList),
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                              colors: [
-                                Color.fromRGBO(14, 198, 178, 1),
-                                Color.fromRGBO(37, 212, 147, 1)
-                              ]),
-                          borderRadius: BorderRadius.circular(15),
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
-                          boxShadow: kElevationToShadow[2],
+                  (widget.donation.status == 'Cancelled')
+                      ? Row(
+                          children: [
+                            Text(
+                              "Donation Status: ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  fontSize: screenWidth * 0.045),
+                            ),
+                            Text(
+                              widget.donation.status,
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: screenWidth * 0.045),
+                            ),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Donation Status:",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  fontSize: screenWidth * 0.045),
+                            ),
+                            Row(
+                              children: [
+                                DropdownButton(
+                                    value: _selectedValue,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedValue = value;
+                                      });
+                                    },
+                                    items: dropdownList),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight,
+                                        colors: [
+                                          Color.fromRGBO(14, 198, 178, 1),
+                                          Color.fromRGBO(37, 212, 147, 1)
+                                        ]),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Theme.of(context).primaryColor),
+                                    boxShadow: kElevationToShadow[2],
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      context
+                                          .read<DonationProvider>()
+                                          .changeStatus(widget.donationId,
+                                              _selectedValue!);
+                                    },
+                                    child: const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        child: InkWell(
-                          onTap: () {
-                            context.read<DonationProvider>().changeStatus(
-                                widget.donationId, _selectedValue!);
-                          },
-                          child: const Icon(
-                            Icons.check,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   Expanded(
                     child: Container(),
                   ),
                   InkWell(
                     onTap: () {
-                      if (widget.donation.donationDriveId == 'none' ||
-                          widget.donation.donationDriveId == null) {
+                      if (widget.donation.donationDriveId == 'none') {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) =>
