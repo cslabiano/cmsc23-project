@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Org {
   final String usertype;
   final String email;
@@ -25,6 +23,7 @@ class Org {
 
   // Factory constructor to instantiate object from json format
   factory Org.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Org(
       usertype: 'org',
       email: json['email'],

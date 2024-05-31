@@ -16,6 +16,8 @@ class OrgCard extends StatelessWidget {
         child: StreamBuilder(
       stream: organizations,
       builder: (context, snapshot) {
+        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55\n");
+        print(organizations);
         if (snapshot.hasError) {
           return Center(
             child: Text("Error encountered! ${snapshot.error}"),

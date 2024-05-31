@@ -47,7 +47,8 @@ class FirebaseOrganizationAPI {
 
   Future<Org?> getDetails(User user) async {
     try {
-      DocumentSnapshot doc = await db.collection("donors").doc(user.uid).get();
+      DocumentSnapshot doc =
+          await db.collection("organizations").doc(user.uid).get();
       if (doc.exists) {
         return Org.fromJson(doc.data() as Map<String, dynamic>);
       } else {

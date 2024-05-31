@@ -1,3 +1,4 @@
+import 'package:elbigay/providers/admin_provider.dart';
 import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
 import 'package:flutter/material.dart';
 import 'package:elbigay/firebase_options.dart';
@@ -29,8 +30,8 @@ import '/screens/donor/donation_drive_details.dart';
 import '/screens/donor/receipt.dart';
 import '/screens/donor/donor_donations.dart';
 import 'screens/admin/admin_profile.dart';
-import '/screens/admin/approval_screen.dart';
-import '/screens/admin/donation_drive_list.dart';
+// import '/screens/admin/approval_screen.dart';
+// import '/screens/admin/donation_drive_list.dart';
 
 //import navbars
 import 'navbars/navbar_donor.dart';
@@ -51,6 +52,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: ((context) => DonorProvider())),
         ChangeNotifierProvider(create: ((context) => DonationDriveProvider())),
         ChangeNotifierProvider(create: ((context) => OrganizationProvider())),
+        ChangeNotifierProvider(create: ((context) => AdminProvider()))
       ],
       child: const MainApp(),
     ),
