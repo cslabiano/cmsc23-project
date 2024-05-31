@@ -33,8 +33,8 @@ class DonationProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeStatus(String id, String status) async {
-    await firebaseService.changeStatus(id, status);
+  void changeStatus(String id, String status, String orgId) async {
+    await firebaseService.changeStatus(id, status, orgId);
     notifyListeners();
   }
 

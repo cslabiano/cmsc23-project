@@ -9,8 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class ReceiptPage extends StatefulWidget {
-  final String id;
-  const ReceiptPage({required this.id, super.key});
+  final String itemId;
+  final String orgId;
+  const ReceiptPage({required this.itemId, required this.orgId, super.key});
 
   @override
   State<ReceiptPage> createState() => _ReceiptPageState();
@@ -45,7 +46,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<DonationProvider>().fetchDonation(widget.id);
+    context.watch<DonationProvider>().fetchDonation(widget.itemId);
     Stream<QuerySnapshot> donoStream =
         context.watch<DonationProvider>().donoStream;
 
@@ -96,7 +97,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
                   ? Align(
                       alignment: Alignment.center,
                       child: QrImageView(
-                          data: widget.id,
+                          data: widget.itemId,
                           version: QrVersions.auto,
                           gapless: false,
                           size: 270),
@@ -151,7 +152,9 @@ class _ReceiptPageState extends State<ReceiptPage> {
                       : InkWell(
                           onTap: () {
                             context.read<DonationProvider>().changeStatus(
-                                donation.id as String, "Cancelled");
+                                donation.id as String,
+                                "Cancelled",
+                                widget.orgId);
                             setState(() {
                               cancelled = true;
                             });

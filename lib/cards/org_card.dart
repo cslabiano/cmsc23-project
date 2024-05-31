@@ -42,8 +42,11 @@ class OrgCard extends StatelessWidget {
                 return Column(children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, '/organization_details',
-                          arguments: org.orgId);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrganizationDetails(
+                                  orgId: org.orgId as String)));
                     },
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),

@@ -16,7 +16,7 @@ class FirebaseDonationDriveAPI {
   // create a donation drive
   Future<String> addDonationDrive(Map<String, dynamic> donationDrive) async {
     try {
-      await db.collection("donationDrives").add(donationDrive);
+      // await db.collection("donationDrives").add(donationDrive);
       return "Successfully added donation drive!";
     } on FirebaseException catch (e) {
       return "Error in ${e.code}: ${e.message}";

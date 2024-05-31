@@ -79,7 +79,7 @@ class MainApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/scanner': (context) => const Scanner(),
+          // '/scanner': (context) => const Scanner(),
           '/': (context) => const Splash(),
           '/signin': (context) => const SignIn(),
           '/signup_donor': (context) => const SignUpDonor(),
@@ -89,7 +89,7 @@ class MainApp extends StatelessWidget {
           '/donor_donations': (context) => const DonorDonations(),
           '/donor_homepage': (context) => const DonorHomepage(),
           '/donor_profilepage': (context) => const DonorProfilepage(),
-          '/donation_drive_details': (context) => const DonationDriveDetails(),
+          // '/donation_drive_details': (context) => const DonationDriveDetails(),
           '/organization_navbar': (context) => const OrgNavbar(),
           '/organization_homepage': (context) => const OrganizationHomepage(),
           '/organization_profile': (context) => const OrganizationProfile(),

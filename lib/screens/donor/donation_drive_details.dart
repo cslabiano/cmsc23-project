@@ -1,7 +1,10 @@
+import 'package:elbigay/providers/donation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DonationDriveDetails extends StatefulWidget {
-  const DonationDriveDetails({super.key});
+  final String donationDriveId;
+  const DonationDriveDetails({required this.donationDriveId, super.key});
 
   @override
   State<DonationDriveDetails> createState() => _DonationDriveDetailsState();
@@ -23,16 +26,37 @@ class _DonationDriveDetailsState extends State<DonationDriveDetails> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: screenHeight * 0.24,
-            width: screenWidth,
-            child: ClipRRect(
-              child: Image.asset(
-                'assets/donation_drive.jpg',
-                fit: BoxFit.cover,
+          SizedBox(height: screenHeight * 0.03),
+          Stack(children: [
+            SizedBox(
+              height: screenHeight * 0.24,
+              width: screenWidth,
+              child: ClipRRect(
+                child: Image.asset(
+                  'assets/donation_drive.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
+            Positioned(
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: Positioned(
+                    child: Icon(Icons.arrow_back_ios_new,
+                        size: 20, color: Theme.of(context).primaryColor),
+                  ),
+                ),
+              ),
+              top: screenHeight * 0.03,
+              left: screenWidth * 0.04,
+            ),
+          ]),
           SizedBox(height: 13),
           Container(
             padding: EdgeInsets.only(left: 20, right: 20),
@@ -73,7 +97,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
           ),
           SizedBox(height: 10),
           SizedBox(
-            child: SingleChildScrollView(
+            child:
+                // StreamBuilder(stream: ,)
+                SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.only(left: 60),
                 child: Column(

@@ -399,8 +399,10 @@ class _DonationDetailsState extends State<DonationDetails> {
                                     onTap: () {
                                       context
                                           .read<DonationProvider>()
-                                          .changeStatus(widget.donationId,
-                                              _selectedValue!);
+                                          .changeStatus(
+                                              widget.donationId,
+                                              _selectedValue!,
+                                              widget.donation.orgId);
                                     },
                                     child: const Icon(
                                       Icons.check,

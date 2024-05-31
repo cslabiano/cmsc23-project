@@ -47,11 +47,23 @@ class FirebaseDonationAPI {
     return db.collection("donations").where('id', isEqualTo: id).snapshots();
   }
 
-  Future<String> changeStatus(String id, String status) async {
+  Future<String> changeStatus(String id, String status, String orgId) async {
     try {
-      await db.collection("donations").doc(id).update({"status": status});
+      QuerySnapshot querySnapshot = await db
+          .collection("donations")
+          .where("orgId", isEqualTo: orgId)
+          .where("id", isEqualTo: id)
+          .get();
 
-      return "Status successfully changed!";
+      if (querySnapshot.docs.isNotEmpty) {
+        String docId = querySnapshot.docs.first.id;
+
+        await db.collection("donations").doc(docId).update({"status": status});
+
+        return "Status successfully changed!";
+      } else {
+        return "No donation found with the given orgId and id.";
+      }
     } on FirebaseException catch (e) {
       return "Error in ${e.code}: ${e.message}";
     }
