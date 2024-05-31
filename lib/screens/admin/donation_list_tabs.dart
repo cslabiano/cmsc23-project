@@ -48,7 +48,7 @@ class _DonorListTabsState extends State<DonorListTabs> {
                   Container(
                     padding: EdgeInsets.only(left: 20, bottom: 20),
                     child: Text(
-                      "Here are all the donors..",
+                      "Here are all the donations..",
                       style: TextStyle(
                           color: Colors.white, fontSize: screenWidth * 0.045),
                     ),

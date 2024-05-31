@@ -1,5 +1,6 @@
 import 'package:elbigay/cards/scanner.dart';
 import 'package:elbigay/providers/admin_provider.dart';
+import 'package:elbigay/screens/admin/approve_org_screen.dart';
 import 'package:elbigay/screens/organization/donation_drive_details_organization.dart';
 import 'package:elbigay/screens/donor/organization_details.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +122,6 @@ class MainApp extends StatelessWidget {
           '/add_donation_drive': (context) => const AddDonationDrive(),
           '/admin_navbar': (context) => const AdminNavbar(),
           '/admin_profile': (context) => const AdminProfile(),
-          // '/admin_approval': (context) => const ApprovalPage(),
         });
   }
 }

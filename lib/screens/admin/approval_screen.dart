@@ -1,73 +1,87 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:elbigay/cards/org_card.dart';
-import 'package:elbigay/models/donor_model.dart';
-import 'package:elbigay/providers/auth_provider.dart';
-import 'package:elbigay/providers/donor_provider.dart';
-import 'package:elbigay/providers/org_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:elbigay/screens/admin/approve_org_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import '../../models/donor_donation_model.dart';
+import '/providers/admin_provider.dart';
+import '/models/org_model.dart';
 
-class DonorHomepage extends StatefulWidget {
-  const DonorHomepage({super.key});
+class ApprovalScreen extends StatelessWidget {
+  const ApprovalScreen({super.key});
 
-  @override
-  State<DonorHomepage> createState() => _DonorHomepageState();
-}
-
-class _DonorHomepageState extends State<DonorHomepage> {
   @override
   Widget build(BuildContext context) {
-    context.watch<OrganizationProvider>().fetchOrganizations();
-    Stream<QuerySnapshot> orgStream = context.watch<OrganizationProvider>().org;
+    double screenWidth = MediaQuery.of(context).size.width;
 
+    context.watch<AdminProvider>().fetchVerifiedOrgs();
+    Stream<QuerySnapshot> orgStream = context.watch<AdminProvider>().vStream;
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(),
-      body: Container(
-        padding: const EdgeInsets.only(right: 20, left: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      spreadRadius: -4,
-                      blurRadius: 3,
-                      blurStyle: BlurStyle.outer,
-                    ),
-                  ],
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 5),
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              OrgCard(organizations: orgStream),
-            ],
-          ),
-        ),
+      appBar: AppBar(
+        title: Text("For Approval",
+            style: TextStyle(color: Theme.of(context).primaryColor)),
+        automaticallyImplyLeading: false,
+      ),
+      body: Expanded(
+        child: StreamBuilder(
+            stream: orgStream,
+            builder: ((context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error encountered! ${snapshot.error}"),
+                );
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (!snapshot.hasData) {
+                return const Center(
+                  child: Text("No Donations Found"),
+                );
+              }
+
+              return ListView.builder(
+                  itemCount: snapshot.data?.docs.length,
+                  itemBuilder: ((context, index) {
+                    Org org = Org.fromJson(snapshot.data?.docs[index].data()
+                        as Map<String, dynamic>);
+
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.language,
+                              size: screenWidth * 0.1,
+                              color: Theme.of(context).colorScheme.secondary),
+                          title: Text(
+                            org.orgname,
+                            style: TextStyle(fontSize: screenWidth * 0.05),
+                          ),
+                          trailing: Container(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromRGBO(210, 237, 228, 1),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AdminApproveOrg(orgId: org.orgId!),
+                                      ));
+                                },
+                                child: Icon(
+                                  Icons.keyboard_arrow_right,
+                                  size: screenWidth * 0.08,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              )),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        )
+                      ],
+                    );
+                  }));
+            })),
       ),
     );
   }
