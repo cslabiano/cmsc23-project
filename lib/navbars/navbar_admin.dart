@@ -22,7 +22,6 @@ class _AdminNavbarState extends State<AdminNavbar> {
         child: IndexedStack(
           index: _selectedIndex,
           children: const <Widget>[
-            // DonationDriveList(),
             ApprovalScreen(),
             UserTab(),
             DonorListTabs(),
