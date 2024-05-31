@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:elbigay/models/donor_donation_model.dart';
 import 'package:elbigay/models/org_model.dart';
-import 'package:elbigay/models/organization_model.dart';
 import 'package:flutter/material.dart';
 
 class OrgCard extends StatelessWidget {
@@ -16,8 +14,6 @@ class OrgCard extends StatelessWidget {
         child: StreamBuilder(
       stream: organizations,
       builder: (context, snapshot) {
-        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55\n");
-        print(organizations);
         if (snapshot.hasError) {
           return Center(
             child: Text("Error encountered! ${snapshot.error}"),
@@ -47,8 +43,6 @@ class OrgCard extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, '/organization_details',
                           arguments: org.orgId);
-                      print("Tapped");
-                      print(org.orgId);
                     },
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -83,8 +77,6 @@ class OrgCard extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, '/organization_details',
                           arguments: org.orgId);
-                      print("Tapped");
-                      print(org.orgId);
                     },
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20),

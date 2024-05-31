@@ -26,6 +26,7 @@ class Org {
   factory Org.fromJson(Map<String, dynamic> json) {
     return Org(
       usertype: 'org',
+      orgId: json['orgId'],
       email: json['email'],
       orgname: json['orgname'],
       uname: json['uname'],
