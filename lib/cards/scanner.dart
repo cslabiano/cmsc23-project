@@ -6,7 +6,8 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 
 class Scanner extends StatelessWidget {
-  const Scanner({super.key});
+  final String orgId;
+  const Scanner({required this.orgId, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +34,13 @@ class Scanner extends StatelessWidget {
 
                 context
                     .watch<DonationProvider>()
-                    .changeStatus(itemId!, "Confirmed");
+                    .changeStatus(itemId!, "Confirmed", orgId);
+
                 showDialog(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                          title: Text(barcodes.first.rawValue ?? ""));
+                          title: Text("Changed Status to Confirmed"));
                     });
               }
             },

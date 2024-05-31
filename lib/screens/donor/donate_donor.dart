@@ -268,6 +268,7 @@ class _DonatePageState extends State<DonatePage> {
     context.read<OrganizationProvider>().getOrg(widget.orgId);
     Org? organization = context.watch<OrganizationProvider>().organization;
     String dropDownValue = organization!.address[0];
+    _address = dropDownValue;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

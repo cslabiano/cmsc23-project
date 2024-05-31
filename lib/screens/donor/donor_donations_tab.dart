@@ -65,7 +65,7 @@ class _DonorDonationsTabState extends State<DonorDonationsTab> {
                         .read<OrganizationProvider>()
                         .getOrg(donation.orgId!);
                   }
-
+                  String? orgId = snapshot.data?.docs[index].id;
                   return Column(
                     children: [
                       ListTile(
@@ -88,7 +88,9 @@ class _DonorDonationsTabState extends State<DonorDonationsTab> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ReceiptPage(
-                                            id: donation.id as String)));
+                                              itemId: donation.id as String,
+                                              orgId: orgId as String,
+                                            )));
                               },
                               child: Icon(
                                 Icons.keyboard_arrow_right,
